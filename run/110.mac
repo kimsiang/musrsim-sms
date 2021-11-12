@@ -1,0 +1,241 @@
+#-----------------------------------------------------------------------
+# Macro file for the simulation of electron/positrons from the Sr decay
+# passing through the scintiallator detectors (blocks).
+# Unless specified otherwises, the default units are mm, ns, MeV, MeV/c.
+# Lines starting with star "#" are comments.
+###################################################################################
+#############################  G E O M E T R Y  ###################################
+#
+# WORLD
+/musr/command construct box World     10 10 100 G4_AIR                0 0 0 no_logical_volume  norot dead -1
+#
+# Sr SOURCE
+/musr/command construct sphere source   0  0.02  0 360 0 180  G4_Sr                   0 0 0 log_World       norot dead 301
+#
+# SCINTILLATOR BLOCKS
+/musr/command construct box scintFarAwayC1  1.5  1.5  1  G4_PLASTIC_SC_VINYLTOLUENE 0 0 5   log_World   norot musr/ScintSD 10
+/musr/command construct box scintFarAwayC2  1.5  1.5  1  G4_PLASTIC_SC_VINYLTOLUENE 0 0 14  log_World   norot musr/ScintSD 11
+#
+# APDs
+/musr/command construct box APD1      0.1  1.5 1.5      G4_Cu                       1.6 0  5 log_World     norot   dead 20
+/musr/command construct box APD2      0.1  1.5 1.5      G4_Cu                       1.6 0 14 log_World     norot   dead 21
+#
+# Plastic holders
+/musr/command construct box Holder1   0.75 4   4        G4_GLASS_PLATE              2.5 0  5 log_World     norot   dead 30
+/musr/command construct box Holder2   0.75 4   4        G4_GLASS_PLATE              2.5 0 14 log_World     norot   dead 31
+#============================================================
+/musr/command visattributes log_World invisible
+/musr/command visattributes log_source red
+/musr/command visattributes G4_PLASTIC_SC_VINYLTOLUENE lightblue
+/musr/command visattributes log_APD1 red
+###################################################################################
+########################## O P T I C A L    P H O T O N S #########################
+#         PhotonEnergy[nEntries] = 
+#	{ 2.695*eV,   2.75489*eV, 2.8175*eV,  2.88302*eV,                 // 460, 450, 440, 430 nm
+#	  2.95167*eV, 3.02366*eV, 3.09925*eV, 3.17872*eV, 3.26237*eV,     // 420, 410, 400, 390, 380 nm
+#	  3.30587*eV, 3.35054*eV, 3.44361*eV, 3.542*eV,   3.64618*eV };   // 375, 370, 360, 350, 340 nm
+#/musr/command materialPropertiesTable optScintMPT ABSLENGTH    2   2.695e-6 3.64618e-6  80 80
+/musr/command materialPropertiesTable optScintMPT RINDEX        2   2.695e-6 3.64618e-6  1.58 1.58
+/musr/command materialPropertiesTable optScintMPT FASTCOMPONENT 14  2.695e-6 2.75489e-6 2.8175e-6 2.88302e-6 2.95167e-6 3.02366e-6 3.09925e-6 3.17872e-6 3.26237e-6 3.30587e-6 3.35054e-6 3.44361e-6 3.542e-6 3.64618e-6  0.01 0.07 0.15 0.26 0.375 0.52 0.65 0.80 0.95 1 0.88 0.44 0.08 0.01
+#/musr/command materialPropertiesTable optScintMPT SLOWCOMPONENT 14   2.695e-6 2.75489e-6 2.8175e-6 2.88302e-6 2.95167e-6 3.02366e-6 3.09925e-6 3.17872e-6 3.26237e-6 3.30587e-6 3.35054e-6 3.44361e-6 3.542e-6 3.64618e-6  0.01 0.07 0.15 0.26 0.375 0.52 0.65 0.80 0.95 1 0.88 0.44 0.08 0.01
+/musr/command materialPropertiesTable optScintMPT SCINTILLATIONYIELD 0 9167.
+/musr/command materialPropertiesTable optScintMPT RESOLUTIONSCALE    0 1.0
+/musr/command materialPropertiesTable optScintMPT FASTTIMECONSTANT   0 1.32
+/musr/command materialPropertiesTable optScintMPT FASTSCINTILLATIONRISETIME 0 0.063
+#/musr/command materialPropertiesTable optScintMPT SLOWTIMECONSTANT   0 1.6
+/musr/command materialPropertiesTable optScintMPT YIELDRATIO         0 1.0
+/musr/command setMaterialPropertiesTable optScintMPT G4_PLASTIC_SC_VINYLTOLUENE
+#
+#  AIR
+/musr/command materialPropertiesTable    optAIR_MPT ABSLENGTH         2   2.0e-6 4.5e-6 0.001 0.001
+/musr/command materialPropertiesTable    optAIR_MPT RINDEX            2   2.0e-6 4.5e-6 1.0003 1.0003
+/musr/command setMaterialPropertiesTable optAIR_MPT G4_AIR
+#
+#  OPTICAL BOUNDARY:  SCINTILLATOR -> AIR
+#/musr/command materialPropertiesTable airWrap1 REFLECTIVITY     2  2.0e-6 4.5e-6  1.0 1.0
+#/musr/command materialPropertiesTable airWrap1 EFFICIENCY       2  2.0e-6 4.5e-6  0. 0.
+#/musr/command materialPropertiesTable airWrap1 
+#/musr/command opticalSurface airBoundary1 phys_scintFarAwayC1 phys_World dielectric_dielectric polished unified airWrap1
+/musr/command opticalSurface airBoundary1 phys_scintFarAwayC1 phys_World dielectric_dielectric polishedteflonair LUT
+
+#  OPTICAL BOUNDARY:  SCINTILLATOR -> AIR
+#/musr/command materialPropertiesTable airWrap2 REFLECTIVITY     2  2.0e-6 4.5e-6  1.0 1.0
+#/musr/command materialPropertiesTable airWrap2 EFFICIENCY       2  2.0e-6 4.5e-6  0. 0.
+/musr/command opticalSurface airBoundary2 phys_scintFarAwayC2 phys_World dielectric_dielectric polishedteflonair LUT
+#
+#  OPTICAL BOUNDARY:  SCINTILLATOR -> APD 1
+/musr/command materialPropertiesTable apdWrapping1 REFLECTIVITY     2  2.0e-6 4.5e-6  0.0 0.0
+/musr/command materialPropertiesTable apdWrapping1 EFFICIENCY       2  2.0e-6 4.5e-6  0.25 0.25
+/musr/command opticalSurface APDsurface phys_scintFarAwayC1 phys_APD1 dielectric_metal polished LUT apdWrapping1
+#
+#  OPTICAL BOUNDARY:  SCINTILLATOR -> APD 2
+/musr/command materialPropertiesTable apdWrapping2 REFLECTIVITY     2  2.0e-6 4.5e-6  0.0 0.0
+/musr/command materialPropertiesTable apdWrapping2 EFFICIENCY       2  2.0e-6 4.5e-6  0.25 0.25
+/musr/command opticalSurface APDsurface phys_scintFarAwayC2 phys_APD2 dielectric_metal polished LUT apdWrapping2
+#
+#
+/musr/command OPSA signalSeparationTime 1000
+#/musr/command OPSA eventsForOPSAhistos -2 0
+/musr/command OPSA OPSAhist 1000 0. 10.
+/musr/command OPSA pulseShapeArray APDpulseShapeFile_2011_1e_Z.txt
+/musr/command OPSA CFD -0.2 0.4 -1.8
+/musr/command OPSA APDcells 1 60 60 0.1 1.5 1.5
+/musr/command OPSA photonFractions 0.01 0.05 0.5 0.2
+/musr/command OPSA SetAPDcellsTimeVariationSigma 0.1
+###################################################################################
+#########################  P H Y S I C S      P R O C E S S E S  ##################
+###################################################################################
+# Geant 4.9.4
+/musr/command process addDiscreteProcess gamma G4PhotoElectricEffect
+/musr/command process addDiscreteProcess gamma G4ComptonScattering
+/musr/command process addDiscreteProcess gamma G4GammaConversion
+/musr/command process addDiscreteProcess gamma G4RayleighScattering
+/musr/command process addDiscreteProcess opticalphoton G4OpAbsorption
+/musr/command process addDiscreteProcess opticalphoton G4OpRayleigh
+/musr/command process addDiscreteProcess opticalphoton G4OpBoundaryProcess
+#/musr/command process addDiscreteProcess opticalphoton G4OpWLS
+/musr/command process addProcess         e-    G4eMultipleScattering    -1  1  1
+/musr/command process addProcess         e-    G4eIonisation            -1  2  2
+/musr/command process addProcess         e-    G4eBremsstrahlung        -1  3  3
+/musr/command process addProcess         e-    G4Scintillation           4 -1  4
+/musr/command process addProcess         e+    G4eMultipleScattering    -1  1  1
+/musr/command process addProcess         e+    G4eIonisation            -1  2  2
+/musr/command process addProcess         e+    G4eBremsstrahlung        -1  3  3
+/musr/command process addProcess         e+    G4eplusAnnihilation       0 -1  4
+/musr/command process addProcess         e+    G4Scintillation           5 -1  5
+#/musr/command process addProcess         mu-   G4MuMultipleScattering   -1  1  1
+#/musr/command process addProcess         mu-   G4MuIonisation           -1  2  2
+#/musr/command process addProcess         mu-   G4MuBremsstrahlung       -1  3  3
+#/musr/command process addProcess         mu-   G4MuPairProduction       -1  4  4
+#/musr/command process addProcess         mu-   G4Scintillation           5 -1  5
+#/musr/command process addProcess         mu+   G4MuMultipleScattering   -1  1  1
+#/musr/command process addProcess         mu+   G4MuIonisation           -1  2  2
+#/musr/command process addProcess         mu+   G4MuBremsstrahlung       -1  3  3
+#/musr/command process addProcess         mu+   G4MuPairProduction       -1  4  4
+#/musr/command process addProcess         mu+   G4Scintillation           5 -1  5
+#
+#
+###/home/install/geant4.9.3/source/processes/electromagnetic/utils/src/G4EnergyLossMessenger.cc
+######## /process/msc/StepLimit Minimal | UseDistanceToBoundary | UseSafety 
+#/process/msc/StepLimit UseSafety
+###/process/msc/LateralDisplacement
+#/process/msc/RangeFactor 0.04
+#/process/msc/GeomFactor 2.5
+###/process/msc/FactorForAngleLimit
+#/process/msc/Skin 3.0
+###/process/msc/ThetaLimit 0.2 rad
+###################################################################################
+##################  S O M E   O T H E R    P A R A M E T E R S   ##################
+###################################################################################
+#/musr/command rootOutputDirectoryName /home/sedlak/simData
+# Store all events into the ROOT tree or just the interesting ones ? (true is default)
+#/musr/command storeOnlyEventsWithHits false
+#/musr/command storeOnlyEventsWithHitInDetID 11
+# Set the minimum time separation between two subsequent signals in the same detector (in ns)
+/musr/command signalSeparationTime 50
+#
+/musr/command maximumRunTimeAllowed 400000
+/musr/run/howOftenToPrintEvent 1
+/musr/run/randomOption 2
+# Use optical photons:
+/musr/command G4OpticalPhotons true
+#/tracking/verbose 5
+#/process/verbose 5
+###################################################################################
+#########################   R O O T     O U T P U T  ##############################
+###################################################################################
+#/musr/command rootOutput runID off
+#/musr/command rootOutput eventID off
+/musr/command rootOutput weight off
+/musr/command rootOutput BFieldAtDecay off
+/musr/command rootOutput muIniPosX off
+/musr/command rootOutput muIniPosY off
+/musr/command rootOutput muIniPosZ off
+/musr/command rootOutput muIniMomX off
+/musr/command rootOutput muIniMomY off
+/musr/command rootOutput muIniMomZ off
+/musr/command rootOutput muIniPolX off
+/musr/command rootOutput muIniPolY off
+/musr/command rootOutput muIniPolZ off
+/musr/command rootOutput muIniTime off
+/musr/command rootOutput muDecayDetID off
+/musr/command rootOutput muDecayPosX off
+/musr/command rootOutput muDecayPosY off
+/musr/command rootOutput muDecayPosZ off
+/musr/command rootOutput muDecayTime off
+/musr/command rootOutput muDecayPolX off
+/musr/command rootOutput muDecayPolY off
+/musr/command rootOutput muDecayPolZ off
+/musr/command rootOutput muTargetTime off
+/musr/command rootOutput muTargetPolX off
+/musr/command rootOutput muTargetPolY off
+/musr/command rootOutput muTargetPolZ off
+/musr/command rootOutput muM0Time off
+/musr/command rootOutput muM0PolX off
+/musr/command rootOutput muM0PolY off
+/musr/command rootOutput muM0PolZ off
+/musr/command rootOutput muM1Time off
+/musr/command rootOutput muM1PolX off
+/musr/command rootOutput muM1PolY off
+/musr/command rootOutput muM1PolZ off
+/musr/command rootOutput muM2Time off
+/musr/command rootOutput muM2PolX off
+/musr/command rootOutput muM2PolY off
+/musr/command rootOutput muM2PolZ off
+#/musr/command rootOutput posIniMomX off
+#/musr/command rootOutput posIniMomY off
+#/musr/command rootOutput posIniMomZ off
+/musr/command rootOutput fieldNomVal off
+#/musr/command rootOutput det_ID off
+#/musr/command rootOutput det_edep off
+/musr/command rootOutput det_edep_el off
+/musr/command rootOutput det_edep_pos off
+/musr/command rootOutput det_edep_gam off
+/musr/command rootOutput det_edep_mup off
+#/musr/command rootOutput det_nsteps off
+#/musr/command rootOutput det_length off
+#/musr/command rootOutput det_start off
+#/musr/command rootOutput det_end off
+#/musr/command rootOutput det_x off
+#/musr/command rootOutput det_y off
+#/musr/command rootOutput det_z off
+#/musr/command rootOutput det_kine off
+/musr/command rootOutput det_VrtxKine off
+/musr/command rootOutput det_VrtxX off
+/musr/command rootOutput det_VrtxY off
+/musr/command rootOutput det_VrtxZ off
+/musr/command rootOutput det_VrtxVolID off
+/musr/command rootOutput det_VrtxProcID off
+/musr/command rootOutput det_VrtxTrackID off
+/musr/command rootOutput det_VrtxParticleID off
+/musr/command rootOutput det_VvvKine off
+/musr/command rootOutput det_VvvX off
+/musr/command rootOutput det_VvvY off
+/musr/command rootOutput det_VvvZ off
+/musr/command rootOutput det_VvvVolID off
+/musr/command rootOutput det_VvvProcID off
+/musr/command rootOutput det_VvvTrackID off
+/musr/command rootOutput det_VvvParticleID off
+### Root variables that are not written out by default, but can be switched on:
+#/musr/command rootOutput fieldIntegralBx on
+#/musr/command rootOutput fieldIntegralBy on
+#/musr/command rootOutput fieldIntegralBz on
+#/musr/command rootOutput fieldIntegralBz1 on
+#/musr/command rootOutput fieldIntegralBz2 on
+#/musr/command rootOutput fieldIntegralBz3 on
+###################################################################################
+#########################  V I S U A L I S A T I O N ##############################
+###################################################################################
+/vis/disable
+#/control/execute visFromToni.mac
+#/control/execute visDawn1.mac
+#/control/execute visVRML201.mac
+###################################################################################
+######################### P A R T I C L E   G U N #################################
+###################################################################################
+/gun/primaryparticle e-
+/gun/vertex 0 0 0 mm
+/gun/momentum 2.15 MeV
+########################  B E A M    O N  #######################################
+/run/beamOn 20
+#/run/beamOn 5000000

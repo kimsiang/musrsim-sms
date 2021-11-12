@@ -1,0 +1,102 @@
+--------------------  Download musrSim source code from svn 
+$> cd /tmp
+$> mkdir test
+$> cd test
+$> svn  co  file:///afs/psi.ch/project/nemu/svn/lem/trunk/simulation/geant4/musrSim  musrSim
+$> cd musrSim
+$> ll
+$> ll doc/
+
+--------------------  Compile musrSim
+$> cd ..
+$> mkdir mSim
+$> cd mSim
+$> cmake -DGeant4_DIR=/home/install/geant4.9.5/install/lib/Geant4-9.5.0 /tmp/test/musrSim/
+$> gmake
+
+--------------------  Prepare and run
+$> g495
+$> cd /tmp/test/musrSim
+$> ll
+$> cd run
+$> ll
+$> ln -s /afs/psi.ch/project/HighFieldMuSR/Magnet/OI-39370/OI_Archiv/Oxford_Instr/9048_2009/x10cm_z2m.table .
+$> ln -s /afs/psi.ch/user/s/sedlak/HighFieldMuSR/Davide/TURTLE/Feb2010/FOR077_reggiani_Feb2010.dat .
+
+$> emacs vis_14510.mac &
+      - show different blocks / commands
+$> /tmp/test/mSim/musrSim vis_14510.mac
+      - show the Dawn output
+$> /tmp/test/mSim/musrSim 14510.mac
+      - discuss the text output
+
+--------------------  Now open the output file in Root:
+$> root
+root [0] TFile* f=new TFile("data/musr_14510.root")
+root [1] .ls
+root [2] t1->Print()
+root [3] t1->Draw("muIniMomZ")
+root [4] t1->Draw("muDecayPosZ")
+root [5] t1->Draw("sqrt(muDecayPosX*muDecayPosX+muDecayPosY*muDecayPosY):muDecayPosZ")
+root [6] t1->Draw("sqrt(muDecayPosX*muDecayPosX+muDecayPosY*muDecayPosY):muDecayPosZ","muDecayPosZ>-200")
+root [7] t1->Draw("det_edep")
+root [8] t1->Draw("det_edep","det_ID==102")
+root [9] .q
+
+-------------------  musrSimAna
+$> cd ../musrSimAna/
+$> gmake
+$> ln -s /tmp/test/musrSim/run/data .
+$> emacs 14510b.v1190&
+$> ./musrSimAna 14510 14510b nographic 
+$> cd data
+$> ln -s /home/data_sim/hifi/his_14410_14410b.v1190.root .
+$> ln -s /home/data_sim/hifi/his_14460_14460a.v1190.root .
+$> cd ..
+
+------------------------------
+Now open the output file in Root:
+$> root
+root [0] TFile* f=new TFile("data/his_14510_14510b.v1190.root")
+root [1] .ls
+root [2] hMuDecayMap_1->Draw()             // condition 1 oncePerEvent
+root [3] hMuDecayMap_6->Draw()             // condition 6 goodEvent_det
+root [4] TFile* f=new TFile("data/his_14410_14410b.v1190.root")
+root [5] hMuDecayMap_6->Draw()             // condition 6 goodEvent_det
+root [6] hdet_time10_6->Draw()             // condition 6 goodEvent_det
+root [7] hdet_time10_11->Draw()            // condition 11 goodEvent_F_det
+root [8] hdet_time10_13->Draw()            // condition 13 goodEvent_U_det
+root [9] hdet_time20_6->Draw()             // condition 6 goodEvent_det
+ --> SetOptFit(1111111)
+            function "[3]*exp(x/2.19703)*(1+[2]*cos(x*[0]+[1]))" was fitted
+            Asymmetry = 0.42
+
+To study pileup background --> natural decay of muons is required.
+This was done in the file 14460:
+
+root [10] TFile* f=new TFile("data/his_14460_14460a.v1190.root")
+root [11] hdet_time20_6->Draw()            // condition 6 goodEvent_det
+ --> SetOptFit(1111111)
+           function "[0]*exp(-x/2.19703)+[1]" was fitted
+ --> Remember that par0 = 375.8  (Normalisation)
+ --> Background from the fit:  par1/par0 = 4.4 / 375.8 = 1.2%
+
+root [12] hdet_time20_rotref_6->Draw()     // condition 6 goodEvent_det
+ --> SetOptFit(1111111)
+          function "[2]*cos(x*[0]+[1]" is fitted
+ --> Asymmetry = 2* par2/Normalisation = 2 * 78.5 / 375.8 = 0.418
+
+2nd way how to extract pileup background:
+root [13] hdet_time10_bgr3_6->Draw()       // condition 6 goodEvent_det
+ --> SetOptFit(1111111)
+ --> background = par0/Normalisation = 4.9 / 375.8 = 1.3%
+
+3rd way how to extract background:     
+root [14] hdet_time10_bgr1_9->Draw()      // condition 9 pileupEvent
+ --> SetOptFit(1111111)
+ --> background = par0/Normalisation = 4.5 / 375.8 = 1.2%
+
+Where to the muons and pileup muons stop? :
+root [28] humanDecayHistograms_6->Draw()         //  <--- accepted events
+root [29] humanDecayHistograms_9->Draw()         //  <--- mu1 for pileup events
+root [30] humanDecayPileupHistograms_9->Draw()   //  <--- mu2 for pileup events

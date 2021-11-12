@@ -1,0 +1,63 @@
+# This is a macro file for visualizing G4 events.
+# It can either be included in another macro or called with /control/exec vis.mac
+
+# Create an OpenGL driver (i.e. a scene handler and viewer)
+# Some useful choices: VRML2FILE, OGLSX, OGLIX, DAWNFILE, etc.
+#/vis/open VRML2FILE
+#*/vis/open OGLIX 600x600-0+0
+/vis/open DAWNFILE
+
+# To calculate volumes and masses uncomment the next two lines
+#*/vis/open ATree 
+#*/vis/ASCIITree/verbose 4
+
+
+# Create a new empty scene and attach it to handler
+/vis/scene/create
+
+# Add world volume, trajectories and hits to the scene
+/vis/scene/add/volume
+/vis/scene/add/trajectories
+/vis/scene/add/hits
+/vis/sceneHandler/attach
+
+# Configure the viewer (optional)
+/vis/viewer/set/viewpointThetaPhi 235 -45
+/vis/viewer/set/lightsThetaPhi    120  60 
+#/vis/viewer/set/hiddenEdge        true
+#/vis/viewer/set/style             surface
+#/vis/viewer/zoom 0.5
+# Style: s - surface, w - wireframe
+# Note: "surface style" and "hiddenEdge true" remove transparency!
+# Other viewpoints (25 55) (235 -45) (125 35)
+
+
+# Store trajectory information for visualisation (set to 0 if too many tracks cause core dump)
+/tracking/storeTrajectory 1
+
+#At the end of each event (default behaviour)
+#/vis/scene/endOfEventAction refresh
+#At the end of run of X events - Data from X events will be superimposed
+/vis/scene/endOfEventAction accumulate
+#At the end of Y runs - Data from Y runs will be superimposed
+#/vis/scene/endOfRunAction accumulate
+
+# Coloured trajectories for an easier particle identification:
+# PDG IDs and colours: e- 11 red, e+ -11 blue, nu_e 12 yellow, 
+#         mu+ -13 magenta, anti_nu_mu -14 green, gamma 22 grey
+# 
+#/vis/modeling/trajectories/create/drawByCharge
+#/vis/modeling/trajectories/drawByCharge-0/set 1 cyan
+
+/vis/modeling/trajectories/create/drawByParticleID
+#*/vis/modeling/trajectories/drawByParticleID-0/set gamma grey
+/vis/modeling/trajectories/drawByParticleID-0/setRGBA mu+ 1 0 1    1
+/vis/modeling/trajectories/drawByParticleID-0/setRGBA e+  0 0 0.8  0.5
+#*/vis/modeling/trajectories/drawByParticleID-0/setRGBA nu_e       0.7 0.7 0 1
+#*/vis/modeling/trajectories/drawByParticleID-0/setRGBA anti_nu_mu 0.3 1.0 0 0.5
+
+# Verbosity of hits
+#/hits/verbose 2
+
+# Output just the detector geometry
+/vis/viewer/flush

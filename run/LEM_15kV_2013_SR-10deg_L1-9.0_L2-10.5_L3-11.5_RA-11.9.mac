@@ -1,0 +1,918 @@
+# Template suitable for beam profile detectioon with the spin rotator in place
+# Zaher Salman 7/10/2010
+#
+# Thomas Prokscha 22/Nov/2012
+# Moved sample stack on cryostat 3mm downstream to fit to positions in apparatus
+# Changed positions of positron counters according to corrected drawing LEM 37.01.024 (19/Sep/2012)
+#
+# Position downstream detectors: z=+62.5mm  original value: z=+66.5mm
+# Position upstream detectors:   z=-64.0mm  original value: z=-60.0mm
+#
+# 2013 setup: 1mm Ti sample tube
+#
+# This is a template mac file for tuning the lem beamline with a spin rotator
+# You can use this to generate a beam envelope profile along z
+#
+################################################################################################################
+# -- ROTATION MATRICES --
+################################################################################################################
+# Define rotations for the field maps of Trigger and Ring Anode:
+/musr/command rotation rotTrig  0  1  0  -45
+/musr/command rotation rotRAnR  0  0  1  -90
+/musr/command rotation rotRAnL  0  0  1   90
+/musr/command rotation rotRAnD  0  0  1  180
+
+# More Rotations
+/musr/command rotation rotD1  0  0  1  11.250
+/musr/command rotation rotD2  0  0  1  33.750
+/musr/command rotation rotD3  0  0  1  56.250
+/musr/command rotation rotD4  0  0  1  78.750
+/musr/command rotation rotD5  0  0  1  101.250
+/musr/command rotation rotD6  0  0  1  123.750
+/musr/command rotation rotD7  0  0  1  146.250
+/musr/command rotation rotD8  0  0  1  168.750
+/musr/command rotation rotD9  0  0  1  191.250
+/musr/command rotation rotD10  0  0  1  213.750
+/musr/command rotation rotD11  0  0  1  236.250
+/musr/command rotation rotD12  0  0  1  258.750
+/musr/command rotation rotD13  0  0  1  281.250
+/musr/command rotation rotD14  0  0  1  303.750
+/musr/command rotation rotD15  0  0  1  326.250
+/musr/command rotation rotD16  0  0  1  348.750
+
+/musr/command rotation rotD17  0  0  1  11.250
+/musr/command rotation rotD18  0  0  1  33.750
+/musr/command rotation rotD19  0  0  1  56.250
+/musr/command rotation rotD20  0  0  1  78.750
+/musr/command rotation rotD21  0  0  1  101.250
+/musr/command rotation rotD22  0  0  1  123.750
+/musr/command rotation rotD23  0  0  1  146.250
+/musr/command rotation rotD24  0  0  1  168.750
+/musr/command rotation rotD25  0  0  1  191.250
+/musr/command rotation rotD26  0  0  1  213.750
+/musr/command rotation rotD27  0  0  1  236.250
+/musr/command rotation rotD28  0  0  1  258.750
+/musr/command rotation rotD29  0  0  1  281.250
+/musr/command rotation rotD30  0  0  1  303.750
+/musr/command rotation rotD31  0  0  1  326.250
+/musr/command rotation rotD32  0  0  1  348.750
+
+# Beam line bend at mirror
+/musr/command rotation rotBend  0  1  0  -90
+/musr/command rotation rotMirr  0  1  0  -45
+
+
+################################################################################################################
+# -- LEM GEOMETRY --
+################################################################################################################
+
+# WORLD = Laboratory reference frame, the origin is in the centre of the LEM sample tube
+/musr/command construct box World 900 350 2600 G4_Galactic 0 0 0 no_logical_volume norot dead -1
+/musr/command visattributes log_World invisible
+
+# These are slices to map the beam envelope along the beam line. The radius should be less than 50mm
+/musr/command construct tubs save0 0  60 0.05 0 360 G4_Galactic 850 0 -1678 log_World rotBend dead 851
+/musr/command construct tubs save1 0  60 0.05 0 360 G4_Galactic 800 0 -1678 log_World rotBend dead 852
+/musr/command construct tubs save2 0  60 0.05 0 360 G4_Galactic 750 0 -1678 log_World rotBend dead 853
+/musr/command construct tubs save3 0  60 0.05 0 360 G4_Galactic 700 0 -1678 log_World rotBend dead 854
+/musr/command construct tubs save4 0  60 0.05 0 360 G4_Galactic 650 0 -1678 log_World rotBend dead 855
+/musr/command construct tubs save5 0  60 0.05 0 360 G4_Galactic 600 0 -1678 log_World rotBend dead 856
+/musr/command construct tubs save6 0  60 0.05 0 360 G4_Galactic 550 0 -1678 log_World rotBend dead 857
+/musr/command construct tubs save7 0  60 0.05 0 360 G4_Galactic 500 0 -1678 log_World rotBend dead 858
+/musr/command construct tubs save8 0  60 0.05 0 360 G4_Galactic 450 0 -1678 log_World rotBend dead 859
+/musr/command construct tubs save9 0  60 0.05 0 360 G4_Galactic 400 0 -1678 log_World rotBend dead 860
+/musr/command construct tubs save10 0  60 0.05 0 360 G4_Galactic 350 0 -1678 log_World rotBend dead 861
+/musr/command construct tubs save11 0  60 0.05 0 360 G4_Galactic 300 0 -1678 log_World rotBend dead 862
+/musr/command construct tubs save12 0  60 0.05 0 360 G4_Galactic 240 0 -1678 log_World rotBend dead 863
+/musr/command construct tubs save13 0  60 0.05 0 360 G4_Galactic 200 0 -1678 log_World rotBend dead 864
+/musr/command construct tubs save14 0  60 0.05 0 360 G4_Galactic 150 0 -1678 log_World rotBend dead 865
+/musr/command construct tubs save15 0  60 0.05 0 360 G4_Galactic 100 0 -1678 log_World rotBend dead 866
+/musr/command construct tubs save16 0  60 0.05 0 360 G4_Galactic 70 0 -1678 log_World rotBend dead 867
+/musr/command construct tubs save17 0  60 0.05 0 360 G4_Galactic 0 0 -1620 log_World norot dead 868
+/musr/command construct tubs save18 0  60 0.05 0 360 G4_Galactic 0 0 -1600 log_World norot dead 869
+/musr/command construct tubs save19 0  60 0.05 0 360 G4_Galactic 0 0 -1550 log_World norot dead 870
+/musr/command construct tubs save20 0  60 0.05 0 360 G4_Galactic 0 0 -1500 log_World norot dead 871
+/musr/command construct tubs save21 0  60 0.05 0 360 G4_Galactic 0 0 -1450 log_World norot dead 872
+/musr/command construct tubs save22 0  60 0.05 0 360 G4_Galactic 0 0 -1400 log_World norot dead 873
+/musr/command construct tubs save23 0  60 0.05 0 360 G4_Galactic 0 0 -1350 log_World norot dead 874
+/musr/command construct tubs save24 0  60 0.05 0 360 G4_Galactic 0 0 -1300 log_World norot dead 875
+/musr/command construct tubs save25 0  60 0.05 0 360 G4_Galactic 0 0 -1250 log_World norot dead 876
+/musr/command construct tubs save26 0  60 0.05 0 360 G4_Galactic 0 0 -1200 log_World norot dead 877
+/musr/command construct tubs save27 0  60 0.05 0 360 G4_Galactic 0 0 -1150 log_World norot dead 878
+/musr/command construct tubs save28 0  60 0.05 0 360 G4_Galactic 0 0 -1100 log_World norot dead 879
+/musr/command construct tubs save29 0  60 0.05 0 360 G4_Galactic 0 0 -1050 log_World norot dead 880
+/musr/command construct tubs save30 0  60 0.05 0 360 G4_Galactic 0 0 -1000 log_World norot dead 881
+/musr/command construct tubs save31 0  60 0.05 0 360 G4_Galactic 0 0 -950 log_World norot dead 882
+/musr/command construct tubs save32 0  60 0.05 0 360 G4_Galactic 0 0 -900 log_World norot dead 883
+/musr/command construct tubs save33 0  60 0.05 0 360 G4_Galactic 0 0 -850 log_World norot dead 884
+/musr/command construct tubs save34 0  60 0.05 0 360 G4_Galactic 0 0 -800 log_World norot dead 885
+/musr/command construct tubs save35 0  60 0.05 0 360 G4_Galactic 0 0 -750 log_World norot dead 886
+/musr/command construct tubs save36 0  60 0.05 0 360 G4_Galactic 0 0 -700 log_World norot dead 887
+/musr/command construct tubs save37 0  60 0.05 0 360 G4_Galactic 0 0 -650 log_World norot dead 888
+/musr/command construct tubs save38 0  60 0.05 0 360 G4_Galactic 0 0 -600 log_World norot dead 889
+/musr/command construct tubs save39 0  60 0.05 0 360 G4_Galactic 0 0 -525 log_World norot dead 890
+/musr/command construct tubs save40 0  60 0.05 0 360 G4_Galactic 0 0 -450 log_World norot dead 891
+/musr/command construct tubs save41 0  60 0.05 0 360 G4_Galactic 0 0 -420 log_World norot dead 892
+/musr/command construct tubs save42 0  60 0.05 0 360 G4_Galactic 0 0 -400 log_World norot dead 893
+/musr/command construct tubs save43 0  60 0.05 0 360 G4_Galactic 0 0 -350 log_World norot dead 894
+/musr/command construct tubs save44 0  60 0.05 0 360 G4_Galactic 0 0 -300 log_World norot dead 895
+/musr/command construct tubs save45 0  60 0.05 0 360 G4_Galactic 0 0 -250 log_World norot dead 896
+/musr/command construct tubs save46 0  60 0.05 0 360 G4_Galactic 0 0 -200 log_World norot dead 897
+/musr/command construct tubs save47 0  60 0.05 0 360 G4_Galactic 0 0 -150 log_World norot dead 898
+/musr/command construct tubs save48 0  60 0.05 0 360 G4_Galactic 0 0 -100 log_World norot dead 899
+/musr/command construct tubs save49 0  60 0.05 0 360 G4_Galactic 0 0 -50 log_World norot dead 900
+/musr/command construct tubs save50 0  60 0.05 0 360 G4_Galactic 0 0 0 log_World norot dead 901
+/musr/command construct tubs save51 0  60 0.05 0 360 G4_Galactic 0 0 16 log_World norot dead 902
+/musr/command construct tubs save52 0  60 0.05 0 360 G4_Galactic 0 0 100 log_World norot dead 903
+/musr/command construct tubs save53 0  60 0.05 0 360 G4_Galactic 0 0 150 log_World norot dead 904
+/musr/command visattributes G4_Galactic invisible
+
+################################################################################################################
+# -- APD Scintillators --
+################################################################################################################
+
+# Detectors volume (0,0,0) coninsides with World (0,0,0)
+/musr/command construct tubs DetV 80 105 133  0 360 G4_Galactic 0 0 0 log_World norot dead 100
+/musr/command visattributes log_DetV invisible
+
+# For final design set
+# BackHW=60
+# BackCR=-64.0, 19/Sep/2012
+# ForwHW=65.5
+# ForwCR=62.5, 19/Sep/2012
+
+# Back inner sections (Upstream) (v.i.)
+# Final design (30 Jun 09, 19 Sep 12) BackHW=60.0mm (Half width or length), BackCR=-4-BackHW=-64.0mm (Center z coordinate)
+/musr/command construct trd90y  ScD1  60  60  17.7  16.7   2.5  G4_PLASTIC_SC_VINYLTOLUENE  86.799497  -17.265493  -64.0 log_DetV rotD1  musr/ScintSD  1  
+/musr/command construct trd90y  ScD2  60  60  17.7  16.7   2.5  G4_PLASTIC_SC_VINYLTOLUENE  73.585061  -49.167966  -64.0 log_DetV rotD2  musr/ScintSD  2  
+/musr/command construct trd90y  ScD3  60  60  17.7  16.7   2.5  G4_PLASTIC_SC_VINYLTOLUENE  49.167966  -73.585061  -64.0 log_DetV rotD3  musr/ScintSD  3  
+/musr/command construct trd90y  ScD4  60  60  17.7  16.7   2.5  G4_PLASTIC_SC_VINYLTOLUENE  17.265493  -86.799497  -64.0 log_DetV rotD4  musr/ScintSD  4  
+/musr/command construct trd90y  ScD5  60  60  17.7  16.7   2.5  G4_PLASTIC_SC_VINYLTOLUENE  -17.265493  -86.799497  -64.0 log_DetV rotD5  musr/ScintSD  5  
+/musr/command construct trd90y  ScD6  60  60  17.7  16.7   2.5  G4_PLASTIC_SC_VINYLTOLUENE  -49.167966  -73.585061  -64.0 log_DetV rotD6  musr/ScintSD  6  
+/musr/command construct trd90y  ScD7  60  60  17.7  16.7   2.5  G4_PLASTIC_SC_VINYLTOLUENE  -73.585061  -49.167966  -64.0 log_DetV rotD7  musr/ScintSD  7  
+/musr/command construct trd90y  ScD8  60  60  17.7  16.7   2.5  G4_PLASTIC_SC_VINYLTOLUENE  -86.799497  -17.265493  -64.0 log_DetV rotD8  musr/ScintSD  8  
+/musr/command construct trd90y  ScD9  60  60  17.7  16.7   2.5  G4_PLASTIC_SC_VINYLTOLUENE  -86.799497  17.265493  -64.0 log_DetV rotD9  musr/ScintSD  9  
+/musr/command construct trd90y  ScD10 60  60  17.7  16.7   2.5  G4_PLASTIC_SC_VINYLTOLUENE  -73.585061  49.167966  -64.0 log_DetV rotD10  musr/ScintSD  10  
+/musr/command construct trd90y  ScD11 60  60  17.7  16.7   2.5  G4_PLASTIC_SC_VINYLTOLUENE  -49.167966  73.585061  -64.0 log_DetV rotD11  musr/ScintSD  11  
+/musr/command construct trd90y  ScD12 60  60  17.7  16.7   2.5  G4_PLASTIC_SC_VINYLTOLUENE  -17.265493  86.799497  -64.0 log_DetV rotD12  musr/ScintSD  12  
+/musr/command construct trd90y  ScD13 60  60  17.7  16.7   2.5  G4_PLASTIC_SC_VINYLTOLUENE  17.265493  86.799497  -64.0 log_DetV rotD13  musr/ScintSD  13  
+/musr/command construct trd90y  ScD14 60  60  17.7  16.7   2.5  G4_PLASTIC_SC_VINYLTOLUENE  49.167966  73.585061  -64.0 log_DetV rotD14  musr/ScintSD  14  
+/musr/command construct trd90y  ScD15 60  60  17.7  16.7   2.5  G4_PLASTIC_SC_VINYLTOLUENE  73.585061  49.167966  -64.0 log_DetV rotD15  musr/ScintSD  15  
+/musr/command construct trd90y  ScD16 60  60  17.7  16.7   2.5  G4_PLASTIC_SC_VINYLTOLUENE  86.799497  17.265493  -64.0 log_DetV rotD16  musr/ScintSD  16  
+
+# Forward inner sections (Downstream) (h.i.)
+# Final design (30 June 09, 19 Sep 12) ForwHW=65.5mm (Half width or length), ForwCR=-3+ForwHW=62.5mm (Center z coordinate)
+/musr/command construct trd90y  ScD17 65.5  65.5  17.5  16.5   2.5  G4_PLASTIC_SC_VINYLTOLUENE   85.818712  -17.070403  62.5 log_DetV rotD17  musr/ScintSD  17  
+/musr/command construct trd90y  ScD18 65.5  65.5  17.5  16.5   2.5  G4_PLASTIC_SC_VINYLTOLUENE   72.753591  -48.612395  62.5 log_DetV rotD18  musr/ScintSD  18  
+/musr/command construct trd90y  ScD19 65.5  65.5  17.5  16.5   2.5  G4_PLASTIC_SC_VINYLTOLUENE   48.612395  -72.753591  62.5 log_DetV rotD19  musr/ScintSD  19  
+/musr/command construct trd90y  ScD20 65.5  65.5  17.5  16.5   2.5  G4_PLASTIC_SC_VINYLTOLUENE   17.070403  -85.818712  62.5 log_DetV rotD20  musr/ScintSD  20  
+/musr/command construct trd90y  ScD21 65.5  65.5  17.5  16.5   2.5  G4_PLASTIC_SC_VINYLTOLUENE  -17.070403  -85.818712  62.5 log_DetV rotD21  musr/ScintSD  21  
+/musr/command construct trd90y  ScD22 65.5  65.5  17.5  16.5   2.5  G4_PLASTIC_SC_VINYLTOLUENE  -48.612395  -72.753591  62.5 log_DetV rotD22  musr/ScintSD  22  
+/musr/command construct trd90y  ScD23 65.5  65.5  17.5  16.5   2.5  G4_PLASTIC_SC_VINYLTOLUENE  -72.753591  -48.612395  62.5 log_DetV rotD23  musr/ScintSD  23  
+/musr/command construct trd90y  ScD24 65.5  65.5  17.5  16.5   2.5  G4_PLASTIC_SC_VINYLTOLUENE  -85.818712  -17.070403  62.5 log_DetV rotD24  musr/ScintSD  24  
+/musr/command construct trd90y  ScD25 65.5  65.5  17.5  16.5   2.5  G4_PLASTIC_SC_VINYLTOLUENE  -85.818712   17.070403  62.5 log_DetV rotD25  musr/ScintSD  25  
+/musr/command construct trd90y  ScD26 65.5  65.5  17.5  16.5   2.5  G4_PLASTIC_SC_VINYLTOLUENE  -72.753591   48.612395  62.5 log_DetV rotD26  musr/ScintSD  26  
+/musr/command construct trd90y  ScD27 65.5  65.5  17.5  16.5   2.5  G4_PLASTIC_SC_VINYLTOLUENE  -48.612395   72.753591  62.5 log_DetV rotD27  musr/ScintSD  27  
+/musr/command construct trd90y  ScD28 65.5  65.5  17.5  16.5   2.5  G4_PLASTIC_SC_VINYLTOLUENE  -17.070403   85.818712  62.5 log_DetV rotD28  musr/ScintSD  28  
+/musr/command construct trd90y  ScD29 65.5  65.5  17.5  16.5   2.5  G4_PLASTIC_SC_VINYLTOLUENE   17.070403   85.818712  62.5 log_DetV rotD29  musr/ScintSD  29  
+/musr/command construct trd90y  ScD30 65.5  65.5  17.5  16.5   2.5  G4_PLASTIC_SC_VINYLTOLUENE   48.612395   72.753591  62.5 log_DetV rotD30  musr/ScintSD  30  
+/musr/command construct trd90y  ScD31 65.5  65.5  17.5  16.5   2.5  G4_PLASTIC_SC_VINYLTOLUENE   72.753591   48.612395  62.5 log_DetV rotD31  musr/ScintSD  31  
+/musr/command construct trd90y  ScD32 65.5  65.5  17.5  16.5   2.5  G4_PLASTIC_SC_VINYLTOLUENE   85.818712   17.070403  62.5 log_DetV rotD32  musr/ScintSD  32  
+
+# Back outer sections (v.a.)
+/musr/command construct trd  ScD33 60  60  19.1  18.1   2.5  G4_PLASTIC_SC_VINYLTOLUENE   93.664994  -18.631126  -64.0 log_DetV rotD1   musr/ScintSD  33  
+/musr/command construct trd  ScD34 60  60  19.1  18.1   2.5  G4_PLASTIC_SC_VINYLTOLUENE   79.405348  -53.056957  -64.0 log_DetV rotD2   musr/ScintSD  34  
+/musr/command construct trd  ScD35 60  60  19.1  18.1   2.5  G4_PLASTIC_SC_VINYLTOLUENE   53.056957  -79.405348  -64.0 log_DetV rotD3   musr/ScintSD  35  
+/musr/command construct trd  ScD36 60  60  19.1  18.1   2.5  G4_PLASTIC_SC_VINYLTOLUENE   18.631126  -93.664994  -64.0 log_DetV rotD4   musr/ScintSD  36  
+/musr/command construct trd  ScD37 60  60  19.1  18.1   2.5  G4_PLASTIC_SC_VINYLTOLUENE  -18.631126  -93.664994  -64.0 log_DetV rotD5   musr/ScintSD  37  
+/musr/command construct trd  ScD38 60  60  19.1  18.1   2.5  G4_PLASTIC_SC_VINYLTOLUENE  -53.056957  -79.405348  -64.0 log_DetV rotD6   musr/ScintSD  38  
+/musr/command construct trd  ScD39 60  60  19.1  18.1   2.5  G4_PLASTIC_SC_VINYLTOLUENE  -79.405348  -53.056957  -64.0 log_DetV rotD7   musr/ScintSD  39  
+/musr/command construct trd  ScD40 60  60  19.1  18.1   2.5  G4_PLASTIC_SC_VINYLTOLUENE  -93.664994  -18.631126  -64.0 log_DetV rotD8   musr/ScintSD  40  
+/musr/command construct trd  ScD41 60  60  19.1  18.1   2.5  G4_PLASTIC_SC_VINYLTOLUENE  -93.664994   18.631126  -64.0 log_DetV rotD9   musr/ScintSD  41  
+/musr/command construct trd  ScD42 60  60  19.1  18.1   2.5  G4_PLASTIC_SC_VINYLTOLUENE  -79.405348   53.056957  -64.0 log_DetV rotD10  musr/ScintSD  42  
+/musr/command construct trd  ScD43 60  60  19.1  18.1   2.5  G4_PLASTIC_SC_VINYLTOLUENE  -53.056957   79.405348  -64.0 log_DetV rotD11  musr/ScintSD  43  
+/musr/command construct trd  ScD44 60  60  19.1  18.1   2.5  G4_PLASTIC_SC_VINYLTOLUENE  -18.631126   93.664994  -64.0 log_DetV rotD12  musr/ScintSD  44  
+/musr/command construct trd  ScD45 60  60  19.1  18.1   2.5  G4_PLASTIC_SC_VINYLTOLUENE   18.631126   93.664994  -64.0 log_DetV rotD13  musr/ScintSD  45  
+/musr/command construct trd  ScD46 60  60  19.1  18.1   2.5  G4_PLASTIC_SC_VINYLTOLUENE   53.056957   79.405348  -64.0 log_DetV rotD14  musr/ScintSD  46  
+/musr/command construct trd  ScD47 60  60  19.1  18.1   2.5  G4_PLASTIC_SC_VINYLTOLUENE   79.405348   53.056957  -64.0 log_DetV rotD15  musr/ScintSD  47  
+/musr/command construct trd  ScD48 60  60  19.1  18.1   2.5  G4_PLASTIC_SC_VINYLTOLUENE   93.664994   18.631126  -64.0 log_DetV rotD16  musr/ScintSD  48  
+
+# Forward outer sections (h.a.)
+/musr/command construct trd  ScD49 65.5  65.5  18.9  17.9   2.5  G4_PLASTIC_SC_VINYLTOLUENE   92.684209  -18.436035  62.5 log_DetV rotD1   musr/ScintSD  49  
+/musr/command construct trd  ScD50 65.5  65.5  18.9  17.9   2.5  G4_PLASTIC_SC_VINYLTOLUENE   78.573878  -52.501387  62.5 log_DetV rotD2   musr/ScintSD  50  
+/musr/command construct trd  ScD51 65.5  65.5  18.9  17.9   2.5  G4_PLASTIC_SC_VINYLTOLUENE   52.501387  -78.573878  62.5 log_DetV rotD3   musr/ScintSD  51  
+/musr/command construct trd  ScD52 65.5  65.5  18.9  17.9   2.5  G4_PLASTIC_SC_VINYLTOLUENE   18.436035  -92.684209  62.5 log_DetV rotD4   musr/ScintSD  52  
+/musr/command construct trd  ScD53 65.5  65.5  18.9  17.9   2.5  G4_PLASTIC_SC_VINYLTOLUENE  -18.436035  -92.684209  62.5 log_DetV rotD5   musr/ScintSD  53  
+/musr/command construct trd  ScD54 65.5  65.5  18.9  17.9   2.5  G4_PLASTIC_SC_VINYLTOLUENE  -52.501387  -78.573878  62.5 log_DetV rotD6   musr/ScintSD  54  
+/musr/command construct trd  ScD55 65.5  65.5  18.9  17.9   2.5  G4_PLASTIC_SC_VINYLTOLUENE  -78.573878  -52.501387  62.5 log_DetV rotD7   musr/ScintSD  55  
+/musr/command construct trd  ScD56 65.5  65.5  18.9  17.9   2.5  G4_PLASTIC_SC_VINYLTOLUENE  -92.684209  -18.436035  62.5 log_DetV rotD8   musr/ScintSD  56  
+/musr/command construct trd  ScD57 65.5  65.5  18.9  17.9   2.5  G4_PLASTIC_SC_VINYLTOLUENE  -92.684209   18.436035  62.5 log_DetV rotD9   musr/ScintSD  57  
+/musr/command construct trd  ScD58 65.5  65.5  18.9  17.9   2.5  G4_PLASTIC_SC_VINYLTOLUENE  -78.573878   52.501387  62.5 log_DetV rotD10  musr/ScintSD  58  
+/musr/command construct trd  ScD59 65.5  65.5  18.9  17.9   2.5  G4_PLASTIC_SC_VINYLTOLUENE  -52.501387   78.573878  62.5 log_DetV rotD11  musr/ScintSD  59  
+/musr/command construct trd  ScD60 65.5  65.5  18.9  17.9   2.5  G4_PLASTIC_SC_VINYLTOLUENE  -18.436035   92.684209  62.5 log_DetV rotD12  musr/ScintSD  60  
+/musr/command construct trd  ScD61 65.5  65.5  18.9  17.9   2.5  G4_PLASTIC_SC_VINYLTOLUENE   18.436035   92.684209  62.5 log_DetV rotD13  musr/ScintSD  61  
+/musr/command construct trd  ScD62 65.5  65.5  18.9  17.9   2.5  G4_PLASTIC_SC_VINYLTOLUENE   52.501387   78.573878  62.5 log_DetV rotD14  musr/ScintSD  62  
+/musr/command construct trd  ScD63 65.5  65.5  18.9  17.9   2.5  G4_PLASTIC_SC_VINYLTOLUENE   78.573878   52.501387  62.5 log_DetV rotD15  musr/ScintSD  63  
+/musr/command construct trd  ScD64 65.5  65.5  18.9  17.9   2.5  G4_PLASTIC_SC_VINYLTOLUENE   92.684209   18.436035  62.5 log_DetV rotD16  musr/ScintSD  64  
+
+# Structural support inside the detectors vessel
+# Carbon fibre, inner radius 80, thickness 2 mm. 
+# Additional Al plate removed, 2 mm thick for h.i and h.a and 3 mm thick for v.i. and v.a
+/musr/command construct tubs hInShell 80.0 82.0 65.5 0 360 G4_C 0 0 62 log_DetV norot dead 70
+/musr/command construct tubs vInShell 80.0 82.0 60.0 0 360 G4_C 0 0 -64.5 log_DetV norot dead 70
+ 
+# Visual attributes (optional)
+/musr/command visattributes G4_PLASTIC_SC_VINYLTOLUENE green
+#/musr/command visattributes log_ScD49 green
+#/musr/command visattributes log_ScD50 green
+#/musr/command visattributes log_test red
+
+################################################################################################################
+# Sample vacuum/tube up to gate valve - Can host either the Cryostat or the MCP2
+################################################################################################################
+
+# Vacuum space
+# /musr/command construct tubs SamV  0   75.0 254.5 0 360 G4_Galactic 0 0 -92.5 log_World norot dead 100  
+# Sample tube
+#/musr/command construct tubs SamS 75.0 77.0 162.0 0 360 G4_Ti       0 0   0   log_World norot dead 101 
+# 2012: 2mm Ti tube, 2013: 1mm
+/musr/command construct tubs SamS 75.0 76.0 162.0 0 360 G4_Ti       0 0   0   log_World norot dead 101 
+
+# F160 - 160 CF flange upstream of MCP2 tube
+/musr/command construct tubs F160 78.0 101.25 11 0 360 Steel 0 0 -151.0 log_World norot dead 102
+# F100 (Blank end flange) 
+/musr/command construct tubs F100  0    75.0  10 0 360 Steel 0 0  172.0 log_World norot dead 103 
+
+# 200 CF flange upstream of MCP2 tube covering the whole length of the gate valve chamber.
+/musr/command construct tubs GATS 103.25 126.5 92.5 0 360 Steel 0 0 -254.5 log_World norot dead 371 
+
+# F200 - 200 CF flange upstream of MCP2 tube to connect to gate valve chamber
+/musr/command construct tubs F200 76.5 103.25 12 0 360 Steel 0 0 -174.0 log_World norot dead 372 
+
+# Visual attributes (optional)
+#/musr/command visattributes log_SamV invisible
+/musr/command visattributes log_SamS oxsteel
+/musr/command visattributes log_F160 oxsteel
+#/musr/command visattributes log_F100 oxsteel
+/musr/command visattributes log_GATS oxsteel
+/musr/command visattributes log_F200 oxsteel
+
+
+################################################################################################################
+# MCP - Micro Channel Plate Detector MCP2 
+# mcpv_z = -92.5 mm!
+#
+# We have a 324 mm long sample tube; 
+# the MCP2 front side is at 142 mm from the end of the sample tube.
+# the front face of the sample plate of the cryostat is 145 mm from the end of the sample tube.
+#
+################################################################################################################
+#
+# MCPM1 - MCP Macor ring 1
+# MCPD  - electron multiplying glass disk (also known as target) 
+# Sensitive surface at z = 20 mm wrt. World
+# MCPM2 - MCP Macor ring 2
+# /musr/command construct tubs MCPM1 24 32.5 0.75 0 360 Macor    0 0 19.25 log_World norot dead 251 
+# Use it either as (DMCP-musr/ScintSD) - no info on mu+ polariz., or as (target-dead) with info on mu+ polariz.
+# /musr/command construct tubs target 0 25.0 1.50 0 360 MCPglass 0 0 21.5  log_World norot dead 252 
+# /musr/command construct tubs MCPM2 24 32.5 0.75 0 360 Macor    0 0 23.75 log_World norot dead 253 
+# NOTE: To intercept ALL the incoming muons, comment the DMCP and MCPM1 lines above and uncomment this one:
+#*aa/musr/command construct tubs DMCP 0 76.5 1.5 0 360 MCPglass 0 0 108 log_SamV norot musr/ScintSD 202 
+#*/musr/command construct tubs target     0 21.0 1.5 0 360 MCPglass    0 0 114 log_SamV norot musr/ScintSD 202 
+#*/musr/command construct tubs saveTarget 0 75.0 0.2 0 360 G4_Galactic 0 0 110.79 log_SamV norot dead 222 
+#
+# MCSR - Stainless Steel Ring for MCP2 mounting (modelled as a box with a circular hole)
+# MCVR - "Vacuum Ring" (circular hole)
+# /musr/command construct box  MCSR  36.5 36.5 1       Steel       0 0 25.5 log_World norot dead 254 
+# /musr/command construct tubs MCVR  0    27.5 1 0 360 G4_Galactic 0 0 0     log_MCSR norot dead 255 
+
+# MCPA = MCP Anode (modelled as a box with two symmetrically subtracted "vacuum" disks)
+# ANVA1 - Anode "Vacuum" 1 - Part of MCP Anode
+# ANVA2 - Anode "Vacuum" 2 - Part of MCP Anode
+# /musr/command construct box  MCPA 36.5 36.5 4       Steel       0 0 37 log_World norot dead 256 
+# /musr/command construct tubs ANVA1 0 27.5 1.5 0 360 G4_Galactic 0 0  -2.5 log_MCPA norot dead 257 
+# /musr/command construct tubs ANVA2 0 27.5 1.5 0 360 G4_Galactic 0 0   2.5 log_MCPA norot dead 258 
+
+# MCSS - MCP Stainless Steel Support Ring
+# /musr/command construct tubs MCSS 40 48   2.5 0 360 Steel 0 0 69.8 log_World norot dead 259 
+
+
+# MCP2 visual attributes (optional)
+#/musr/command visattributes log_DMCP    MCP_style
+#*/musr/command visattributes log_target MCP_style
+#*/musr/command visattributes log_MCPM1  MACOR_style
+#*------ /musr/command visattributes log_MCPM2 MACOR_style
+
+
+################################################################################################################
+# CRY - Cryostat - Used as an ALTERNATIVE to MCP2 - Uncomment lines with #*. (Offset = 0.0 cm)
+#
+# sample plate front face is at z = 17mm:
+# cold finger distance to CF100: 130mm
+# 5mm base plate + 6mm sapphire + 4mm sample plate   = 15mm
+# sample plate front face from CF100: 145mm
+# z-position of sample plate front face: 324/2-145mm = 17mm
+# --> sample plate center is at 17+2=19mm
+#
+################################################################################################################
+
+# Dimensions for large/small sample plates SamPL=35/21 and SaphPL=SamPL35-5
+/musr/command construct tubs target     0 35 2    0 360 G4_Al 0 0 19.0 log_World norot dead 251 
+/musr/command construct tubs SAPH       0 30 3    0 360 G4_ALUMINUM_OXIDE 0 0 24.0 log_World norot dead 252 
+/musr/command construct tubs SAH1       0 35 2.5  0 360 G4_Al 0 0 29.5 log_World norot dead 253 
+
+# Special save target volume
+/musr/command construct tubs saveTarget 0 40 0.05  0 360 G4_Galactic 0 0 16.9 log_World norot dead 253 
+
+# Other components of the cryostat (dimensions and position of CRY4 are only approx. because unknown)
+# COld Finger
+/musr/command construct tubs COFI   0 27.5 5   0 360 G4_Cu 0 0 37.0 log_World norot dead 261 
+# End plate of cryostat (7 mm thick, 30 mm diameter)
+/musr/command construct tubs CRY1   0 15   3.5 0 360 G4_Cu 0 0 45.5 log_World norot dead 262 
+# Heat exchanger (assuming a 10 mm opening - Original dimensions not known.) # OLD pos. 160.0
+/musr/command construct tubs CRY2   5 15  25   0 360 G4_Cu 0 0 74.0 log_World norot dead 263 
+# Mounting ring for He-shield
+/musr/command construct tubs CRY3  38 47   5.5 0 360 G4_Cu 0 0 54.0 log_World norot dead 264 
+# 2 mm thick plate for mounting ring. This is just to close the downstream side.
+/musr/command construct tubs CRY4  15 38   1   0 360 G4_Cu 0 0 54.0 log_World norot dead 265 
+# Radiation shield
+/musr/command construct tubs CRSH  47 48  45   0 360 G4_Cu 0 0 19.0 log_World norot dead 266 
+# Front part of the radiation shield
+/musr/command construct tubs CRSH2 30 48   0.5 0 360 G4_Cu 0 0 -26.5 log_World norot dead 267 
+
+# Electrical Field Guard Rings (distance between the guard rings: 16 mm)
+# /musr/command construct tubs Guard1 29 38 1.5 0 360 G4_Cu 0 0 -13.5 log_World norot dead 271 
+# /musr/command construct tubs Guard2 29 38 1.5 0 360 G4_Cu 0 0  2.5 log_World norot dead 272 
+
+# Cryostat visual attributes (optional)
+/musr/command visattributes  log_SAH1 oxsteel
+#/musr/command visattributes  log_SAH2 oxsteel
+/musr/command visattributes  log_target oxsteel
+/musr/command visattributes  log_SAPH MACOR_style
+#/musr/command visattributes  log_SAH3 oxsteel
+/musr/command visattributes  log_CRSH yellow
+/musr/command visattributes  log_CRSH2 yellow
+#/musr/command visattributes log_test red
+
+
+################################################################################################################
+# RA - Ring Anode, M - middle part (closer to Ground Anode), E - end part (farther from the Ground Anode)
+#                  U - up, D - down, L - left, R - right  (with respect to muon's view - momentum direction)
+# Note: 3.0 mm HALF gap at 45.1469 mm half radius => delta_ang = asin(3.0/45.1469)*180/pi = 3.81 deg.
+# Note: delta_ang = 3.1744 deg. for 2.5 mm HG. The angular extension goes e.g. from (45 + da) to (90 - 2*da).
+# Note: Ring Anode - Ground Anode distance was 15 mm => CHANGED to 12 mm! (Positions: 11.5 -> 8.5, -33.5 -> -36.5)
+################################################################################################################
+
+# RA_Ez = -10.35+2.25 = -8.1 cm; RA_Mz= -10.35 - 2.25 = -12.6 cm; RA_Gz= -25.45+3.75 = -21.7 cm; mcpv_z = -9.25 cm 
+/musr/command construct cons RA_EU 45.1469 62.5 33.5   39.0 22.5  48.81 82.38 Steel 0 0 -84.0 log_World   norot dead 801 
+/musr/command construct cons RA_MU 56.7937 62.5 45.147 62.5 22.5  48.81 82.38 Steel 0 0 -129. log_World   norot dead 802 
+/musr/command construct cons RA_ER 45.1469 62.5 33.5   39.0 22.5  48.81 82.38 Steel 0 0 -84.0 log_World rotRAnR dead 803 
+/musr/command construct cons RA_MR 56.7937 62.5 45.147 62.5 22.5  48.81 82.38 Steel 0 0 -129. log_World rotRAnR dead 804 
+/musr/command construct cons RA_ED 45.1469 62.5 33.5   39.0 22.5  48.81 82.38 Steel 0 0 -84.0 log_World rotRAnD dead 805 
+/musr/command construct cons RA_MD 56.7937 62.5 45.147 62.5 22.5  48.81 82.38 Steel 0 0 -129. log_World rotRAnD dead 806 
+/musr/command construct cons RA_EL 45.1469 62.5 33.5   39.0 22.5  48.81 82.38 Steel 0 0 -84.0 log_World rotRAnL dead 807 
+/musr/command construct cons RA_ML 56.7937 62.5 45.147 62.5 22.5  48.81 82.38 Steel 0 0 -129. log_World rotRAnL dead 808 
+
+# Dummy, thin cylindres used for applying the SAME RA field-map (ROTATED by 90 deg.) to different anodes.
+# NOTE: EM field cannot be applied to non simply connected bodies, as e.g. rings, cons, tori, etc.!
+/musr/command construct tubs RA_T  0 0.01 0.005 0 360 G4_Galactic 0 0 -143.00 log_World   norot dead 822 
+/musr/command construct tubs RA_R  0 0.01 0.005 0 360 G4_Galactic 0 0 -143.02 log_World rotRAnR dead 824 
+/musr/command construct tubs RA_B  0 0.01 0.005 0 360 G4_Galactic 0 0 -143.04 log_World rotRAnD dead 826 
+/musr/command construct tubs RA_L  0 0.01 0.005 0 360 G4_Galactic 0 0 -143.06 log_World rotRAnL dead 828 
+
+# RA_G - Ring Anode Ground Cylinder
+/musr/command construct tubs RA_G 58 62.5 58.0 0 360 G4_Cu 0 0 -221.5 log_World norot dead 831 
+
+# Ring Anodes visual attributes (optional)
+/musr/command visattributes log_RA_G  invisible
+#/musr/command visattributes log_RA_G  Grid_style
+
+
+################################################################################################################
+# Trigger - Trigger Detector  # Triggerz = -1092 mm; total length of TD is 110 mm; carbon foil at -1144 mm.
+################################################################################################################
+
+# Trigger volume
+/musr/command construct tubs TrigV 90 127 148 0 360 G4_Galactic 0 0 -495 log_World norot dead 600 
+# Trigger tube
+/musr/command construct tubs TrigS 100 103 148 0 360 Steel       0 0 0 log_TrigV norot dead 601 
+
+# TF - Trigger tube flanges
+/musr/command construct tubs TF1 103 126.5 12 0 360 Steel 0 0  136 log_TrigV norot dead 611 
+/musr/command construct tubs TF2 103 126.5 12 0 360 Steel 0 0 -136 log_TrigV norot dead 612 
+
+# trigger foil is 52-55mm upstream of TrigV center
+# Carbon Foil (default HALF-thickness 0.000005147 mm, see below => CFoil thick = 10.3 nm).
+# USE THE NAME CFoil or coulombCFoil, otherwise musrMuFormation won't work!
+/musr/command construct box CFoil 60 60 0.0000025 G4_GRAPHITE 0 0 -550 log_World norot dead 621 
+
+# Notes: NIST tables use G4_GRAPHITE with 1.7 g/cm3 and 78 eV ioniz. energy.
+# An area density of 2.20 ug/cm2 implies a CF thickn. = (2.20*1.e-6/1.70)*cm = 1.294e-5 mm - Total thickness
+# An area density of 1.75 ug/cm2 implies a CF thickn. = (1.75*1.e-6/1.70)*cm = 1.029e-5 mm - Total thickness
+# If necessary, use Graphite as defined in musrDetectorConstruction.cc and set any density.
+
+
+# Trigger visual attributes (optional)
+/musr/command visattributes log_TrigV oxsteel
+/musr/command visattributes log_TrigS oxsteel
+/musr/command visattributes log_TF1 oxsteel
+/musr/command visattributes log_TF2 oxsteel
+#*/musr/command visattributes saveCFoil  MACOR_style
+#*/musr/command visattributes log_saveAfterTD  darkred
+
+# Trigger Lens, L3, center -382 length 70mm radius 65mm.
+/musr/command construct tubs TL3S 65.0 70.0 35.0 0 360 G4_Galactic 0 0 -382 log_World norot dead 706 nofield
+/musr/command visattributes log_TL3S red
+
+# One can set visible attrib. also on a MATERIAL basis, rather than on log_VOL.
+# E.g. /musr/command visattributes Steel red
+
+
+################################################################################################################
+# L2 - 2nd Einzel Lens  # L3z = -56.7 cm. (it was "L3" in 2011 and  before) 
+# Lens Gap = 12.0 mm => G/D = 12/130 ~ 0.1 (Lens Gap = gap between Ground and Anode, D - Diameter)
+################################################################################################################
+
+# L3 volume
+/musr/command construct tubs L3V 65 127 220  0 360 G4_Galactic 0 0 -863 log_World norot dead 400
+
+# Lens 3 Steel tube (inner dia: 200 mm, outer dia: 206 mm, length: 720 mm)
+/musr/command construct tubs L3ST 100 103  220 0 360 Steel 0 0 0 log_L3V norot dead 401 
+
+# Lens 3 Flange 1, z = L3z + 208 mm
+/musr/command construct tubs L3F1 103 126.5 12 0 360 Steel 0 0 -208 log_L3V norot dead 402 
+
+# Lens 3 Flange 2, z = L3z - 208 mm
+/musr/command construct tubs L3F2 103 126.5 12 0 360 Steel 0 0 208 log_L3V norot dead 403 
+
+# GPn - Ground Potential Electrodes
+# n = 1-4 (further from TD) and 5-8 (closer to TD) - components of the Ground Electrodes
+# Ground Electrode (inner dia: 130 mm, outer dia: 134 mm, length: 133 mm)
+/musr/command construct tubs L3GP1 65 67 66.5 0 360 Steel 0 0  133.5 log_L3V norot dead 421 
+# Outer electrode surface (LN2 cooling vessel)
+/musr/command construct tubs L3GP2 81 83 66.5 0 360 Steel 0 0  133.5 log_L3V norot dead 422 
+# First ring cap
+/musr/command construct tubs L3GP3 67 81  4   0 360 Steel 0 0  196.0 log_L3V norot dead 423 
+# Second ring cap
+/musr/command construct tubs L3GP4 67 81  4   0 360 Steel 0 0   71.0 log_L3V norot dead 424 
+
+/musr/command construct tubs L3GP5 65 67 66.5 0 360 Steel 0 0 -133.5 log_L3V norot dead 431 
+/musr/command construct tubs L3GP6 81 83 66.5 0 360 Steel 0 0 -133.5 log_L3V norot dead 432 
+/musr/command construct tubs L3GP7 67 81  4   0 360 Steel 0 0 -196.0 log_L3V norot dead 433 
+/musr/command construct tubs L3GP8 67 81  4   0 360 Steel 0 0  -71.0 log_L3V norot dead 434 
+
+# HP - High Potential Electrode (Central Anode - usually at +8.7 kV, for a 15 keV muon beam)
+/musr/command construct tubs L3HP 65 83 55 0 360 Steel 0 0 0 log_L3V norot dead 451 
+
+# Lens 3 visual attributes (optional)
+/musr/command visattributes log_L3V invisible
+/musr/command visattributes log_L3ST oxsteel
+/musr/command visattributes log_L3F1 oxsteel
+/musr/command visattributes log_L3F2 oxsteel
+/musr/command visattributes log_L3HP darkred
+
+
+
+
+################################################################################################################
+# -- SPIN ROTATOR GEOMETRY --
+################################################################################################################
+
+# Spin Rotator volume
+/musr/command construct tubs SRENV 50 320 201.5 0 360 G4_Galactic 0 0 -1284.5 log_World norot dead 100
+/musr/command visattributes log_SRENV invisible
+
+# Electromagnet with iron yoke
+# U - up, D - down, L - left, R - right  (with respect to muon's view - momentum direction)
+
+/musr/command construct box NPole 200 10  150  G4_Fe   0    85 0 log_SRENV  norot dead 201 
+/musr/command construct box NYoke 150 22.5  50  G4_Fe   0   117.5 0 log_SRENV  norot dead 202 
+/musr/command construct box NConn 225 17.5 190.0  G4_Fe   0 157.5 0 log_SRENV  norot dead 203 
+
+/musr/command construct box SPole 200 10  150  G4_Fe  0    -85 0  log_SRENV  norot dead 205 
+/musr/command construct box SYoke 150 22.5  50  G4_Fe  0   -117.5 0  log_SRENV  norot dead 206 
+/musr/command construct box SConn 225 17.5 190.0  G4_Fe  0 -157.5 0 log_SRENV  norot dead 207 
+
+# Front mirror plate
+/musr/command construct box FShU 225 50 5  G4_Fe  0  125 -195.0 log_SRENV  norot dead 301 
+/musr/command construct box FShD 225 50 5  G4_Fe  0 -125 -195.0 log_SRENV  norot dead 302 
+/musr/command construct box FShL  75 75 5  G4_Fe  150 0  -195.0 log_SRENV  norot dead 303 
+/musr/command construct box FShR  75 75 5  G4_Fe -150 0  -195.0 log_SRENV  norot dead 304 
+
+# Back mirror plate
+/musr/command construct box BShU 225 50 5  G4_Fe  0  125 195.0 log_SRENV  norot dead 321 
+/musr/command construct box BShD 225 50 5  G4_Fe  0 -125 195.0 log_SRENV  norot dead 322 
+/musr/command construct box BShL  75 75 5  G4_Fe  150 0  195.0 log_SRENV  norot dead 323 
+/musr/command construct box BShR  75 75 5  G4_Fe -150 0  195.0 log_SRENV  norot dead 324 
+
+# Top coils
+/musr/command construct box TCoil1 170 22.5 10  G4_Cu    0  117.5 -60 log_SRENV  norot dead 401 
+/musr/command construct box TCoil2 170 22.5 10  G4_Cu    0  117.5  60 log_SRENV  norot dead 402 
+/musr/command construct box TCoil3  10 22.5 50  G4_Cu  160  117.5   0 log_SRENV  norot dead 403 
+/musr/command construct box TCoil4  10 22.5 50  G4_Cu -160  117.5   0 log_SRENV  norot dead 404 
+
+# Bottom coils
+/musr/command construct box BCoil1 170 22.5 10  G4_Cu    0 -117.5 -60 log_SRENV  norot dead 421 
+/musr/command construct box BCoil2 170 22.5 10  G4_Cu    0 -117.5  60 log_SRENV  norot dead 422 
+/musr/command construct box BCoil3  10 22.5 50  G4_Cu  160 -117.5   0 log_SRENV  norot dead 423 
+/musr/command construct box BCoil4  10 22.5 50  G4_Cu -160 -117.5   0 log_SRENV  norot dead 424 
+
+# Capacitor
+/musr/command construct box Cap_p 0.5 50 150  Brass  55 0 0 log_SRENV  norot dead 501 
+/musr/command construct box Cap_n 0.5 50 150  Brass -55 0 0 log_SRENV  norot dead 502 
+#*/musr/command construct box Uniform 49  49 150  G4_Galactic 0 0 0 log_SRENV  norot dead 503 
+/musr/command construct tubs RodCapUp 0 5 150 90 180 Brass 55 55 0 log_SRENV norot dead 504 
+/musr/command construct tubs RodCapUn 0 5 150 -90 180 Brass -55 55 0 log_SRENV norot dead 505 
+/musr/command construct tubs RodCapDp 0 5 150 90 180 Brass 55 -55 0 log_SRENV norot dead 506 
+/musr/command construct tubs RodCapDn 0 5 150 -90 180 Brass -55 -55 0 log_SRENV norot dead 507 
+
+
+# Rods
+/musr/command construct tubs RodPosU 0 5 150 0 360 Brass 27.5 55 0 log_SRENV norot dead 511 
+/musr/command construct tubs Rod0U 0 5 150 0 360 Brass 0 55 0 log_SRENV norot dead 512 
+/musr/command construct tubs RodNegU 0 5 150 0 360 Brass -27.5 55 0 log_SRENV norot dead 513 
+/musr/command construct tubs RodPosD 0 5 150 0 360 Brass 27.5 -55 0 log_SRENV norot dead 514 
+/musr/command construct tubs Rod0D 0 5 150 0 360 Brass 0 -55 0 log_SRENV norot dead 515 
+/musr/command construct tubs RodNegD 0 5 150 0 360 Brass -27.5 -55 0 log_SRENV norot dead 516 
+
+
+# Vacuum vessel
+/musr/command construct box TVac1 72.5 2.5 191.5 Steel 0 72.5 0 log_SRENV  norot dead 601 
+/musr/command construct box TVac2 2.5 70.0 191.5 Steel 72.5 0 0 log_SRENV  norot dead 602 
+/musr/command construct box TVac3 72.5 2.5 191.5 Steel 0 -72.5 0 log_SRENV  norot dead 603 
+/musr/command construct box TVac4 2.5 70.0 191.5 Steel -72.5 0 0 log_SRENV  norot dead 604 
+
+# Dummy, thin cylindres used for applying the field maps.
+# NOTE: EM field cannot be applied to non simply connected bodies, as e.g. rings, cones, tori, etc.!
+# For Spin Rotator 
+/musr/command construct tubs SREField  0 0.01 0.005 0 360 G4_Galactic 0 0 -1284.5 log_World norot dead 630 nofield
+/musr/command construct tubs SRBField  0 0.01 0.005 0 360 G4_Galactic 0 0 -1284.51 log_World norot dead 631 nofield
+
+/musr/command visattributes G4_Cu red
+/musr/command visattributes G4_Fe blue
+/musr/command visattributes Brass yellow
+
+
+################################################################################################################
+# Lens 1 - 1st Einzel Lens 
+################################################################################################################
+# L1ENV - Lens 1 envelope - for easy positioning of lens parts (outer dia: 100 mm, length: 300 mm)
+#/musr/command construct tubs L1ENV   40  100  150 0 360 G4_Galactic 0 0 -1929.5 log_World norot dead 600 
+/musr/command construct tubs L1ENV   40  100  150 0 360 G4_Galactic 251.5 0.0  -1678.0 log_World rotBend dead 600 
+/musr/command visattributes log_L1ENV invisible
+
+# Lens 1 Steel tube (inner dia: 200 mm, outer dia: 206 mm, length: 246 mm)
+/musr/command construct tubs L1ST 70 73  60 0 360 Steel 0 0 0 log_L1ENV norot dead 650 
+
+
+# GPn  -  Ground Potential Electrodes. (n = 1-2, inner dia: 80 mm, outer dia: 84 mm, length: 100 mm)
+# n = 1 - Ground Electrode 1 (further from SR).
+/musr/command construct tubs L1GP1 40 44 50 0 360 Steel 0 0 -100 log_L1ENV norot dead 651 
+# n = 2 - Ground Electrode 2 (closer to SR).
+/musr/command construct tubs L1GP2 40 44 50 0 360 Steel 0 0  100 log_L1ENV norot dead 653 
+# HP - High Potential Electrode (Central Anode - usually at +8.5 kV, for a 15 keV muon beam)
+/musr/command construct tubs L1HP 40 44 40 0 360 Steel 0 0 0 log_L1ENV norot dead 652 
+
+# Lens 1 visual attributes (optional)
+/musr/command visattributes log_L1HP  darkred
+
+
+################################################################################################################
+# Electrostatic mirror at bend
+################################################################################################################
+# MRENV
+/musr/command construct box MirrE 65 65 10 G4_Galactic 14.14213562 0.0  -1678.0 log_World rotMirr dead 200 
+/musr/command globalfield Mirr_field 65 65 10 uniform  14.14213562 0.0  -1678.0 log_MirrE 0 0 0 0 0 0.75
+
+###################################################################################
+################### E L E C T R O M G N E T I C     F I E L D S  ##################
+###################################################################################
+
+# Use ABSOLUTE coordinates to specify the field position (i.e. with respect to GLOBAL WORLD)!
+# Default field units:  Magnetic - T, Electric - kV/mm (or kV for E-field maps).
+# NOTE: Applying a field to an invisible log_vol makes is visible!
+
+# Dummy, thin cylindres used for applying the field maps.
+# NOTE: EM field cannot be applied to non simply connected bodies, as e.g. rings, cones, tori, etc.!
+# For L1
+/musr/command construct tubs L1EField   0 0.01 0.005 0 360 G4_Galactic 251.5 0.0  -1678.0 log_World rotBend dead 706 nofield
+# For L2 (L3 before 2012)
+/musr/command construct tubs L3EField    0 0.01 0.005 0 360 G4_Galactic 0 0 -863.0 log_World norot dead 708 nofield
+
+# LENS 1. Best L1 settings: 6.0 kV for 10 keV muons
+/musr/command globalfield Lens1EField 251.5 0.0  -1678.0 fromfile 2DE L1_Erz.map  log_L1EField  9.0
+
+# LENS 2. Best L3 settings: 7.0 kV for 10 keV muons
+/musr/command globalfield  Lens3EField 0. 0. -863.0 fromfile 2DE L3_Erz.map log_L3EField 10.5
+
+# Spin rotator
+# Electric field should be 370mm plates
+# Magnetic field should be 260mm poles as measured srlem_ext.map
+/musr/command globalfield Ele_field 0. 0. -1284.5   fromfile 3DE E_Sep_P37.5cm.map log_SREField 2.5713
+/musr/command globalfield Mag_field 0. 0. -1284.51  fromfile 3DB srlem_ext.map log_SRBField -0.00698
+
+# Electrical Field areas in the Trigger Detector
+# En = Electrical Field n: TnFieldMgr (n = 1-3)
+# Original TriggE2: [4.*sqrt(2), 4.5, 0.7/sqrt(2)] cm -> changed due to overlaps with E1 and E3
+# 57.15mm upstream center
+/musr/command construct box TriggE0 45 45 5      G4_Galactic 0 0 -555.1 log_World   norot dead 630 nofield
+# 48mm upstream center
+/musr/command construct box TriggE1 45 45 4      G4_Galactic 0 0 -543.   log_World   norot dead 631 nofield
+# 2.25mm downstream center
+/musr/command construct box TriggE2 45 45 4.9479 G4_Galactic 0 0 -492.75 log_World rotTrig dead 632 nofield
+# 54mm downstream center
+/musr/command construct box TriggE3 45 45 4      G4_Galactic 0 0 -441.0  log_World   norot dead 633
+
+### Electric field at TRIGGER Detector TD: Three different uniform fields, 2012 settings
+/musr/command globalfield Trigg0_field 45 45 5      uniform 0. 0. -555.1  log_TriggE0 0 0 0 0 0  0.338
+/musr/command globalfield Trigg1_field 45 45 4      uniform 0. 0. -543.   log_TriggE1 0 0 0 0 0 -0.02375
+/musr/command globalfield Trigg2_field 45 45 4.9497 uniform 0. 0. -492.75 log_TriggE2 0 0 0 0 0  0.041416
+/musr/command globalfield Trigg3_field 45 45 4      uniform 0. 0. -441.0  log_TriggE3 0 0 0 0 0 -0.45
+
+# Trigger Lens, L3, (available space from -437 to -347, we use 70mm of that)
+/musr/command construct tubs TL3EField 0 0.01 0.005 0 360 G4_Galactic 0 0 -382.0 log_World norot dead 706 nofield
+/musr/command globalfield  ColRingEField 0. 0. -382.0 fromfile 2DE CR7cm_Grid.map log_TL3EField 11.5
+
+### Electric field at RING ANODE - from 3DE field map
+# To create an arbitrary configuration, switch on all fields and set different potentials.
+/musr/command globalfield RngAnT_field 0. 0. -143.00 fromfile 3DE EM_3D_ext_gridf.map log_RA_T 11.9
+/musr/command globalfield RngAnR_field 0. 0. -143.02 fromfile 3DE EM_3D_ext_gridf.map log_RA_R 11.9
+/musr/command globalfield RngAnB_field 0. 0. -143.04 fromfile 3DE EM_3D_ext_gridf.map log_RA_B 11.9
+/musr/command globalfield RngAnL_field 0. 0. -143.06 fromfile 3DE EM_3D_ext_gridf.map log_RA_L 11.9
+
+### Magnetic field at the sample
+/musr/command construct tubs SBField  0 0.01 0.005 0 360 G4_Galactic 0.0 0.0 15.0 log_World norot dead 709 nofield
+/musr/command globalfield SampleBField 0. 0. 15.0 fromfile 3DB wew_rs_ext.map log_SBField 0.000
+
+### Electric field at the sample
+/musr/command construct tubs SEField  0 0.01 0.005 0 360 G4_Galactic 0.0 0.0 15.9 log_World norot dead 710 nofield
+/musr/command globalfield SampleEField 0. 0. 15.9 fromfile 2DE SamplePlate_2DE.map log_SEField 0.0
+
+# Set parameters for particle tracking in an EM field
+/musr/command globalfield setparameter SetLargestAcceptableStep 5
+/musr/command globalfield setparameter SetMinimumEpsilonStep 5e-5
+/musr/command globalfield setparameter SetMaximumEpsilonStep 0.001
+/musr/command globalfield setparameter SetDeltaOneStep 0.1
+/musr/command globalfield setparameter SetDeltaIntersection 0.01
+/musr/command globalfield printparameters
+
+# TESTING EM FIELD
+/musr/command globalfield printFieldValueAtPoint 0. 0. 0.
+/musr/command globalfield printFieldValueAtPoint 0. 35. -670.
+
+
+###################################################################################
+#########################  P H Y S I C S      P R O C E S S E S  ##################
+###################################################################################
+# Geant 4.9.3
+/musr/command process addDiscreteProcess gamma G4PhotoElectricEffect
+/musr/command process addDiscreteProcess gamma G4ComptonScattering
+/musr/command process addDiscreteProcess gamma G4GammaConversion
+/musr/command process addDiscreteProcess gamma G4RayleighScattering
+/musr/command process addProcess         e-    G4eMultipleScattering    -1  1  1
+/musr/command process addProcess         e-    G4eIonisation            -1  2  2
+/musr/command process addProcess         e-    G4eBremsstrahlung        -1  3  3
+/musr/command process addProcess         e+    G4eMultipleScattering    -1  1  1
+/musr/command process addProcess         e+    G4eIonisation            -1  2  2
+/musr/command process addProcess         e+    G4eBremsstrahlung        -1  3  3
+/musr/command process addProcess         e+    G4eplusAnnihilation      	0 -1  4
+/musr/command process addProcess         mu-   G4MuMultipleScattering   -1  1  1
+/musr/command process addProcess         mu-   G4MuIonisation           -1  2  2
+/musr/command process addProcess         mu-   G4MuBremsstrahlung       -1  3  3
+/musr/command process addProcess         mu-   G4MuPairProduction       -1  4  4
+/musr/command process addProcess         mu+   G4MuMultipleScattering   -1  1  1
+#/musr/command process addModel           mu+   G4MuMultipleScattering   G4UrbanMscModel92 0
+#/musr/command process addModel           mu+   G4MuMultipleScattering   G4WentzelVIModel 0
+/musr/command process addProcess         mu+   G4MuIonisation           -1  2  2
+#/musr/command process addProcess         mu+   G4MuBremsstrahlung       -1  3  3
+#/musr/command process addProcess         mu+   G4MuPairProduction       -1  4  4
+#/musr/command process addDiscreteProcess mu+   G4CoulombScattering
+#/musr/command process addProcess        mu+   G4StepLimiter             -1  -1  5
+/musr/command process addProcess          mu+   musrMuFormation     -1 -1 2
+
+###################################################################################
+##################  S O M E   O T H E R    P A R A M E T E R S   ##################
+###################################################################################
+# Set the overall range cut
+#/run/setCut 1 mm
+# Set the range cut on a particular volumes (in mm)
+#/musr/command SetUserLimits log_target 0.01
+#/musr/command SetUserLimits log_targetscint 0.01
+#/musr/command SetUserLimits log_M0 0.01
+# Store all events into the ROOT tree or just the interesting ones ? (true is default)
+/musr/command storeOnlyEventsWithHits false
+# Set the minimum time separation between two subsequent signals in the same detector (in ns)
+#/musr/command signalSeparationTime 0.1
+#
+/musr/run/randomOption 1
+
+################################################################################################################
+# -- Setting simulation PARAMETERS --
+################################################################################################################
+
+# Set the overall range cut (default 0.1 mm)
+#*/run/setCut 1 mm
+
+# Set the range cut on particular volumes (in mm)
+/musr/command SetUserLimits   log_CFoil 1e-8 -1 -1 -1 -1
+#*/musr/command SetUserLimits log_target 0.01
+#*/musr/command SetUserLimits log_targetscint 0.01
+#*/musr/command SetUserLimits log_cryostatscint 0.01
+
+# Set particle energy cuts on particular volumes (in eV)
+#/musr/command SetUserLimits log_World ustepMax(mm) utrakMax(mm) utimeMax(ns) uekinMin(MeV) urangMin(mm)
+/musr/command SetUserLimits log_World -1 -1 -1 1e-7 -1
+
+# Store ALL the events in a ROOT tree or just the interesting ones? (default is true)
+#*/musr/command storeOnlyEventsWithHits false
+
+# Set the minimum time separation between two subsequent signals in the same detector (in ns)
+/musr/command signalSeparationTime 0.1
+
+# Override runID number
+#*/musr/run/runID 21
+
+# Set the frequency of event printing
+/musr/run/howOftenToPrintEvent 100
+
+# RANDOM option choices: (specify the random number generator initialisation)
+# 0 ... no initialisation (default)
+# 1 ... use actual computer time to initialise now
+# 2 ... use event number to initialise at the beginning of each event
+# 3 ... read in the random no. initial values for each event from a file
+/musr/run/randomOption 2
+
+# VISUALIZATION options
+# To enable or disable visualization uncomment one of these lines
+# To modify visualization options edit the file vis.mac
+/vis/disable
+#*/control/execute vis.mac
+#*/control/execute visdawn.mac
+
+
+###################################################################################
+#########################   R O O T     O U T P U T  ##############################
+###################################################################################
+#/musr/command rootOutput runID off
+#/musr/command rootOutput eventID off
+#/musr/command rootOutput weight off
+#/musr/command rootOutput BFieldAtDecay off
+#/musr/command rootOutput muIniPosX off
+#/musr/command rootOutput muIniPosY off
+#/musr/command rootOutput muIniPosZ off
+#/musr/command rootOutput muIniMomX off
+#/musr/command rootOutput muIniMomY off
+#/musr/command rootOutput muIniMomZ off
+#/musr/command rootOutput muIniPolX off
+#/musr/command rootOutput muIniPolY off
+#/musr/command rootOutput muIniPolZ off
+#/musr/command rootOutput muDecayDetID off
+#/musr/command rootOutput muDecayPosX off
+#/musr/command rootOutput muDecayPosY off
+#/musr/command rootOutput muDecayPosZ off
+#/musr/command rootOutput muDecayTime off
+#/musr/command rootOutput muDecayPolX off
+#/musr/command rootOutput muDecayPolY off
+#/musr/command rootOutput muDecayPolZ off
+#/musr/command rootOutput muTargetTime off
+#/musr/command rootOutput muTargetPolX off
+#/musr/command rootOutput muTargetPolY off
+#/musr/command rootOutput muTargetPolZ off
+#/musr/command rootOutput muM0Time off
+#/musr/command rootOutput muM0PolX off
+#/musr/command rootOutput muM0PolY off
+#/musr/command rootOutput muM0PolZ off
+/musr/command rootOutput muM1Time off
+/musr/command rootOutput muM1PolX off
+/musr/command rootOutput muM1PolY off
+/musr/command rootOutput muM1PolZ off
+/musr/command rootOutput muM2Time off
+/musr/command rootOutput muM2PolX off
+/musr/command rootOutput muM2PolY off
+/musr/command rootOutput muM2PolZ off
+#/musr/command rootOutput posIniMomX off
+#/musr/command rootOutput posIniMomY off
+#/musr/command rootOutput posIniMomZ off
+#/musr/command rootOutput fieldNomVal off
+#/musr/command rootOutput det_ID off
+#/musr/command rootOutput det_edep off
+#/musr/command rootOutput det_edep_el off
+#/musr/command rootOutput det_edep_pos off
+#/musr/command rootOutput det_edep_gam off
+#/musr/command rootOutput det_edep_mup off
+#/musr/command rootOutput det_nsteps off
+#/musr/command rootOutput det_length off
+#/musr/command rootOutput det_start off
+#/musr/command rootOutput det_end off
+#/musr/command rootOutput det_x off
+#/musr/command rootOutput det_y off
+#/musr/command rootOutput det_z off
+#/musr/command rootOutput det_kine off
+/musr/command rootOutput det_VrtxKine off
+/musr/command rootOutput det_VrtxX off
+/musr/command rootOutput det_VrtxY off
+/musr/command rootOutput det_VrtxZ off
+/musr/command rootOutput det_VrtxVolID off
+/musr/command rootOutput det_VrtxProcID off
+/musr/command rootOutput det_VrtxTrackID off
+/musr/command rootOutput det_VrtxParticleID off
+/musr/command rootOutput det_VvvKine off
+/musr/command rootOutput det_VvvX off
+/musr/command rootOutput det_VvvY off
+/musr/command rootOutput det_VvvZ off
+/musr/command rootOutput det_VvvVolID off
+/musr/command rootOutput det_VvvProcID off
+/musr/command rootOutput det_VvvTrackID off
+/musr/command rootOutput det_VvvParticleID off
+### Root variables that are not written out by default, but can be switched on:
+#/musr/command rootOutput fieldIntegralBx on
+#/musr/command rootOutput fieldIntegralBy on
+#/musr/command rootOutput fieldIntegralBz on
+#/musr/command rootOutput fieldIntegralBz1 on
+#/musr/command rootOutput fieldIntegralBz2 on
+#/musr/command rootOutput fieldIntegralBz3 on
+
+/musr/command storeOnlyEventsWithHits false
+
+
+
+################################################################################################################
+# -- Setting PARTICLE GUN parameters --
+################################################################################################################
+
+# Default momentum  direction: 001, i.e. 0z.
+# Default muon spin direction: 100, i.e. 0x.
+# Default particle type: mu+ (can be changed to Mu)
+
+# Set particle type
+#*/gun/particle Mu
+/gun/particle mu+
+
+# Set beam vertex 
+# CFoil at -1144 mm, acceleration starts at -1154.15 mm
+#/gun/vertex 0. 0. -2119.5 mm
+/gun/vertex 441.5  0. -1678.0 mm
+
+# A point-like uniform beam
+#/gun/vertexsigma -0.1 -0.1 0 mm
+
+# Set beam transverse spread (default GAUSSIAN spread)
+# If FWHM = 10 mm ==> sigma = 10/2.354 = 4.2481 mm (last 0 is a dummy value)
+# Negative sigma values => random FLAT RECTANGULAR distribution (area 2x.2y)
+# Use vertexboundary with (vb < sigma_xy) to obtain a CIRCULAR beam spot
+# /gun/vertexsigma 0 0 0 mm ==> Very SLOW with mag. field ON and centered beam
+/gun/vertexsigma  6.83  6.83  0 mm 
+#/gun/vertexsigma   -20 -20   0  mm
+#/gun/vertexboundary 20 -1e6 1e6 mm
+
+# /gun/vertexboundary: rMaxAllowed, zMinAllowed, zMaxAllowed # Beam AND gating
+#*/gun/vertexboundary 7 -1314.4 -1305 mm
+# Without restrictions in z, but only on r:
+#*/gun/vertexboundary 3 -1e6 1e6 mm
+
+# Set beam momentum (USE only as an ALTERNATIVE to setting energy!)
+# /gun/momentum 0 0 29.79 MeV
+#*/gun/momentum 0 0  1.8  MeV
+# Energy loss at p = 1.2 MeV/c (E =  6.8 keV) => 1.23 +/- 0.2 keV
+# Energy loss at p = 1.8 MeV/c (E = 15.3 keV) => 1.25 +/- 0.3 keV
+# 1.2 MeV/c -> 6.8 keV, 1.8 MeV/c -> 15.3 keV
+# muon rest mass = 105.658 MeV/c2
+
+# Set muon energy before hitting TD; a constant field in front of the C-foil accelerates the muons
+# to add 3.38 keV 
+/gun/kenergy 15.0 keV 
+
+# Set beam momentum direction
+/gun/direction -1.0 0.0 0.0
+
+# Set muon spin direction: +10deg or 0
+/gun/muonPolarizVector 0.9848 0 0.17365
+#/gun/muonPolarizVector 1 0 0
+
+
+# Other useful test parameters:
+#
+# FWHM = 3%  ==> sigma = 29.79*0.03/2.354 = 0.37965 MeV/c
+#*/gun/momentumsmearing 0.37965 MeV
+#---/gun/momentumboundary: pMinAllowed, pMaxAllowed, dummy
+#*/gun/momentumboundary 20 40 0 MeV
+#---/gun/tilt: xangle, yangle, dummy
+#*/gun/tilt 0  0.0   0 deg
+#---/gun/tiltsigma: xangleSigma, yangleSigma, dummy  (1 degree at 1 m => 17 mm)
+#*/gun/tiltsigma 0.2 0.2 0 deg
+#*/gun/pitch 0.0  deg
+#---/gun/decaytimelimits: decayMin, decayMax, decayTime
+#*/gun/decaytimelimits 10400 10420 2197.03 ns
+/gun/tiltsigma 1.4 1.4 0 deg
+
+# Selectively inactivate or activate sensitive detectors
+#*/hits/inactivate /musr/ScintSD
+
+# Only for code debugging!
+#/tracking/verbose 1
+
+# BEAM ON
+#/run/beamOn 1000000
+#/run/beamOn   10
+/run/beamOn 10000
+ 

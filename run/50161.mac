@@ -1,0 +1,349 @@
+#-----------------------------------------------------------------------
+# Macro file for muSR instrument simulations 
+# Unless specified otherwises, the default units are mm, ns, MeV, MeV/c.
+# Lines starting with star "#" are comments.
+###################################################################################
+#############################  G E O M E T R Y  ###################################
+###################################################################################
+# ROTATION MATRIXES:
+/musr/command rotation matrix1 0 0 45
+/musr/command rotation matrix2 0 180 0
+/musr/command rotation matrix3 0 270 0
+#/musr/command rotation matrix3 90 90
+/musr/command arrayDef zPlaneGPSveto 12  0.   5.   91.  105. 115.  125.  135.  145. 155. 168.49 168.5 172.5
+/musr/command arrayDef rInnerGPSveto 12 10.  11.   31.   31. 28.75 24.8. 19.7  14   10.3   9.    0.    0.
+/musr/command arrayDef rOuterGPSveto 12 12.5 15.11 35.11 35. 32.85 29.1  24.2  18.6 14.6  13.2  13.0  13.0
+# Rotation "fieldRot 0 0.57295 0" corresponds to 10 mrad (2.5mm/25cm) tilt of the magnetic field
+#/musr/command rotation fieldRot 0 0.57295 0
+#/musr/command rotation fieldRot 0 1.1459 0
+# WORLD VOLUME
+/musr/command construct box  World  300 300 2000 G4_Galactic 0 0 0 no_logical_volume norot dead -1
+# ---- BEAMPIPE vers. 1 (ALC-like)
+#/musr/command construct tubs beampipe      0  34 810 0 360 G4_Galactic  0 0 -840 log_World norot dead 232
+#/musr/command construct tubs beampipeshell 34 36 810 0 360 G4_Al 0 0 -840 log_World norot dead 231
+# PASSIVE COLLIMATOR (for BEAMPIPE vers.1)
+#/musr/command construct tubs pbCollimator_1  16.5 34 25 0 360 G4_Pb        0 0 540 log_beampipe norot dead 241
+# ACTIVE COLLIMATOR (for BEAMPIPE vers.1)
+#/musr/command construct tubs activeCollim 2.5 34.  2.5 0 360 G4_PLASTIC_SC_VINYLTOLUENE  0 0 -27 log_World norot musr/ScintSD 150
+#
+# ---- BEAMPIPE vers. 2 (SEGMENTED and BROAD, small section 30cm long)
+#/musr/command construct tubs beampipeA      0   128 500 0 360 G4_Galactic  0 0 -800 log_World norot dead 232
+#/musr/command construct tubs beampipeAshell 128 130 500 0 360 G4_Al        0 0 -800 log_World norot dead 231
+#/musr/command construct tubs beampipeB      0    34 135 0 360 G4_Galactic  0 0 -165 log_World norot dead 234
+#/musr/command construct tubs beampipeBshell 34   36 135 0 360 G4_Al        0 0 -165 log_World norot dead 233
+# PASSIVE COLLIMATOR (for BEAMPIPE vers.2)
+#/musr/command construct tubs pbCollimator_1  34 128 25 0 360 G4_Pb        0 0 475 log_beampipeA norot dead 241
+#/musr/command construct tubs pbCollimator_2 16.5 34 25 0 360 G4_Pb        0 0  65 log_beampipeB norot dead 242
+# ACTIVE COLLIMATOR (for BEAMPIPE vers.2)
+#/musr/command construct tubs activeCollim 2.5 36.  2.5 0 360 G4_PLASTIC_SC_VINYLTOLUENE  0 0 -27 log_World norot musr/ScintSD 150
+#
+# ---- BEAMPIPE vers. 3 (SEGMENTED and BROAD, small section 50cm long)
+#/musr/command construct tubs beampipeA      0   128 400 0 360 G4_Galactic  0 0 -900 log_World norot dead 232
+#/musr/command construct tubs beampipeAshell 128 130 400 0 360 G4_Al        0 0 -900 log_World norot dead 231
+#/musr/command construct tubs beampipeB      0    34 230 0 360 G4_Galactic  0 0 -270 log_World norot dead 234
+#/musr/command construct tubs beampipeBshell 34   36 230 0 360 G4_Al        0 0 -270 log_World norot dead 233
+# PASSIVE COLLIMATOR (for BEAMPIPE vers.1)
+#/musr/command construct tubs pbCollimator_1  20 128 15 0 360 G4_Pb          0 0 385 log_beampipeA norot dead 241
+#/musr/command construct cons pbCollimator_2  122 128 34 128 70 0 360 G4_Pb 0 0 300 log_beampipeA norot dead 242
+#/musr/command construct tubs pbCollimator_11 2.5 34 15 0 360 G4_Pb          0 0 215 log_beampipeB norot dead 245
+#/musr/command construct cons pbCollimator_12 32 34 2.5 34 25 0 360 G4_Pb   0 0 175 log_beampipeB norot dead 246
+# ACTIVE COLLIMATOR (for BEAMPIPE vers.1)
+#/musr/command construct tubs activeCollim  2.5 5.  2.5 0 360 G4_PLASTIC_SC_VINYLTOLUENE  0 0 -31 log_World norot musr/ScintSD 150
+#/musr/command construct tubs activeCollimB 5. 10.  2.5 0 360 G4_PLASTIC_SC_VINYLTOLUENE  0 0 -31 log_World norot musr/ScintSD 151
+#/musr/command construct tubs activeCollimC 10. 36. 2.5 0 360 G4_PLASTIC_SC_VINYLTOLUENE  0 0 -31 log_World norot musr/ScintSD 152
+#
+# OLD ALC BEAMPIPE
+#    OLD ALC DESIGN: MSR 20.05.082      Tube
+/musr/command construct tubs tube      35.45 38.05 315   0 360 Steel       0 0 -613   log_World  norot dead 8201
+/musr/command construct tubs tube_a     0    35.45 315   0 360 G4_Galactic 0 0 -613   log_World  norot dead 8251
+# SECOND COLLIMATOR
+/musr/command construct tubs shield_collimatorA2    10  35  25  0 360 G4_Cu       0 0  290   log_tube_a norot dead 341
+#   OLD ALC DESIGN:  MSR 20.05.083      Flange
+/musr/command construct tubs flange    38.05 90      6 0 360 Steel  0 0 -934   log_World norot dead 8301
+# ---- 
+# POSITRON COUNTERS
+#/musr/command construct GPSforward  forwardCounter  25 25 2.5 12.51 15.12 G4_PLASTIC_SC_VINYLTOLUENE 0    0  26.5 log_World norot musr/ScintSD 1
+/musr/command construct GPSbackward forwardCounter  25 25 2.5 9.1   11.9   G4_PLASTIC_SC_VINYLTOLUENE 0    0  26.5 log_World norot musr/ScintSD 1
+/musr/command construct GPSbackward backwardCounter 30 30 2.5 8.80 7.64   G4_PLASTIC_SC_VINYLTOLUENE 0    0 -30.0 log_World norot musr/ScintSD 2
+/musr/command construct box         up              2.5  53  53           G4_PLASTIC_SC_VINYLTOLUENE  57.5  0   0.log_World norot musr/ScintSD 3
+/musr/command construct box         down            2.5  53  53           G4_PLASTIC_SC_VINYLTOLUENE -57.5  0   0.log_World norot musr/ScintSD 4
+/musr/command construct box         rite1           53  2.5  14           G4_PLASTIC_SC_VINYLTOLUENE 0 -56.25 -38 log_World norot musr/ScintSD 5
+/musr/command construct box         rite2           53  2.5  14           G4_PLASTIC_SC_VINYLTOLUENE 0 -56.25  38 log_World norot musr/ScintSD 6
+/musr/command construct box         rite3           35  2.5  20           G4_PLASTIC_SC_VINYLTOLUENE 0 -51.25   0 log_World norot musr/ScintSD 7
+/musr/command construct box         left1           53  2.5  19.3         G4_PLASTIC_SC_VINYLTOLUENE 0 72.5 -48.3 log_World norot musr/ScintSD 8
+/musr/command construct box         left2           53  2.5  19.3         G4_PLASTIC_SC_VINYLTOLUENE 0 72.5  48.3 log_World norot musr/ScintSD 9
+/musr/command construct box         left3           35  2.5  20           G4_PLASTIC_SC_VINYLTOLUENE 0  53.75   0 log_World norot musr/ScintSD 10
+# FORWARD VETO
+#/musr/command construct polyconeA forwardVeto 0 360 12 zPlaneGPSveto rInnerGPSveto rOuterGPSveto G4_PLASTIC_SC_VINYLTOLUENE 0 0 24 log_World norot musr/ScintSD 51
+/musr/command construct GPSbackwardVeto forwVetoA 9.   11.8 9.   11.8  2.5 6.25 6.7 6.25 6.7 G4_PLASTIC_SC_VINYLTOLUENE 0 0 26.5   log_World norot musr/ScintSD 51
+/musr/command construct GPSbackwardVeto forwVetoB 11.8 23.5 11.8 23.5 37.5 6.7 18.4 6.7 18.4 G4_PLASTIC_SC_VINYLTOLUENE 0 0 66.5   log_World norot musr/ScintSD 51
+/musr/command construct GPSbackwardVeto forwVetoC 23.5 16.1 23.5 16.1 17.5 18.4 11. 18.4 11. G4_PLASTIC_SC_VINYLTOLUENE 0 0 121.5  log_World norot musr/ScintSD 51
+/musr/command construct box             forwVetoD 16. 16. 2.5                                G4_PLASTIC_SC_VINYLTOLUENE 0 0 141.5  log_World norot musr/ScintSD 51
+#/musr/command construct box             forwVetoD 23.5 23.5 2.5                              G4_PLASTIC_SC_VINYLTOLUENE 0 0 106.5  log_World norot musr/ScintSD 51
+#/musr/command construct GPSbackwardVeto forwVetoB 11.8 18.9 11.8 18.9 15 6.7 13.8 6.7 13.8   G4_PLASTIC_SC_VINYLTOLUENE 0 0  44.0  log_World norot musr/ScintSD 51
+#/musr/command construct box             forwVetoD 18.9 18.9 2.5                              G4_PLASTIC_SC_VINYLTOLUENE 0 0  61.5  log_World norot musr/ScintSD 51
+# BACKWARD VETO
+/musr/command construct GPSbackwardVeto backwardVeto 35.13 7.63 35.13 7.63 60 31 3.5 31 3.5  G4_PLASTIC_SC_VINYLTOLUENE 0 0 -87.5 log_World norot musr/ScintSD 52
+#---------------------
+# OUTER SHIELD
+/musr/command construct tubeWithWindows tube1 20   21 33.5 14.5 33.5 14.5 33.5 G4_Cu 0   0   0 log_World matrix3 dead 401
+/musr/command construct tubs          bottom1 0    20 0.5 0 360               G4_Cu 0  -33.0 0 log_World matrix3 dead 402
+/musr/command construct tubs          window1 21   21.010 15 0 360            G4_Cu 0    0   0 log_World matrix3 dead 403
+/musr/command construct tubs          bottom1a 0   20 0.5 0 360               G4_Cu 0   33.0 0 log_World matrix3 dead 404
+# INNER SHIELD
+/musr/command construct tubeWithWindows tube2 11.5 12.5 21.5 7.5 21.5 10. 21.5 G4_Cu 0   0   0 log_World matrix3 dead 411
+/musr/command construct tubs          bottom2 0    11.5 3.0 0 360             G4_Cu 0  -21.5 0 log_World matrix3 dead 412
+/musr/command construct tubs          window2 12.5 12.510 8 0 360             G4_Cu 0    0   0 log_World matrix3 dead 413
+/musr/command construct tubs          bottom2a 0   11.5 3.0 0 360             G4_Cu 0   21.5 0 log_World matrix3 dead 414
+# HEATER
+/musr/command construct tubs          heater  16    16.3 7.5 0 360            G4_Cu 0 -18.5 0 log_World matrix3 dead 415
+#
+#---------------------
+# MAGNET
+#/musr/command construct tubs magnet     44.4 100  150 0 360 G4_He 0 0 0 log_World  norot dead 221
+# MAGNET WALL
+#/musr/command construct tubs mag_wall   44.4 46.5 150 0 360 G4_Cu 0 0 0 log_magnet norot dead 222
+# MAGNET VOLUME TO DELETE TRACKS
+#/musr/command construct tubs sh0    46.5 100  150 0 360 G4_Cu 0 0 0 log_magnet norot dead 223
+# SHIELD TO DELETE TRACKS
+#/musr/command construct tubs shield1    36 100  5 0 360 G4_AIR 0 0 -105 log_World  norot dead -2
+#/musr/command construct tubs sh2     0 100  5 0 360 G4_AIR 0 0  205 log_World  norot dead -3
+
+# NOSE EXTENSION
+#/musr/command construct tubs noseExtensionA  15   25  2.0   0 360 G4_Al     0 0 -47     log_World        norot dead 300
+#/musr/command construct tubs noseExtensionB  25   28 126.5  0 360 G4_Al     0 0 -171.5  log_World        norot dead 302
+#/musr/command construct tubs noseExtensionC  28   41  4.0   0 360 G4_Al     0 0 -294    log_World        norot dead 304
+#
+# COLLIMATOR
+#/musr/command construct tubs collimatorA     2.5  25  15    0 360 G4_Pb     0 0 -64     log_World        norot dead 310
+#/musr/command construct tubs collimatorB     3.5  25  10    0 360 G4_Pb     0 0 -89     log_World        norot dead 312
+#/musr/command construct tubs collimatorC     5.0  25  10    0 360 G4_Pb     0 0 -109     log_World        norot dead 314
+#
+# M COUNTERS AND M COUNTER HOLDER
+#/musr/command construct tubs M0_holder1     5.5 7.5 3.25    0 360 G4_Al         0 0 -36.31  log_World        norot dead 330
+#/musr/command construct tubs M0_holder2     3.5 5.5 0.75    0 360 G4_PLEXIGLASS 0 0 -37.06  log_World        norot dead 333
+#/musr/command construct tubs M0_holder3     4.0 5.5 0.75    0 360 G4_PLEXIGLASS 0 0 -35.56  log_World        norot dead 335
+/musr/command construct tubs M0       0 7.5 0.15 0 360 G4_PLASTIC_SC_VINYLTOLUENE 0 0 -25.0 log_World     norot musr/ScintSD 102
+#/musr/command construct tubs M0_electronics 4.0 9  0.85     0 360 G4_POLYCARBONATE 0 0 -40.41 log_World     norot dead 337
+#
+# TARGET SPACE
+#/musr/command construct tubs targetspace 0 5 50 0 360 G4_He 0 0 -20 log_cryostat
+# SCINTILLATOR BEFORE TARGET
+#/musr/command construct tubs coulombM1 0 3.0 0.1 0 360 G4_PLASTIC_SC_VINYLTOLUENE 0 0 -2  log_World norot musr/ScintSD 101
+# TARGET
+/musr/command construct tubs target          0 4.0 0.215  0 360 G4_Ag                     0 0 0     log_World  norot dead 201
+/musr/command construct tubs targetFieldVol  0 0.5 0.015  0 360 G4_Ag                     0 0 0     log_target  norot dead 202
+#/musr/command construct tubs vetoTarget 0 5.0 1.    0 360 G4_PLASTIC_SC_VINYLTOLUENE 0 0 1.220 log_World  norot musr/ScintSD 160
+#/musr/command construct tubs vetoCyl    5 6.0 3.6   0 360 G4_PLASTIC_SC_VINYLTOLUENE 0 0 -1.39 log_World  norot musr/ScintSD 161
+#/musr/command construct TubeWithTubeHole vetoTarget    7 9 5.1   0 360 8.2 G4_PLASTIC_SC_VINYLTOLUENE 0 0 -2.89 log_World  norot musr/ScintSD 160
+#/musr/command construct TubeWithHoleAndTubeHole vetoTarget 1.5 6 5.1   0 360 4 8.2 G4_PLASTIC_SC_VINYLTOLUENE 0 0 -2.89 log_World  norot musr/ScintSD 160
+#/musr/command construct tubs sampleHolder    0  4  31.39 0 360 G4_Ag                     0 0 31.61  log_World  norot dead 165
+#/musr/command construct tubs sampleHolder2   0 7.5 108.5  0 360 G4_Ag                     0 0 171.5  log_World  norot dead 166
+#
+#/musr/command construct TubeWithHolePlusTubeHole PlexyCyl1  4 12.5 4.5 0 360 7 12.5 5 G4_PLEXIGLASS  0 0 -10. log_World matrix2 dead 45
+#/musr/command construct tubs                     PlexyCyl2  7.5 12.5 2 0 360          G4_PLEXIGLASS  0 0 12.5 log_World norot   dead 46
+#/musr/command construct TubeWithHolePlusTubeHole vetoCyl  2.5 12. 5. 0 360 4 12 9 G4_PLASTIC_SC_VINYLTOLUENE  0 0 -10.5 log_World matrix2 musr/ScintSD 51
+#/musr/command construct tubs vetoCylA 8.0 12.0 10  91  88 G4_PLASTIC_SC_VINYLTOLUENE     0     0      0    log_World  norot  musr/ScintSD 61
+#/musr/command construct tubs vetoCylB 8.0 12.0 10 181  88 G4_PLASTIC_SC_VINYLTOLUENE     0     0      0    log_World  norot  musr/ScintSD 62
+#/musr/command construct tubs vetoCylC 8.0 12.0 10 271  88 G4_PLASTIC_SC_VINYLTOLUENE     0     0      0    log_World  norot  musr/ScintSD 63
+#/musr/command construct tubs vetoCylD 8.0 12.0 10   1  88 G4_PLASTIC_SC_VINYLTOLUENE     0     0      0    log_World  norot  musr/ScintSD 64
+#
+#---------------------------------------------------------
+#/musr/command region define goulombRegion log_target
+#/musr/command region define goulombRegion log_M0
+#/musr/command region setProductionCut goulombRegion 0.01 0.01 0.01
+#---------------------------------------------------------
+#/musr/command logicalVolumeToBeReweighted mu log_pbCollimator_1  6
+#/musr/command logicalVolumeToBeReweighted mu log_pbCollimator_2  5
+#/musr/command logicalVolumeToBeReweighted mu log_activeCollim    4
+#---------------------------------------------------------
+#
+/musr/command visattributes G4_PLASTIC_SC_VINYLTOLUENE red
+/musr/command visattributes G4_PLEXIGLASS yellow
+/musr/command visattributes G4_Pb blue
+#/musr/command visattributes log_beampipe invisible
+#/musr/command visattributes log_beampipeAshell invisible
+#/musr/command visattributes log_beampipeBshell invisible
+/musr/command visattributes log_World invisible
+/musr/command visattributes log_target yellow
+#/musr/command visattributes log_magnet invisible
+#/musr/command visattributes log_mag_wall invisible
+#/musr/command visattributes log_magnet yellow
+#/musr/command visattributes log_mag_wall yellow
+#/musr/command visattributes log_sh0 invisible
+#/musr/command visattributes log_sh2 invisible
+#/musr/command visattributes log_vetoTarget green
+#/musr/command visattributes log_vetoCyl green
+###################################################################################
+#########################  M A G N E T I C     F I E L D  #########################
+###################################################################################
+# Set magnetic field  (set field intensity in T and sigma in mm)
+# syntax for magneticfield:  fromfile filename fieldValue
+#                            uniform  fieldValue         
+#                            gaussian fieldValue sigma
+#                            
+/musr/command globalfield centralSolenoidField 0. 0. 0. fromfile 2D GPS_6kG_yAx_xRad_cgs.table log_targetFieldVol 0.005
+/musr/command globalfield setparameter SetLargestAcceptableStep 2
+/musr/command globalfield setparameter SetMinimumEpsilonStep 5e-5
+/musr/command globalfield setparameter SetMaximumEpsilonStep 0.001
+/musr/command globalfield setparameter SetDeltaOneStep 0.1
+/musr/command globalfield setparameter SetDeltaIntersection 0.01
+/musr/command globalfield printparameters
+/musr/command globalfield printFieldValueAtPoint 0 0 10
+/musr/command globalfield printFieldValueAtPoint 0 0 -10
+/musr/command globalfield printFieldValueAtPoint 0 10 10
+/musr/command globalfield printFieldValueAtPoint 10 0 10
+/musr/command globalfield printFieldValueAtPoint -10 0 10
+/musr/command globalfield printFieldValueAtPoint 10 10 10
+/musr/command globalfield printFieldValueAtPoint 40 40 100
+/musr/command globalfield printFieldValueAtPoint 40 40 900
+###################################################################################
+#########################  P H Y S I C S      P R O C E S S E S  ##################
+###################################################################################
+# Geant 4.9.3
+/musr/command process addDiscreteProcess gamma G4PhotoElectricEffect
+/musr/command process addDiscreteProcess gamma G4ComptonScattering
+/musr/command process addDiscreteProcess gamma G4GammaConversion
+/musr/command process addDiscreteProcess gamma G4RayleighScattering
+/musr/command process addProcess         e-    G4eMultipleScattering    -1  1  1
+/musr/command process addProcess         e-    G4eIonisation            -1  2  2
+/musr/command process addProcess         e-    G4eBremsstrahlung        -1  3  3
+/musr/command process addProcess         e+    G4eMultipleScattering    -1  1  1
+/musr/command process addProcess         e+    G4eIonisation            -1  2  2
+/musr/command process addProcess         e+    G4eBremsstrahlung        -1  3  3
+/musr/command process addProcess         e+    G4eplusAnnihilation      	0 -1  4
+/musr/command process addProcess         mu-   G4MuMultipleScattering   -1  1  1
+/musr/command process addProcess         mu-   G4MuIonisation           -1  2  2
+/musr/command process addProcess         mu-   G4MuBremsstrahlung       -1  3  3
+/musr/command process addProcess         mu-   G4MuPairProduction       -1  4  4
+/musr/command process addProcess         mu+   G4MuMultipleScattering   -1  1  1
+#/musr/command process addModel           mu+   G4MuMultipleScattering   G4UrbanMscModel92 0
+/musr/command process addProcess         mu+   G4MuIonisation           -1  2  2
+/musr/command process addProcess         mu+   G4MuBremsstrahlung       -1  3  3
+/musr/command process addProcess         mu+   G4MuPairProduction       -1  4  4
+#
+#
+#/home/install/geant4.9.3/source/processes/electromagnetic/utils/src/G4EnergyLossMessenger.cc
+######## /process/msc/StepLimit Minimal | UseDistanceToBoundary | UseSafety 
+/process/msc/StepLimit UseSafety
+#/process/msc/LateralDisplacement
+/process/msc/RangeFactor 0.04
+/process/msc/GeomFactor 2.5
+#/process/msc/FactorForAngleLimit
+/process/msc/Skin 3.0
+#/process/msc/ThetaLimit 0.2 rad
+#
+###################################################################################
+##################  S O M E   O T H E R    P A R A M E T E R S   ##################
+###################################################################################
+# Set the overall range cut
+#/run/setCut 1 mm
+# Set the range cut on a particular volumes (in mm)
+/musr/command SetUserLimits log_target 0.01
+#/musr/command SetUserLimits log_targetscint 0.01
+/musr/command SetUserLimits log_M0 0.01
+# Store all events into the ROOT tree or just the interesting ones ? (true is default)
+#/musr/command storeOnlyEventsWithHits false
+# Set the minimum time separation between two subsequent signals in the same detector (in ns)
+/musr/command signalSeparationTime 0.1
+#
+/musr/run/howOftenToPrintEvent 100000
+/musr/command maximumRunTimeAllowed 86000
+/musr/run/randomOption 2
+###################################################################################
+#########################   R O O T     O U T P U T  ##############################
+###################################################################################
+/musr/command rootOutput det_edep_el    off
+/musr/command rootOutput det_edep_pos   off
+/musr/command rootOutput det_edep_gam   off
+/musr/command rootOutput det_edep_mup   off
+/musr/command rootOutput det_nsteps     off
+/musr/command rootOutput det_length     off
+/musr/command rootOutput det_time_end   off
+/musr/command rootOutput det_kine       off
+/musr/command rootOutput det_VrtxKine   off
+/musr/command rootOutput det_VrtxX      off
+/musr/command rootOutput det_VrtxY      off
+/musr/command rootOutput det_VrtxZ      off
+/musr/command rootOutput det_VrtxVolID  off
+/musr/command rootOutput det_VrtxProcID off
+/musr/command rootOutput det_VrtxTrackID     off
+/musr/command rootOutput det_VrtxParticleID  off
+/musr/command rootOutput det_VvvKine   off
+/musr/command rootOutput det_VvvX      off
+/musr/command rootOutput det_VvvY      off
+/musr/command rootOutput det_VvvZ      off
+/musr/command rootOutput det_VvvVolID  off
+/musr/command rootOutput det_VvvProcID off
+/musr/command rootOutput det_VvvTrackID     off
+/musr/command rootOutput det_VvvParticleID  off
+/musr/command rootOutput odet_ID off
+/musr/command rootOutput odet_nPhot off
+/musr/command rootOutput odet_timeFirst off
+/musr/command rootOutput odet_timeSecond off
+/musr/command rootOutput odet_timeThird off
+/musr/command rootOutput odet_timeA off
+/musr/command rootOutput odet_timeB off
+/musr/command rootOutput odet_timeC off
+/musr/command rootOutput odet_timeD off
+/musr/command rootOutput odet_timeMean off
+/musr/command rootOutput odet_timeLast off
+/musr/command rootOutput odet_timeCFD off
+/musr/command rootOutput odet_amplCFD off
+/musr/command rootOutput nOptPhot off
+###################################################################################
+#########################  V I S U A L I S A T I O N ##############################
+###################################################################################
+/vis/disable
+#/control/execute visVRML.mac
+#/control/execute visFromToni.mac
+#/control/execute visDawn50001.mac
+#/vis/open VRML2FILE
+#/vis/open DAWNFILE
+### (if too many tracks cause core dump => storeTrajectory 0)
+#/vis/scene/create
+#
+#/tracking/storeTrajectory 1
+#/vis/viewer/set/viewpointThetaPhi  90 0
+##/vis/viewer/set/globalLineWidthScale 3
+#/vis/viewer/zoom 30
+###/vis/scene/add/trajectories
+#/vis/drawVolume
+#/vis/viewer/flush
+####/hits/verbose 2
+###################################################################################
+######################### P A R T I C L E   G U N #################################
+###################################################################################
+/gun/vertex 0 0 -1000 mm
+# FWHM 10mm ==> sigma = 10/2.354 = 4.2481mm
+#/gun/vertexsigma 20 20 0 mm
+#---/gun/vertexboundary: rMaxAllowed, zMinAllowed, zMaxAllowed
+/gun/vertexboundary 128 -999999 999999 mm
+#/gun/momentum 27.0 MeV
+# sigma = 3%  ==> sigma 27*0.03 = 0.81
+#/gun/momentumsmearing 0.81 MeV
+#---/gun/momentumboundary: pMinAllowed, pMaxAllowed, dummy
+#/gun/momentumboundary 20 40 0 MeV
+# TURTLE
+#/gun/turtlefilename FOR061_2008_04_22.DAT
+#/gun/turtlefilename FOR070_2008_10_17_XXII.DAT
+#/gun/turtlefilename FOR077_pie3_HiField_d05_x30.dat
+#/gun/turtlefilename FOR077_reggiani_Jan2010_NEW.dat
+/gun/turtlefilename FOR077_reggiani_Feb2010.dat
+#/gun/turtleZ0position -900 mm
+#---/gun/tilt: xangle, yangle, dummy
+#/gun/tilt 0  0.5  0 deg
+#---/gun/tiltsigma: xangleSigma, yangleSigma, dummy  (1 degree on 1 meter ~ 17mm)
+#/gun/tiltsigma 0.2 0.2 0 deg
+#/gun/pitch 0.5 deg
+# Spin rotated by 50 degrees upwards:
+/gun/muonPolarizVector 0.766043969 0. -0.642788174
+#---/gun/decaytimelimits:  decayMin, decayMax, decayTime
+#/gun/decaytimelimits 400 410 2197.03 ns
+/gun/decaytimelimits -1 -1 2197.03 ns
+###################################################################################
+########################  B E A M    O N  #########################################
+###################################################################################
+#/run/beamOn 3000000
+#/run/beamOn 10
+/run/beamOn 10000000

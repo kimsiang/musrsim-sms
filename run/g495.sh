@@ -1,0 +1,10 @@
+export G4LEVELGAMMADATA=/home/install/geant4.9.5/data/PhotonEvaporation2.2; 
+export G4RADIOACTIVEDATA=/home/install/geant4.9.5/data/RadioactiveDecay3.4; 
+export G4LEDATA=/home/install/geant4.9.5/data/G4EMLOW6.23; 
+export G4NEUTRONHPDATA=/home/install/geant4.9.5/data/G4NDL4.0; 
+export G4ABLADATA=/home/install/geant4.9.5/data/G4ABLA3.0; 
+export G4REALSURFACEDATA=/home/install/geant4.9.5/data/RealSurface1.0; 
+export G4NEUTRONXSDATA=/home/install/geant4.9.5/data/G4NEUTRONXS1.1; 
+export G4PIIDATA=/home/install/geant4.9.5/data/G4PII1.3; 
+export G4VRMLFILE_VIEWER="vrmlview"; 
+echo  "On this machine the G4VRMLFILE_VIEWER=$G4VRMLFILE_VIEWER"
