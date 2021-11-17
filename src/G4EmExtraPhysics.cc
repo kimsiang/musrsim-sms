@@ -134,7 +134,7 @@ G4EmExtraPhysics::G4EmExtraPhysics(G4int ver,G4String steeringFileName):
   fNuActivated (false),
   fNuETotXscActivated (false),
   fUseGammaNuclearXS(false),
-  gmumuFactor (1.0), // default = 1.0
+  gmumuFactor (10000.0), // default = 1.0
   pmumuFactor (1.0),
   phadFactor  (1.0),
   fNuEleCcBias(1.0),
