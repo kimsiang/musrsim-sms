@@ -29,9 +29,10 @@
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-musrRootOutput::musrRootOutput() {
+musrRootOutput::musrRootOutput(std::string name) {
   TTree::SetMaxTreeSize(100000000000LL);      // Set maximum size of the tree file
                                               // to 100 GB (instead of 1.9 GB).
+  run_name = name;
   pointerToRoot=this;
   boolIsAnySpecialSaveVolumeDefined=false;
   nFieldNomVal=0;
@@ -179,7 +180,13 @@ void musrRootOutput::BeginOfRunAction() {
   G4int tmpRunNr=(G4RunManager::GetRunManager())->GetCurrentRun()->GetRunID();
   char RootOutputFileName[200];
   //  sprintf(RootOutputFileName, "data/musr_%i.root", tmpRunNr);
-  sprintf(RootOutputFileName, "%s/musr_%i.root",rootOutputDirectoryName,tmpRunNr);
+  if(run_name!="") {
+    sprintf(RootOutputFileName, "%s/musr_%i_%s.root",rootOutputDirectoryName,tmpRunNr,run_name.c_str());
+  }
+  else {
+    sprintf(RootOutputFileName, "%s/musr_%i.root",rootOutputDirectoryName,tmpRunNr);  
+  }
+  
   rootFile=new TFile(RootOutputFileName,"recreate");
   if (rootFile->IsZombie()) {
     char message[200];  

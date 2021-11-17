@@ -7,6 +7,7 @@
 #include "musrStackingAction.hh"
 #include "musrSteppingAction.hh"
 #include "musrSteppingVerbose.hh"
+#include <string>
 
 #include "G4RunManager.hh"
 #include "G4UImanager.hh"
@@ -70,7 +71,9 @@ int main(int argc,char** argv) {
   //  TApplication* myapp=new TApplication("myapp",0,0);
   
   // Create Root class for storing the output of the Geant simulation
-  musrRootOutput* myRootOutput = new musrRootOutput();
+  std::string name = "";
+  if(argc>2) name = std::string(argv[2]);
+  musrRootOutput* myRootOutput = new musrRootOutput(name);
 
 // The following command is needed to cope with the problem of 
 // "Error in <TPluginManager::FindHandler>: Cannot find plugin handler for TVirtualStreamerInfo! 

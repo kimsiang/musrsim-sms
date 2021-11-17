@@ -22,3 +22,9 @@ Example:
 # set gmumu xsection factor to 1000.0
 /musr/command G4EmExtraPhysics SetCrossSecFactor gmumuFactor 1000.0
 ```
+
+Now can specify a name when launch the job:
+```
+../musrSim 1003.mac name
+```
+The output file will be `musr_1003_name.root`. 

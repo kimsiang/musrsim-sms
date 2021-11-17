@@ -46,7 +46,7 @@
 
 class musrRootOutput  {
   public:
-    musrRootOutput();
+    musrRootOutput(std::string name="");
    ~musrRootOutput();
     static musrRootOutput* GetRootInstance();
 
@@ -488,6 +488,7 @@ class musrRootOutput  {
 
     std::map<std::string,int> SensDetectorMapping;
     std::map<std::string,int> ProcessIDMapping;
+    std::string run_name;
 };
 
 #endif
