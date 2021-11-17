@@ -54,7 +54,7 @@ class G4EmExtraPhysics : public G4VPhysicsConstructor
 {
 public:
 
-  G4EmExtraPhysics(G4int ver = 1);
+  G4EmExtraPhysics(G4int ver = 1,G4String steeringFileName = "");
 
   // obsolete
   G4EmExtraPhysics(const G4String& name);
@@ -116,8 +116,12 @@ private:
 
   G4String fNuDetectorName;
 
+
   G4EmMessenger* theMessenger;
+
   G4int verbose;
+
+  G4String parameterFileName;
 };
 
 #endif

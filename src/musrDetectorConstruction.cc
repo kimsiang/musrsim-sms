@@ -1549,8 +1549,9 @@ G4VPhysicalVolume* musrDetectorConstruction::Construct()  {
 	sscanf(&line[0],"%*s %*s %lf",&musrMuEnergyLossLandau::landauSigma);
 	cout << "landauSigma = " << musrMuEnergyLossLandau::landauSigma << endl;
       }
+      else if (strcmp(tmpString1,"G4EmExtraPhysics")==0){}
 
-      else ReportGeometryProblem(line);
+      else {ReportGeometryProblem(line);}
       
     }
   }

@@ -177,6 +177,10 @@
 #/run/setCut 1 mm
 # Set the range cut on particular volumes (in mm)
 #/musr/command SetUserLimits   log_ECAL 1  -1 -1 -1 -1
+
+#CC
+/musr/command G4EmExtraPhysics SetCrossSecFactor gmumuFactor 1000.0
+
 ###################################################################################
 #########################  V I S U A L I S A T I O N ##############################
 ###################################################################################
@@ -206,5 +210,7 @@
 #/gps/ang/maxtheta 2 deg
 #/gps/ang/maxphi 2 deg
 ########################  B E A M    O N  #######################################
+
+
 #/run/beamOn 1000
-/run/beamOn 50
+/run/beamOn 5

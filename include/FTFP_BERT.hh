@@ -46,7 +46,7 @@
 class FTFP_BERT: public G4VModularPhysicsList 
 {
 public:
-  FTFP_BERT(G4int ver = 1);
+  FTFP_BERT(G4int ver = 1,G4String steeringFileName="");
   virtual ~FTFP_BERT()=default;
 
   FTFP_BERT(const FTFP_BERT &) = delete;

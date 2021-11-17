@@ -120,7 +120,7 @@ G4_DECLARE_PHYSCONSTR_FACTORY(G4EmExtraPhysics);
 
 //////////////////////////////////////
 
-G4EmExtraPhysics::G4EmExtraPhysics(G4int ver): 
+G4EmExtraPhysics::G4EmExtraPhysics(G4int ver,G4String steeringFileName): 
   G4VPhysicsConstructor("G4GammaLeptoNuclearPhys"),
   gnActivated (true), // default = true
   eActivated  (true), // default = true
@@ -128,7 +128,7 @@ G4EmExtraPhysics::G4EmExtraPhysics(G4int ver):
   munActivated(true),
   synActivated(false),
   synActivatedForAll(false),
-  gmumuActivated(false), // default = false
+  gmumuActivated(true), // default = false
   pmumuActivated(false),
   phadActivated (false),
   fNuActivated (false),
@@ -142,11 +142,54 @@ G4EmExtraPhysics::G4EmExtraPhysics(G4int ver):
   fNuNucleusBias(1.0),
   fGNLowEnergyLimit(200*CLHEP::MeV),
   fNuDetectorName("0"),
-  verbose(ver)
+  verbose(ver),
+  parameterFileName(steeringFileName)
 {
   theMessenger = new G4EmMessenger(this);
   SetPhysicsType(bEmExtra);
   if(verbose > 1) G4cout << "### G4EmExtraPhysics" << G4endl;
+
+  //read xsection factors from steering file (CC)
+  if(steeringFileName!=""){
+    FILE *fSteeringFile=fopen(parameterFileName.c_str(),"r");
+    if (fSteeringFile==NULL) {
+      if (parameterFileName=="Unset") {
+        G4cout<<"musrG4EmExtraPhysics:  No input macro file specified"<<G4endl;
+      }
+      else {
+        G4cout << "E R R O R : musrG4EmExtraPhysics  Failed to open detector configuration file " << parameterFileName << G4endl;
+      }
+      G4cout << "S T O P    F O R C E D" << G4endl;
+      exit(1);
+    }
+    char  line[501];
+    while (!feof(fSteeringFile)) {
+      fgets(line,500,fSteeringFile);
+      if ((line[0]!='#')&&(line[0]!='\n')&&(line[0]!='\r')) {
+        char tmpString0[100]="Unset";
+        sscanf(&line[0],"%s",tmpString0);
+        if ( strcmp(tmpString0,"/musr/command")!=0 ) continue;
+      
+
+        char tmpString1[100]="Unset",tmpString2[100]="Unset",factorName[100]="Unset";
+        double factor=1.;
+        sscanf(&line[0],"%*s %s %s",tmpString1,tmpString2);
+        if (strcmp(tmpString1,"G4EmExtraPhysics")==0 && strcmp(tmpString2,"SetCrossSecFactor")==0){
+          sscanf(&line[0],"%*s %*s %*s %s %lf",factorName,&factor);
+          G4cout << "G4EmExtraPhysics    customized "<< factorName << " to "<< factor << G4endl;
+          if(strcmp(factorName,"gmumuFactor")==0) {
+            gmumuFactor = factor;
+          }
+          else if(strcmp(factorName,"pmumuFactor")==0){
+            pmumuFactor = factor;
+          }
+          else if(strcmp(factorName,"phadFactor")==0){
+            phadFactor = factor;
+          }
+        }
+      }
+    }
+  }
 }
 
 G4EmExtraPhysics::G4EmExtraPhysics(const G4String&)

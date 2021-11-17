@@ -94,7 +94,7 @@ int main(int argc,char** argv) {
   musrDetectorConstruction* musrdetector = new musrDetectorConstruction(steeringFileName);
   runManager->SetUserInitialization(musrdetector);
   //runManager->SetUserInitialization(new musrPhysicsList);
-  runManager->SetUserInitialization(new FTFP_BERT);
+  runManager->SetUserInitialization(new FTFP_BERT(1,steeringFileName));
   
 #ifdef G4VIS_USE
   // Visualization, if you choose to have it!

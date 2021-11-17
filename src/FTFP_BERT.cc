@@ -66,7 +66,7 @@
 #include "G4HadronPhysicsFTFP_BERT.hh"
 #include "FTFP_BERT.hh"
 
-FTFP_BERT::FTFP_BERT(G4int ver)
+FTFP_BERT::FTFP_BERT(G4int ver,G4String steeringFileName)
 {
   // default cut value  (1.0mm) 
   // defaultCutValue = 1.0*CLHEP::mm;
@@ -79,7 +79,7 @@ FTFP_BERT::FTFP_BERT(G4int ver)
   RegisterPhysics( new G4EmStandardPhysics(ver));
 
   // Synchroton Radiation & GN Physics
-  RegisterPhysics( new G4EmExtraPhysics(ver) );
+  RegisterPhysics( new G4EmExtraPhysics(ver,steeringFileName) );
 
   // Decays 
   RegisterPhysics( new G4DecayPhysics(ver) );
