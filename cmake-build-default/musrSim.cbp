@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="musrSim"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\GEANT4\;CMake Files\..\..\GEANT4\geant4-10.7.2\;CMake Files\..\..\GEANT4\geant4-10.7.2\install\;CMake Files\..\..\GEANT4\geant4-10.7.2\install\lib\;CMake Files\..\..\GEANT4\geant4-10.7.2\install\lib\Geant4-10.7.2\;CMake Files\..\..\GEANT4\geant4-10.7.2\install\lib\Geant4-10.7.2\PTL\;CMake Files\..\..\GEANT4\geant4-10.7.2\install\lib\Geant4-10.7.2\Modules\;CMake Files\run\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/mlv/software/musrSim/musrsim-sms/cmake-build-default"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/strip">
+				<Option working_dir="/home/mlv/software/musrSim/musrsim-sms/cmake-build-default"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 install/strip"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install">
+				<Option working_dir="/home/mlv/software/musrSim/musrsim-sms/cmake-build-default"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 install"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="list_install_components">
+				<Option working_dir="/home/mlv/software/musrSim/musrsim-sms/cmake-build-default"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 list_install_components"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/mlv/software/musrSim/musrsim-sms/cmake-build-default"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/mlv/software/musrSim/musrsim-sms/cmake-build-default"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/local">
+				<Option working_dir="/home/mlv/software/musrSim/musrsim-sms/cmake-build-default"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 install/local"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="musrSim">
+				<Option output="/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/musrSim" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/mlv/software/musrSim/musrsim-sms/cmake-build-default"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DG4UI_USE_TCSH"/>
+					<Add option="-DG4LIB_BUILD_DLL"/>
+					<Add directory="/home/mlv/software/ROOT6.20/install/include"/>
+					<Add directory="/home/mlv/software/musrSim/musrsim-sms/include"/>
+					<Add directory="/home/mlv/software/GEANT4/geant4-10.7.2/install/include/Geant4"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 musrSim"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="musrSim/fast">
+				<Option output="/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/musrSim" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/mlv/software/musrSim/musrsim-sms/cmake-build-default"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DG4UI_USE_TCSH"/>
+					<Add option="-DG4LIB_BUILD_DLL"/>
+					<Add directory="/home/mlv/software/ROOT6.20/install/include"/>
+					<Add directory="/home/mlv/software/musrSim/musrsim-sms/include"/>
+					<Add directory="/home/mlv/software/GEANT4/geant4-10.7.2/install/include/Geant4"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 musrSim/fast"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/mlv/software/musrSim/musrsim-sms/cmake-build-default/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/include/BLEngeFunction.hh">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/include/F04ElementField.hh">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/include/F04FieldMessenger.hh">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/include/F04GlobalField.hh">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/include/FTFP_BERT.hh">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/include/G4EmExtraPhysics.hh">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/include/MuDecayChannel.hh">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/include/MuDecayChannelWithSpin.hh">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/include/meyer.hh">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/include/musrDetectorConstruction.hh">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/include/musrDetectorMessenger.hh">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/include/musrErrorMessage.hh">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/include/musrEventAction.hh">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/include/musrMuEnergyLossLandau.hh">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/include/musrMuFormation.hh">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/include/musrMuScatter.hh">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/include/musrMuonium.hh">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/include/musrParameters.hh">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/include/musrPhysicsList.hh">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/include/musrPrimaryGeneratorAction.hh">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/include/musrPrimaryGeneratorMessenger.hh">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/include/musrQuadrupole.hh">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/include/musrRootOutput.hh">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/include/musrRunAction.hh">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/include/musrScintHit.hh">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/include/musrScintSD.hh">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/include/musrStackingAction.hh">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/include/musrSteppingAction.hh">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/include/musrSteppingVerbose.hh">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/include/musrTabulatedElementField.hh">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/include/musrUniformField.hh">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/include/yields.hh">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/musrSim.cc">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/src/F04ElementField.cc">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/src/F04FieldMessenger.cc">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/src/F04GlobalField.cc">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/src/FTFP_BERT.cc">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/src/G4EmExtraPhysics.cc">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/src/MuDecayChannel.cc">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/src/MuDecayChannelWithSpin.cc">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/src/meyer.cc">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/src/musrDetectorConstruction.cc">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/src/musrDetectorMessenger.cc">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/src/musrErrorMessage.cc">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/src/musrEventAction.cc">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/src/musrMuEnergyLossLandau.cc">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/src/musrMuFormation.cc">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/src/musrMuScatter.cc">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/src/musrMuonium.cc">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/src/musrParameters.cc">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/src/musrPhysicsList.cc">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/src/musrPrimaryGeneratorAction.cc">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/src/musrPrimaryGeneratorMessenger.cc">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/src/musrQuadrupole.cc">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/src/musrRootOutput.cc">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/src/musrRunAction.cc">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/src/musrScintHit.cc">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/src/musrScintSD.cc">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/src/musrStackingAction.cc">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/src/musrSteppingAction.cc">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/src/musrSteppingVerbose.cc">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/src/musrTabulatedElementField.cc">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/src/musrUniformField.cc">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/src/yields.cc">
+			<Option target="musrSim"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/FindROOT.cmake">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/../../GEANT4/geant4-10.7.2/install/lib/Geant4-10.7.2/G4EXPATShim.cmake">
+			<Option virtualFolder="CMake Files\..\..\GEANT4\geant4-10.7.2\install\lib\Geant4-10.7.2\"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/../../GEANT4/geant4-10.7.2/install/lib/Geant4-10.7.2/Geant4Config.cmake">
+			<Option virtualFolder="CMake Files\..\..\GEANT4\geant4-10.7.2\install\lib\Geant4-10.7.2\"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/../../GEANT4/geant4-10.7.2/install/lib/Geant4-10.7.2/Geant4ConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\GEANT4\geant4-10.7.2\install\lib\Geant4-10.7.2\"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/../../GEANT4/geant4-10.7.2/install/lib/Geant4-10.7.2/Geant4LibraryDepends-release.cmake">
+			<Option virtualFolder="CMake Files\..\..\GEANT4\geant4-10.7.2\install\lib\Geant4-10.7.2\"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/../../GEANT4/geant4-10.7.2/install/lib/Geant4-10.7.2/Geant4LibraryDepends.cmake">
+			<Option virtualFolder="CMake Files\..\..\GEANT4\geant4-10.7.2\install\lib\Geant4-10.7.2\"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/../../GEANT4/geant4-10.7.2/install/lib/Geant4-10.7.2/Geant4PackageCache.cmake">
+			<Option virtualFolder="CMake Files\..\..\GEANT4\geant4-10.7.2\install\lib\Geant4-10.7.2\"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/../../GEANT4/geant4-10.7.2/install/lib/Geant4-10.7.2/UseGeant4.cmake">
+			<Option virtualFolder="CMake Files\..\..\GEANT4\geant4-10.7.2\install\lib\Geant4-10.7.2\"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/../../GEANT4/geant4-10.7.2/install/lib/Geant4-10.7.2/PTL/PTLConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\GEANT4\geant4-10.7.2\install\lib\Geant4-10.7.2\PTL\"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/../../GEANT4/geant4-10.7.2/install/lib/Geant4-10.7.2/PTL/PTLConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\GEANT4\geant4-10.7.2\install\lib\Geant4-10.7.2\PTL\"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/../../GEANT4/geant4-10.7.2/install/lib/Geant4-10.7.2/PTL/PTLTargets-release.cmake">
+			<Option virtualFolder="CMake Files\..\..\GEANT4\geant4-10.7.2\install\lib\Geant4-10.7.2\PTL\"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/../../GEANT4/geant4-10.7.2/install/lib/Geant4-10.7.2/PTL/PTLTargets.cmake">
+			<Option virtualFolder="CMake Files\..\..\GEANT4\geant4-10.7.2\install\lib\Geant4-10.7.2\PTL\"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/../../GEANT4/geant4-10.7.2/install/lib/Geant4-10.7.2/Modules/IntelCompileFeatures.cmake">
+			<Option virtualFolder="CMake Files\..\..\GEANT4\geant4-10.7.2\install\lib\Geant4-10.7.2\Modules\"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/../../GEANT4/geant4-10.7.2/install/lib/Geant4-10.7.2/Modules/MSVCCompileFeatures.cmake">
+			<Option virtualFolder="CMake Files\..\..\GEANT4\geant4-10.7.2\install\lib\Geant4-10.7.2\Modules\"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/run/101.mac">
+			<Option virtualFolder="CMake Files\run\"/>
+		</Unit>
+		<Unit filename="/home/mlv/software/musrSim/musrsim-sms/run/102.mac">
+			<Option virtualFolder="CMake Files\run\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

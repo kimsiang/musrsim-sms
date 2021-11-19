@@ -1,0 +1,182 @@
+#-----------------------------------------------------------------------
+# Macro file for the simulation of electron/positrons from the Sr decay
+# passing through the scintiallator detectors (blocks).
+# Unless specified otherwises, the default units are mm, ns, MeV, MeV/c.
+# Lines starting with star "#" are comments.
+###################################################################################
+#############################  G E O M E T R Y  ###################################
+#
+# WORLD
+/musr/command construct box World     10 10 100 G4_AIR                0 0 0 no_logical_volume  norot dead -1
+#
+# Sr SOURCE
+#/musr/command construct sphere source   0  0.02  0 360 0 180  G4_Sr                   0 0 0 log_World       norot dead 301
+#
+# SCINTILLATOR BLOCKS
+/musr/command construct box scintFarAwayC1  1.5  1.5  1  G4_PLASTIC_SC_VINYLTOLUENE 0 0 5   log_World   norot musr/ScintSD 10
+/musr/command construct box scintFarAwayC2  1.5  1.5  1  G4_PLASTIC_SC_VINYLTOLUENE 0 0 14  log_World   norot musr/ScintSD 11
+#
+#============================================================
+/musr/command visattributes log_World invisible
+#/musr/command visattributes log_source red
+/musr/command visattributes G4_PLASTIC_SC_VINYLTOLUENE lightblue
+###################################################################################
+#########################  P H Y S I C S      P R O C E S S E S  ##################
+###################################################################################
+# Geant 4.9.4
+/musr/command process addDiscreteProcess gamma G4PhotoElectricEffect
+/musr/command process addDiscreteProcess gamma G4ComptonScattering
+/musr/command process addDiscreteProcess gamma G4GammaConversion
+/musr/command process addDiscreteProcess gamma G4RayleighScattering
+/musr/command process addProcess         e-    G4eMultipleScattering    -1  1  1
+/musr/command process addProcess         e-    G4eIonisation            -1  2  2
+/musr/command process addProcess         e-    G4eBremsstrahlung        -1  3  3
+/musr/command process addProcess         e+    G4eMultipleScattering    -1  1  1
+/musr/command process addProcess         e+    G4eIonisation            -1  2  2
+/musr/command process addProcess         e+    G4eBremsstrahlung        -1  3  3
+/musr/command process addProcess         e+    G4eplusAnnihilation       0 -1  4
+#/musr/command process addProcess         mu-   G4MuMultipleScattering   -1  1  1
+#/musr/command process addProcess         mu-   G4MuIonisation           -1  2  2
+#/musr/command process addProcess         mu-   G4MuBremsstrahlung       -1  3  3
+#/musr/command process addProcess         mu-   G4MuPairProduction       -1  4  4
+#/musr/command process addProcess         mu+   G4MuMultipleScattering   -1  1  1
+#/musr/command process addProcess         mu+   G4MuIonisation           -1  2  2
+#/musr/command process addProcess         mu+   G4MuBremsstrahlung       -1  3  3
+#/musr/command process addProcess         mu+   G4MuPairProduction       -1  4  4
+#
+###################################################################################
+##################  S O M E   O T H E R    P A R A M E T E R S   ##################
+###################################################################################
+# Store all events into the ROOT tree or just the interesting ones ? (true is default)
+#/musr/command storeOnlyEventsWithHits false
+/musr/command storeOnlyEventsWithHitInDetID 11
+# Set the minimum time separation between two subsequent signals in the same detector (in ns)
+/musr/command signalSeparationTime 50
+#
+/musr/run/howOftenToPrintEvent 10000
+/musr/run/randomOption 2
+###################################################################################
+#########################   R O O T     O U T P U T  ##############################
+###################################################################################
+#/musr/command rootOutput runID off
+#/musr/command rootOutput eventID off
+/musr/command rootOutput weight off
+/musr/command rootOutput BFieldAtDecay off
+/musr/command rootOutput muIniPosX off
+/musr/command rootOutput muIniPosY off
+/musr/command rootOutput muIniPosZ off
+/musr/command rootOutput muIniMomX off
+/musr/command rootOutput muIniMomY off
+/musr/command rootOutput muIniMomZ off
+/musr/command rootOutput muIniPolX off
+/musr/command rootOutput muIniPolY off
+/musr/command rootOutput muIniPolZ off
+/musr/command rootOutput muIniTime off
+/musr/command rootOutput muDecayDetID off
+/musr/command rootOutput muDecayPosX off
+/musr/command rootOutput muDecayPosY off
+/musr/command rootOutput muDecayPosZ off
+/musr/command rootOutput muDecayTime off
+/musr/command rootOutput muDecayPolX off
+/musr/command rootOutput muDecayPolY off
+/musr/command rootOutput muDecayPolZ off
+/musr/command rootOutput muTargetTime off
+/musr/command rootOutput muTargetPolX off
+/musr/command rootOutput muTargetPolY off
+/musr/command rootOutput muTargetPolZ off
+/musr/command rootOutput muM0Time off
+/musr/command rootOutput muM0PolX off
+/musr/command rootOutput muM0PolY off
+/musr/command rootOutput muM0PolZ off
+/musr/command rootOutput muM1Time off
+/musr/command rootOutput muM1PolX off
+/musr/command rootOutput muM1PolY off
+/musr/command rootOutput muM1PolZ off
+/musr/command rootOutput muM2Time off
+/musr/command rootOutput muM2PolX off
+/musr/command rootOutput muM2PolY off
+/musr/command rootOutput muM2PolZ off
+#/musr/command rootOutput posIniMomX off
+#/musr/command rootOutput posIniMomY off
+#/musr/command rootOutput posIniMomZ off
+/musr/command rootOutput fieldNomVal off
+#/musr/command rootOutput det_ID off
+#/musr/command rootOutput det_edep off
+/musr/command rootOutput det_edep_el off
+/musr/command rootOutput det_edep_pos off
+/musr/command rootOutput det_edep_gam off
+/musr/command rootOutput det_edep_mup off
+#/musr/command rootOutput det_nsteps off
+#/musr/command rootOutput det_length off
+#/musr/command rootOutput det_start off
+#/musr/command rootOutput det_end off
+#/musr/command rootOutput det_x off
+#/musr/command rootOutput det_y off
+#/musr/command rootOutput det_z off
+#/musr/command rootOutput det_kine off
+/musr/command rootOutput det_VrtxKine off
+/musr/command rootOutput det_VrtxX off
+/musr/command rootOutput det_VrtxY off
+/musr/command rootOutput det_VrtxZ off
+/musr/command rootOutput det_VrtxVolID off
+/musr/command rootOutput det_VrtxProcID off
+/musr/command rootOutput det_VrtxTrackID off
+/musr/command rootOutput det_VrtxParticleID off
+/musr/command rootOutput det_VvvKine off
+/musr/command rootOutput det_VvvX off
+/musr/command rootOutput det_VvvY off
+/musr/command rootOutput det_VvvZ off
+/musr/command rootOutput det_VvvVolID off
+/musr/command rootOutput det_VvvProcID off
+/musr/command rootOutput det_VvvTrackID off
+/musr/command rootOutput det_VvvParticleID off
+/musr/command rootOutput odet_ID           off
+/musr/command rootOutput nOptPhot          off
+/musr/command rootOutput odet_nPhot        off
+/musr/command rootOutput odet_timeFirst    off
+/musr/command rootOutput odet_timeA        off
+/musr/command rootOutput odet_timeB        off
+/musr/command rootOutput odet_timeC        off
+/musr/command rootOutput odet_timeD        off
+/musr/command rootOutput odet_timeE        off
+/musr/command rootOutput odet_timeMean     off
+/musr/command rootOutput odet_timeLast     off
+/musr/command rootOutput odet_timeCFD      off
+/musr/command rootOutput odet_amplCFD      off
+### Root variables that are not written out by default, but can be switched on:
+#/musr/command rootOutput fieldIntegralBx on
+#/musr/command rootOutput fieldIntegralBy on
+#/musr/command rootOutput fieldIntegralBz on
+#/musr/command rootOutput fieldIntegralBz1 on
+#/musr/command rootOutput fieldIntegralBz2 on
+#/musr/command rootOutput fieldIntegralBz3 on
+###################################################################################
+#########################  V I S U A L I S A T I O N ##############################
+###################################################################################
+/vis/disable
+#/control/execute visFromToni.mac
+#/control/execute visDawn101.mac
+#/control/execute visVRML.mac
+###################################################################################
+######################### P A R T I C L E   G U N #################################
+###################################################################################
+/gun/primaryparticle e-
+/gun/vertex 0 0 0 mm
+/gun/momentum 2.15 MeV
+# sigma = 3%  ==> sigma 27*0.03 = 0.81
+#/gun/momentumsmearing 0.3 MeV
+#/gun/tiltsigma 5.15 5.15 0 deg
+#/gun/pitch 10.0573 deg
+#
+#/gps/particle ion
+#/gps/ion 39 86
+#/gps/ion 27 57 0 0
+#/gps/ion 38 90 0 0
+#  /gps/position seems to be in cm !!!! 
+#/gps/position 0 0 0
+#/gps/energy 0 keV
+#/gps/ang/maxtheta 2 deg
+#/gps/ang/maxphi 2 deg
+########################  B E A M    O N  #######################################
+#/run/beamOn 1000
+/run/beamOn 5

@@ -1,0 +1,27 @@
+C:\Windows\system32\wsl.exe --distribution Ubuntu-20.04 --exec /bin/sh -c "export CLION_IDE=TRUE && export JETBRAINS_IDE=TRUE && cd /home/mlv/software/musrSim/musrsim-sms/cmake-build-debug && /usr/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G 'CodeBlocks - Unix Makefiles' /home/mlv/software/musrSim/musrsim-sms"
+-- The C compiler identification is GNU 9.3.0
+-- The CXX compiler identification is GNU 9.3.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Looking for Root...
+CMake Error at FindROOT.cmake:31 (MESSAGE):
+  ROOT not installed in the searchpath and ROOTSYS is not set.  Please
+
+   set ROOTSYS or add the path to your ROOT installation in the Macro FindROOT.cmake in the
+   subdirectory cmake/modules.
+Call Stack (most recent call first):
+  CMakeLists.txt:10 (include)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/home/mlv/software/musrSim/musrsim-sms/cmake-build-debug/CMakeFiles/CMakeOutput.log".
