@@ -1,6 +1,7 @@
 ########## Meng Lv's gitignore ##########
 /cmake-build-debug/
 /cmake-build-default/
+/build/
 /install/
 /.idea/
 /run/multiSimuScript/
