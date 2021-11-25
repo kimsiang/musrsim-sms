@@ -9,6 +9,9 @@
 #include "musrSteppingVerbose.hh"
 #include <string>
 
+#include <fstream>
+#include <sstream>
+
 #include "G4RunManager.hh"
 #include "G4UImanager.hh"
 #include "G4UIterminal.hh"
@@ -72,7 +75,28 @@ int main(int argc,char** argv) {
 
     // Create Root class for storing the oMuMu Filterutput of the Geant simulation
     std::string name = "";
-    if(argc>2) name = std::string(argv[2]);
+
+    if (argc > 2) name = std::string(argv[2]);
+    // Read from macro to customize output ROOT file name
+    std::ifstream fin(steeringFileName.c_str());
+    std::string line;
+    while (std::getline(fin, line)){
+        std::istringstream ss(line);
+        std::string cmd1, cmd2, cmd3;
+        if (ss >> cmd1 >> cmd2 >> cmd3){
+//            std::cout << cmd1 << " " << cmd2 << " " << cmd3 << std::endl;
+            if (!cmd1.compare("/musr/command") && !cmd2.compare("SetOutputFileName")){
+                if (!cmd3.compare("DEFAULT")) {
+                    std::cout << "\nmusrSim.cc: Set default output ROOT file: " <<"data/musr_" << atoi(argv[1]) << ".root\n" << std::endl;
+                }
+                else {
+                    name = cmd3;
+                    std::cout << "\nmusrSim.cc: Set output ROOT file: " << "data/musr_" << atoi(argv[1]) << cmd3 << ".root\n" << std::endl;
+                }
+            }
+        }
+    }
+
     musrRootOutput* myRootOutput = new musrRootOutput(name);
 
 // The following command is needed to cope with the problem of 
