@@ -1,0 +1,46 @@
+Universe   = vanilla
+Executable = run.sh
+Log        = submit_condor.log
+Output     = logs/condor.$(Process).out
+Error      = logs/condor.$(Process).error
+
+#irradiation test
+Arguments = irradiation_test
+Queue
+
+# #baseline
+# Arguments = 1p2GeV_1cm_gmm1
+# Queue
+
+# #low gmm control sample
+# Arguments = 1p2GeV_1cm_gmm1em4
+# Queue
+
+# #thickness scan
+# Arguments = 1p2GeV_0p5cm_gmm1e4
+# Queue
+# Arguments = 1p2GeV_1cm_gmm1e4
+# Queue
+# Arguments = 1p2GeV_1p5cm_gmm1e4
+# Queue
+# Arguments = 1p2GeV_2cm_gmm1e4
+# Queue
+# Arguments = 1p2GeV_3cm_gmm1e4
+# Queue
+# Arguments = 1p2GeV_4cm_gmm1e4
+# Queue
+# Arguments = 1p2GeV_5cm_gmm1e4
+# Queue
+# Arguments = 1p2GeV_6cm_gmm1e4
+# Queue
+
+
+# #beam energy scan
+# #Arguments = 1p2GeV_1cm_gmm1e4
+# #Queue
+# Arguments = 2p5GeV_1cm_gmm1e4
+# Queue
+# Arguments = 5GeV_1cm_gmm1e4
+# Queue
+# Arguments = 10GeV_1cm_gmm1e4
+# Queue
