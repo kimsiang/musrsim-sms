@@ -60,3 +60,20 @@ Now can specify a name when launch the job:
 ../musrSim 1003.mac name
 ```
 The output file will be `musr_1003_name.root`.
+
+### 2021-11-25 (ML)
+Enables the customization of output file name in `.mac` steering file
+
+Example:
+```
+# set output file name
+/musr/command SetOutputFileName myRootFile
+```
+And the output root file will be: `musr_1003_myRootFile.root`(if the steering file is `1003.mac`)
+
+Moreover, you can specify the name as DEFAULT:
+```
+/musr/command SetOutputFileName DEFAULT
+```
+This is equivalent to running the macro without this command line
+
