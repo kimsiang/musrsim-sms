@@ -45,12 +45,12 @@
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 class musrRootOutput  {
-  public:
+public:
     musrRootOutput(std::string name="");
-   ~musrRootOutput();
+    ~musrRootOutput();
     static musrRootOutput* GetRootInstance();
 
-  public:
+public:
     void BeginOfRunAction();
     void EndOfRunAction();
     void FillEvent();
@@ -60,58 +60,58 @@ class musrRootOutput  {
     G4int ConvertProcessToID(std::string processName);
     void SetSpecialSaveVolumeDefined() {boolIsAnySpecialSaveVolumeDefined=true;};
 
-  // Getting variables (just for debugging)
+    // Getting variables (just for debugging)
     G4double GetDecayPositionZ() {return muDecayPosZ;};
     G4double GetDecayTime()      {return muDecayTime*CLHEP::microsecond;};
     G4double GetTimeInTarget()   {return muTargetTime*CLHEP::microsecond;};
 
-  // Setting variables common to the whole event:
+    // Setting variables common to the whole event:
     void SetRunID          (G4int id) {runID = id;};
     void SetEventID        (G4int id) {eventID = id;};
     void SetTimeToNextEvent(G4double deltaT) {timeToNextEvent = deltaT/CLHEP::microsecond;}
     void SetDecayDetectorID (std::string detectorName) {muDecayDetID = SensDetectorMapping[detectorName];};
     Int_t GetDecayDetectorID() {return  muDecayDetID;};
-    void SetBField       (G4double F[6]) {B_t[0]=F[0]/CLHEP::tesla; B_t[1]=F[1]/CLHEP::tesla; B_t[2]=F[2]/CLHEP::tesla; 
-                                          B_t[3]=F[3]/CLHEP::tesla; B_t[4]=F[4]/CLHEP::tesla; B_t[5]=F[5]/CLHEP::tesla;};
+    void SetBField       (G4double F[6]) {B_t[0]=F[0]/CLHEP::tesla; B_t[1]=F[1]/CLHEP::tesla; B_t[2]=F[2]/CLHEP::tesla;
+        B_t[3]=F[3]/CLHEP::tesla; B_t[4]=F[4]/CLHEP::tesla; B_t[5]=F[5]/CLHEP::tesla;};
     void SetDecayPolarisation (G4ThreeVector pol) {muDecayPolX=pol.x(); muDecayPolY=pol.y(); muDecayPolZ=pol.z();};
-    void SetDecayPosition (G4ThreeVector pos) {muDecayPosX=pos.x()/CLHEP::mm; muDecayPosY=pos.y()/CLHEP::mm; 
-                                               muDecayPosZ=pos.z()/CLHEP::mm;};
+    void SetDecayPosition (G4ThreeVector pos) {muDecayPosX=pos.x()/CLHEP::mm; muDecayPosY=pos.y()/CLHEP::mm;
+        muDecayPosZ=pos.z()/CLHEP::mm;};
     void SetEventWeight  (G4double w) {weight *= w;}
-    void SetDetectorInfo (G4int nDetectors, G4int ID, G4int particleID, G4double edep, 
-                          G4double edep_el, G4double edep_pos, 
-			  G4double edep_gam, G4double edep_mup,G4int nsteps, G4double length, G4double t1, 
-			  G4double t2, G4double x, G4double y, G4double z,
-			  G4double ek, G4double ekVertex, G4double xVertex, G4double yVertex, G4double zVertex, 
-			  G4int idVolVertex, G4int idProcVertex, G4int idTrackVertex) ;
+    void SetDetectorInfo (G4int nDetectors, G4int ID, G4int particleID, G4double edep,
+                          G4double edep_el, G4double edep_pos,
+                          G4double edep_gam, G4double edep_mup,G4int nsteps, G4double length, G4double t1,
+                          G4double t2, G4double x, G4double y, G4double z,
+                          G4double ek, G4double ekVertex, G4double xVertex, G4double yVertex, G4double zVertex,
+                          G4int idVolVertex, G4int idProcVertex, G4int idTrackVertex) ;
 
     void SetDetectorInfoVvv (G4int nDetectors,
-			     G4double ekVertex, G4double xVertex, G4double yVertex, G4double zVertex, 
-			     G4int idVolVertex, G4int idProcVertex, G4int idTrackVertex, G4int particleID) ;
+                             G4double ekVertex, G4double xVertex, G4double yVertex, G4double zVertex,
+                             G4int idVolVertex, G4int idProcVertex, G4int idTrackVertex, G4int particleID) ;
 
-    void SetOPSAinfo    (G4int nDetectors, G4int ID, G4int nPhot, G4int nPhotPrim, G4double timeFirst, G4double timeSecond, 
-			 G4double timeThird, G4double timeA, G4double timeB, G4double timeC, G4double timeD,
-			 G4double timeMean, G4double timeLast, G4double timeCFD, G4double amplCFD);
+    void SetOPSAinfo    (G4int nDetectors, G4int ID, G4int nPhot, G4int nPhotPrim, G4double timeFirst, G4double timeSecond,
+                         G4double timeThird, G4double timeA, G4double timeB, G4double timeC, G4double timeD,
+                         G4double timeMean, G4double timeLast, G4double timeCFD, G4double amplCFD);
 
     void SetCFDSpecialInfo (G4int n, G4double time);
 
     void SetTimeC1SpecialInfo (G4double* time);
 
-    void SetSaveDetectorInfo (G4int ID, G4int particleID, G4double ke, G4double x, G4double y, G4double z, G4double time, 
-			      G4double px, G4double py, G4double pz, G4double polx, G4double poly, G4double polz) ;
+    void SetSaveDetectorInfo (G4int ID, G4int particleID, G4double ke, G4double x, G4double y, G4double z, G4double time,
+                              G4double px, G4double py, G4double pz, G4double polx, G4double poly, G4double polz) ;
 
-    void SetInitialMuonParameters(G4double x, G4double y, G4double z, G4double px, G4double py, G4double pz, 
-				  G4double xpolaris, G4double ypolaris, G4double zpolaris, G4double particleTime) {
-      muIniTime=particleTime/CLHEP::microsecond;
-      muIniPosX=x;  muIniPosY=y;  muIniPosZ=z;
-      muIniMomX=px; muIniMomY=py; muIniMomZ=pz;
-      muIniPolX=xpolaris; muIniPolY=ypolaris; muIniPolZ=zpolaris; 
+    void SetInitialMuonParameters(G4double x, G4double y, G4double z, G4double px, G4double py, G4double pz,
+                                  G4double xpolaris, G4double ypolaris, G4double zpolaris, G4double particleTime) {
+        muIniTime=particleTime/CLHEP::microsecond;
+        muIniPosX=x;  muIniPosY=y;  muIniPosZ=z;
+        muIniMomX=px; muIniMomY=py; muIniMomZ=pz;
+        muIniPolX=xpolaris; muIniPolY=ypolaris; muIniPolZ=zpolaris;
     }
     void PrintInitialMuonParameters() {
-      G4cout<<"musrRootOutput.hh: Initial muon parameters: x="<<muIniPosX<<", y="<<muIniPosY<<", z="<<muIniPosZ
-	    <<", px="<<muIniMomX << ", py="<<muIniMomY<<", pz="<<muIniMomZ<<G4endl;
-      G4cout<<"            polx="<<muIniPolX<<", poly="<<muIniPolY<<", polz="<<muIniPolZ<<G4endl;
-      G4cout<<"            time at which muon was generated = "<<muIniTime<<G4endl;
-      G4cout<<"            numberOfGeneratedEvents = "<<GeantParametersD[7]<<G4endl;
+        G4cout<<"musrRootOutput.hh: Initial muon parameters: x="<<muIniPosX<<", y="<<muIniPosY<<", z="<<muIniPosZ
+              <<", px="<<muIniMomX << ", py="<<muIniMomY<<", pz="<<muIniMomZ<<G4endl;
+        G4cout<<"            polx="<<muIniPolX<<", poly="<<muIniPolY<<", polz="<<muIniPolZ<<G4endl;
+        G4cout<<"            time at which muon was generated = "<<muIniTime<<G4endl;
+        G4cout<<"            numberOfGeneratedEvents = "<<GeantParametersD[7]<<G4endl;
     }
 
     void SetPolInTarget(G4ThreeVector pol) {muTargetPolX=pol.x(); muTargetPolY=pol.y(); muTargetPolZ=pol.z();}
@@ -131,20 +131,20 @@ class musrRootOutput  {
     void SetFieldNomVal(G4int i, G4double value);
     G4int GetNrOfVolumes() {return det_nMax;}
     void SetBFieldIntegral(G4double BxInt,G4double ByInt,G4double BzInt,G4double BzInt1,G4double BzInt2,G4double BzInt3) {
-      BxIntegral=BxInt/CLHEP::m/CLHEP::tesla; ByIntegral=ByInt/CLHEP::m/CLHEP::tesla; BzIntegral=BzInt/CLHEP::m/CLHEP::tesla;
-      BzIntegral1=BzInt1/CLHEP::m/CLHEP::tesla;BzIntegral2=BzInt2/CLHEP::mm;BzIntegral3=BzInt3/CLHEP::mm;
+        BxIntegral=BxInt/CLHEP::m/CLHEP::tesla; ByIntegral=ByInt/CLHEP::m/CLHEP::tesla; BzIntegral=BzInt/CLHEP::m/CLHEP::tesla;
+        BzIntegral1=BzInt1/CLHEP::m/CLHEP::tesla;BzIntegral2=BzInt2/CLHEP::mm;BzIntegral3=BzInt3/CLHEP::mm;
     }
     void StoreGeantParameter(Int_t i, Double_t value) {
-      if (i<maxNGeantParameters) { GeantParametersD[i]=value; }
-      else {G4cout<<"musrRootOutput.hh::StoreGeantParameter:  index="<<i<<" out of range"
-		  <<" (maxNGeantParameters=" <<maxNGeantParameters<<")"<<G4endl;}
+        if (i<maxNGeantParameters) { GeantParametersD[i]=value; }
+        else {G4cout<<"musrRootOutput.hh::StoreGeantParameter:  index="<<i<<" out of range"
+                    <<" (maxNGeantParameters=" <<maxNGeantParameters<<")"<<G4endl;}
     };
     void setRootOutputDirectoryName(char dirName[1000]);
 
     TH2F *htest1, *htest2;
     TH1F *htest3, *htest4, *htest5, *htest6, *htest7, *htest8;
 
-  public:
+public:
     static G4bool store_runID;
     static G4bool store_eventID;
     static G4bool store_weight;
@@ -249,24 +249,24 @@ class musrRootOutput  {
 
     static G4int oldEventNumberInG4EqEMFieldWithSpinFunction;
 
-  private:
+private:
     TFile* rootFile;
     TTree* rootTree;
     static musrRootOutput* pointerToRoot;
     static const Int_t maxNGeantParameters=30;
     char   rootOutputDirectoryName[1000];
     Double_t GeantParametersD[maxNGeantParameters];   // parameters transfered from GEANT to Root
-          // 0 ... fieldOption:  0 ... no field, 1 ... uniform, 2 ... gaussian, 3 ... from table
-          // 1 ... fieldValue:   intensity of the magnetic field         
-          // 2 ... minimum of the generated decay time of the muon (in microsecond)
-          // 3 ... maximum of the generated decay time of the muon (in microsecond)
-          // 4 ... muon mean life time (in microsecond)
-          // 5 ... nr. of the last generated event
-          // 6 ... run number
-          // 7 ... numberOfGeneratedEvents (i.e. number of the generated events; 
-          //                    in case of Turtle nr. of events tried); 
+    // 0 ... fieldOption:  0 ... no field, 1 ... uniform, 2 ... gaussian, 3 ... from table
+    // 1 ... fieldValue:   intensity of the magnetic field
+    // 2 ... minimum of the generated decay time of the muon (in microsecond)
+    // 3 ... maximum of the generated decay time of the muon (in microsecond)
+    // 4 ... muon mean life time (in microsecond)
+    // 5 ... nr. of the last generated event
+    // 6 ... run number
+    // 7 ... numberOfGeneratedEvents (i.e. number of the generated events;
+    //                    in case of Turtle nr. of events tried);
 
-  // Variables common to the whole event:
+    // Variables common to the whole event:
     Int_t runID;
     Int_t eventID;
     Double_t weight;
@@ -290,24 +290,24 @@ class musrRootOutput  {
     static const Int_t maxNOptPhotDet=10000;
     Double_t phot_time[maxNOptPhotDet];
 
-  public:
+public:
     static const Int_t maxNFieldnNominalValues=30;
-  private:
+private:
     Int_t     nFieldNomVal;
     Double_t  fieldNomVal[maxNFieldnNominalValues];
     Double_t  BxIntegral, ByIntegral, BzIntegral;
     Double_t  BzIntegral1, BzIntegral2, BzIntegral3;
 
-  // Variables for a particle in a given detector within the event
-  public:
+    // Variables for a particle in a given detector within the event
+public:
     static const Int_t maxNSubTracks=30;
-  private:
-  // Variables for the activity inside a given detector
-  public:
+private:
+    // Variables for the activity inside a given detector
+public:
     static const Int_t det_nMax=100;    // must be by 1 higher than the real number of detector "hits", because
-                                                // else the detector nr. 0 is counted (0 is used if no
-                                                // SensDetectorMapping correspond to a given logical volume).
-  private:
+    // else the detector nr. 0 is counted (0 is used if no
+    // SensDetectorMapping correspond to a given logical volume).
+private:
     G4int     det_n;
     G4int     det_ID[det_nMax];
     G4double  det_edep[det_nMax];
@@ -340,10 +340,10 @@ class musrRootOutput  {
     G4int     det_VvvTrackID[det_nMax];
     G4int     det_VvvParticleID[det_nMax];
 
-  public:
-    static const Int_t odet_nMax=det_nMax;    
-  
-  private:
+public:
+    static const Int_t odet_nMax=det_nMax;
+
+private:
     G4int odet_n;
     G4int odet_ID[odet_nMax];
     G4int odet_nPhot[odet_nMax];
@@ -465,10 +465,10 @@ class musrRootOutput  {
     G4double odet_timeC39[odet_nMax];
     G4double odet_timeC40[odet_nMax];
 
-  public:
+public:
     static const Int_t save_nMax=1000;
 
-  private:
+private:
     G4int    save_n;
     G4int    save_detID[save_nMax];
     G4int    save_particleID[save_nMax];

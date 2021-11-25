@@ -45,9 +45,9 @@
 
 
 
-musrSteppingAction::musrSteppingAction()  { 
+musrSteppingAction::musrSteppingAction()  {
   pointer=this;
-  
+
   boolIsAnySpecialSaveVolumeDefined = false;
   boolIsVvvInfoRequested = false;
   boolMuonEventReweighting = false;
@@ -60,7 +60,7 @@ musrSteppingAction::musrSteppingAction()  {
   lastActualVolume="Unset";
 }
 
-musrSteppingAction::~musrSteppingAction()  { 
+musrSteppingAction::~musrSteppingAction()  {
 }
 
 
@@ -86,7 +86,7 @@ void musrSteppingAction::DoAtTheBeginningOfEvent() {
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void musrSteppingAction::UserSteppingAction(const G4Step* aStep)  { 
+void musrSteppingAction::UserSteppingAction(const G4Step* aStep)  {
 
   G4Track* aTrack = aStep->GetTrack();
 
@@ -106,7 +106,7 @@ void musrSteppingAction::UserSteppingAction(const G4Step* aStep)  {
 
   //  suspend the track if too many steps has already happened (relevant at high field)
   if (aTrack->GetCurrentStepNumber()>musrParameters::maximumNrOfStepsPerTrack) {
-    char eMessage[200]; 
+    char eMessage[200];
     sprintf(eMessage,"musrSteppingAction: Current number of steps for the track > %d ==> TRACK KILLED",
 	    musrParameters::maximumNrOfStepsPerTrack);
     musrErrorMessage::GetInstance()->musrError(WARNING,eMessage,true);
@@ -125,7 +125,7 @@ void musrSteppingAction::UserSteppingAction(const G4Step* aStep)  {
     G4RunManager* fRunManager = G4RunManager::GetRunManager();
     G4cout<<"musrSteppingAction: event "<<fRunManager->GetCurrentEvent()->GetEventID()
   	  <<" aborted because calculation took already "<<musrParameters::maximumTimePerEvent<<" seconds."<<G4endl;
-    char eMessage[200]; 
+    char eMessage[200];
     sprintf(eMessage,"musrSteppingAction:  event aborted because its calculation takes more than %d seconds.",
 	    musrParameters::maximumTimePerEvent);
     musrErrorMessage::GetInstance()->musrError(WARNING,eMessage,true);
@@ -140,8 +140,8 @@ void musrSteppingAction::UserSteppingAction(const G4Step* aStep)  {
     musrErrorMessage::GetInstance()->musrError(SERIOUS,
          "musrSteppingAction: kinetic energy of a particle larger than 1GeV!  STRANGE FOR muSR!",false);
     G4RunManager* fRunManager = G4RunManager::GetRunManager();
-    G4cout<<"   Event nr.:"<<fRunManager->GetCurrentEvent()->GetEventID() 
-	  <<", the particle \""<<  aTrack->GetDynamicParticle()->GetDefinition()->GetParticleName() 
+    G4cout<<"   Event nr.:"<<fRunManager->GetCurrentEvent()->GetEventID()
+	  <<", the particle \""<<  aTrack->GetDynamicParticle()->GetDefinition()->GetParticleName()
 	  <<"\" has energy of "<<(preStepPoint->GetKineticEnergy())/CLHEP::GeV<<" GeV."<<G4endl;
     G4cout<<"             Deleting the event!"<<G4endl;
     G4cout.flush();
@@ -160,13 +160,13 @@ void musrSteppingAction::UserSteppingAction(const G4Step* aStep)  {
     // There is an example how to delete the track in example/novice/N04.
     // It is done in a different way here, because the example/novice/N04 was not doing
     // exactly what I wanted.
-    if((actualVolume(0,8)=="log_kill")||(actualVolume(0,8)=="log_Kill")) { 
+    if((actualVolume(0,8)=="log_kill")||(actualVolume(0,8)=="log_Kill")) {
       aTrack->SetTrackStatus(fStopAndKill);   // suspend the track
     }
     if ((p_name=="nu_mu")||(p_name=="anti_nu_mu")||(p_name=="nu_e")||(p_name=="anti_nu_e")) {
       //aTrack->SetTrackStatus(fStopAndKill);   // suspend the tracks of neutrinos
     }
-    
+
 
     // Save info about the old tracks, if the user wishes to have Vvv info in the output Root Tree.
     if (boolIsVvvInfoRequested) {
@@ -214,7 +214,7 @@ void musrSteppingAction::UserSteppingAction(const G4Step* aStep)  {
       }
     }
 
- 
+
     // Check if particle comes to the special volume
     if (boolIsAnySpecialSaveVolumeDefined) {
       //    G4bool isFirstStepInVolume=aStep->IsFirstStepInVolume();
@@ -256,7 +256,7 @@ void musrSteppingAction::UserSteppingAction(const G4Step* aStep)  {
 
     if ((p_name == "mu+")||(p_name == "mu-")||(p_name == "Mu"))  {
       // Store the information about the muon when it enters the target, M0, M1 or M2 for the fist time
-      // in a given event (i.e. the code has to be called just once during the event).      
+      // in a given event (i.e. the code has to be called just once during the event).
       if ((actualVolume=="log_target")||(actualVolume=="log_Target")) {
 	if (!muAlreadyWasInTargetInThisEvent) {
 	  muAlreadyWasInTargetInThisEvent=true;
@@ -384,13 +384,13 @@ void musrSteppingAction::UserSteppingAction(const G4Step* aStep)  {
 	}
       }
     }
-    
+
     else {   // particle is not muon
       // Delete track if the particle is far away from the detector (i.e. in the "shield" volume).
       // There is an example how to delete the track in example/novice/N04.
       // It is done in a different way here, because the example/novice/N04 was not doing
       // exactly what I wanted.
-      if((actualVolume(0,10)=="log_shield")||(actualVolume(0,10)=="log_Shield")) { 
+      if((actualVolume(0,10)=="log_shield")||(actualVolume(0,10)=="log_Shield")) {
 	aTrack->SetTrackStatus(fStopAndKill);   // suspend the track
       }
     }
@@ -401,7 +401,7 @@ void musrSteppingAction::UserSteppingAction(const G4Step* aStep)  {
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 
-void musrSteppingAction::SetLogicalVolumeAsSpecialSaveVolume(G4String logicName, G4int volumeID)  { 
+void musrSteppingAction::SetLogicalVolumeAsSpecialSaveVolume(G4String logicName, G4int volumeID)  {
   boolIsAnySpecialSaveVolumeDefined = true;
   saveVolumeMapping[logicName]=volumeID;
 }
@@ -418,7 +418,7 @@ G4bool  musrSteppingAction::GetInfoAboutOldTrack(G4int trackID, G4int& parentTra
   //  G4cout<<"musrSteppingAction::GetInfoAboutOldTrack: trackID="<<trackID<<"\t myOldTracksMap[trackID]="<<myOldTracksMap[trackID]<<G4endl;
   std::map<G4int,G4int>::iterator itr;
   itr = myOldTracksMap.find(trackID);
-  if ( itr==myOldTracksMap.end() ) { 
+  if ( itr==myOldTracksMap.end() ) {
     //  if ((ind==0)||(ind>=maxNumberOfOldTracks)) {
     char eMessage[200];
     sprintf(eMessage,"musrSteppingAction::GetInfoAboutOldTrack: trackID not found in myOldTracksMap, det_VvvXXX variables might be affected");
@@ -428,7 +428,7 @@ G4bool  musrSteppingAction::GetInfoAboutOldTrack(G4int trackID, G4int& parentTra
     //    for (itr=myOldTracksMap.begin(); itr!=myOldTracksMap.end(); itr++) {
     //      G4cout<<"first="<<itr->first<<"\tsecond="<<itr->second<<G4endl;
     //    }
-    return false; 
+    return false;
   }
   else {
     G4int ind = itr->second;
@@ -462,13 +462,13 @@ G4bool  musrSteppingAction::AreTracksCommingFromSameParent(G4int trackID1, G4int
   // functions returns "true".
   std::map<G4int,G4int>::iterator itr;
   G4int ind;
-  
+
   G4int track1;
   G4int trID = trackID1;
   do {
     track1=trID;
     itr = myOldTracksMap.find(trID);
-    if ( itr==myOldTracksMap.end() ) { 
+    if ( itr==myOldTracksMap.end() ) {
       G4cout<<"musrSteppingAction::AreTracksCommingFromSameParent()  Strange, trackID1 ="<<trackID1<<" not found"<<G4endl;
       return false;
     }
@@ -481,14 +481,14 @@ G4bool  musrSteppingAction::AreTracksCommingFromSameParent(G4int trackID1, G4int
   do {
     track2=trID;
     itr = myOldTracksMap.find(trID);
-    if ( itr==myOldTracksMap.end() ) { 
+    if ( itr==myOldTracksMap.end() ) {
       G4cout<<"musrSteppingAction::AreTracksCommingFromSameParent()  Strange, trackID2 ="<<trackID2<<" not found"<<G4endl;
       return false;
     }
     ind   = itr->second;
     trID = parentTrackID_oldTrack[ind];
   } while (vertexLogVol_oldTrack[ind]==volumeName);
-  
+
 
   if (track1==track2) {return true;}
     //G4cout<<"track1="<<track1<<"\ttrack2="<<track2<<G4endl; return true;}
