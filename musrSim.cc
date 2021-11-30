@@ -72,7 +72,9 @@ int main(int argc,char** argv) {
   
   // Create Root class for storing the output of the Geant simulation
   std::string name = "";
+  int random_seed_offset = 0;
   if(argc>2) name = std::string(argv[2]);
+  if(argc>3) random_seed_offset = atoi(argv[3]);
   musrRootOutput* myRootOutput = new musrRootOutput(name);
 
 // The following command is needed to cope with the problem of 
@@ -94,7 +96,7 @@ int main(int argc,char** argv) {
     if (myRunNr>0)  {runManager->SetRunIDCounter(myRunNr);}
     //    musrdetector->SetInputParameterFileName(argv[1]);
   }
-  musrDetectorConstruction* musrdetector = new musrDetectorConstruction(steeringFileName);
+  musrDetectorConstruction* musrdetector = new musrDetectorConstruction(steeringFileName,random_seed_offset);
   runManager->SetUserInitialization(musrdetector);
   //runManager->SetUserInitialization(new musrPhysicsList);
   runManager->SetUserInitialization(new FTFP_BERT(1,steeringFileName));
@@ -129,15 +131,15 @@ int main(int argc,char** argv) {
       session = new G4UIterminal(new G4UItcsh);      
 #else
       session = new G4UIterminal();
-#endif    
+#endif
 
-    UI->ApplyCommand("/control/execute vis.mac");    
+    UI->ApplyCommand("/control/execute vis.mac");
     session->SessionStart();
     delete session;
   }
   else
   // Batch mode
-  { 
+  {
     G4String command = "/control/execute ";
     G4String fileName = argv[1];
     UI->ApplyCommand(command+fileName);
@@ -172,6 +174,3 @@ int main(int argc,char** argv) {
 
   return 0;
 }
-
-
-

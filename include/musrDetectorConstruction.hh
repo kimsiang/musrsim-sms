@@ -49,7 +49,7 @@ class musrDetectorConstruction : public G4VUserDetectorConstruction
 {
 public:
   
-  musrDetectorConstruction(G4String steeringFileName);
+  musrDetectorConstruction(G4String steeringFileName,int random_seed_offset=0);
   ~musrDetectorConstruction();
 
 public:

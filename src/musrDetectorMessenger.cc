@@ -43,6 +43,9 @@
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
+void musrDetectorMessenger::SetRandomSeedOffset(int offset) {
+  random_seed_offset= offset;
+}
 
 musrDetectorMessenger::musrDetectorMessenger(musrDetectorConstruction* myDet)
   :myDetector(myDet)
@@ -133,8 +136,8 @@ void musrDetectorMessenger::SetNewValue(G4UIcommand* command,G4String newValue) 
 	G4cout << "******************************************" << G4endl;
 	long seeds[2];
 	time_t systime = time(NULL);
-	seeds[0] = (long) systime;
-	seeds[1] = (long) (systime*G4UniformRand());
+	seeds[0] = (long) (systime + random_seed_offset);
+	seeds[1] = (long) (systime*G4UniformRand()+random_seed_offset);
 	G4cout << "seed1: " << seeds[0] << "; seed2: " << seeds[1] << G4endl;
 	CLHEP::HepRandom::setTheSeeds(seeds);
 	CLHEP::HepRandom::showEngineStatus();

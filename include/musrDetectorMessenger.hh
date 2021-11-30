@@ -42,6 +42,7 @@ class musrDetectorMessenger: public G4UImessenger
 {
   public:
     musrDetectorMessenger(musrDetectorConstruction*);
+    void SetRandomSeedOffset(int offset);
    ~musrDetectorMessenger();
     
     void SetNewValue(G4UIcommand*, G4String);
@@ -59,6 +60,8 @@ class musrDetectorMessenger: public G4UImessenger
     G4UIcmdWithAnInteger*      HowOftenToPrintEventCmd;
     G4UIcmdWithAnInteger*      RndmEventToSaveSeedsCmd;
     G4UIcmdWithoutParameter*   UpdateCmd;
+
+    int random_seed_offset;
 
   public:
 

@@ -79,12 +79,14 @@ using namespace std;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-musrDetectorConstruction::musrDetectorConstruction(G4String steeringFileName)
+musrDetectorConstruction::musrDetectorConstruction(G4String steeringFileName,int random_seed_offset)
 :checkOverlap(true), aScintSD(0)
 {  
   parameterFileName = steeringFileName;
   DefineMaterials();
   detectorMessenger = new musrDetectorMessenger(this);
+  detectorMessenger->SetRandomSeedOffset(random_seed_offset);
+
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
