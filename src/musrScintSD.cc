@@ -380,6 +380,7 @@ void musrScintSD::EndOfEvent(G4HCofThisEvent*) {
     G4int    det_VrtxParticleID[det_IDmax];
     G4int det_VvvTrackSign[det_IDmax];
 
+
     //  Sort hits according to the time.  Using std::map is convenient, because it sorts
     //  its entries according to the key (the first variable of the pair).
     std::multimap<G4double,G4int> myHitTimeMapping;    // "map" replaced by "multimap" (needed for radioactive decay,
@@ -427,7 +428,7 @@ void musrScintSD::EndOfEvent(G4HCofThisEvent*) {
 	    det_edep_mup[j]           += aHit->GetEdep();
 	  }  else {
 	    char message[200];
-	    sprintf(message,"musrScintSD.cc::EndOfEvent(): untreated particle \"%s\" deposited energy.",aParticleName.c_str());
+	    sprintf(message,"musrScintSD.cc::EndOfEvent(): UNTREATED PARTICLE \"%s\" deposited energy., PID=\"%d\"",aParticleName.c_str(),aHit->GetParticleID());
 	    musrErrorMessage::GetInstance()->musrError(WARNING,message,true);
 	  }
 	  // Check whether the signals consits of more then just one hit,  in which case make the track ID negative:
@@ -472,7 +473,7 @@ void musrScintSD::EndOfEvent(G4HCofThisEvent*) {
 	    det_edep_mup[nSignals]           += aHit->GetEdep();
 	  }  else {
 	    char message[200];
-	    sprintf(message,"musrScintSD.cc::EndOfEvent(): UNTREATED PARTICLE \"%s\" deposited energy.",aParticleName.c_str());
+	    sprintf(message,"musrScintSD.cc::EndOfEvent(): UNTREATED PARTICLE \"%s\" deposited energy., PID=\"%d\"",aParticleName.c_str(),aHit->GetParticleID());
 	    musrErrorMessage::GetInstance()->musrError(WARNING,message,true);
 	  }
 	  G4ThreeVector prePos = aHit->GetPrePos();
@@ -492,6 +493,7 @@ void musrScintSD::EndOfEvent(G4HCofThisEvent*) {
 	  det_VrtxTrackID[nSignals]      = aHit->GetTrackID();
 	  det_VrtxParticleID[nSignals]   = aHit->GetParticleID();
 	  det_VvvTrackSign[nSignals]     = 1;
+    
 	  nSignals++;
 	}
       }   // end of "if (!signalAssigned)"

@@ -54,7 +54,26 @@ musrRootOutput::musrRootOutput(std::string name) {
   ProcessIDMapping["conv"]=14;
   ProcessIDMapping["compt"]=15;
   ProcessIDMapping["phot"]=16;
+  ProcessIDMapping["dInelastic"] = 17;
+  ProcessIDMapping["electronNuclear"] = 18;
+  ProcessIDMapping["GammaToMuPair"] = 19;
+  ProcessIDMapping["hBertiniCaptureAtRest"] = 20;
+  ProcessIDMapping["hIoni"] = 21;
+  ProcessIDMapping["lambdaInelastic"] = 22;
+  ProcessIDMapping["muMinusCaptureAtRest"] = 23;
+  ProcessIDMapping["muonNuclear"] = 24;
+  ProcessIDMapping["nCapture"] = 25;
+  ProcessIDMapping["neutronInelastic"] = 26;
+  ProcessIDMapping["photonNuclear"] = 27;
+  ProcessIDMapping["pi-Inelastic"] = 28;
+  ProcessIDMapping["pi+Inelastic"] = 29;
+  ProcessIDMapping["protonInelastic"] = 30;
+  ProcessIDMapping["tInelastic"] = 31;
+  ProcessIDMapping["hadElastic"] = 32;
+  
   ProcessIDMapping["initialParticle"]=100;
+
+  
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
