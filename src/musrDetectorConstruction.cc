@@ -1552,6 +1552,7 @@ G4VPhysicalVolume* musrDetectorConstruction::Construct()  {
 	cout << "landauSigma = " << musrMuEnergyLossLandau::landauSigma << endl;
       }
       else if (strcmp(tmpString1,"G4EmExtraPhysics")==0){}
+      else if (strcmp(tmpString1, "SetOutputFileName") == 0) {} // Exception for setting file name command
 
       else {ReportGeometryProblem(line);}
       

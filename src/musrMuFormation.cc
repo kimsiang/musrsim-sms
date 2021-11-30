@@ -67,7 +67,7 @@ G4bool musrMuFormation::CheckCondition(const G4Step& aStep)
   p_name = aStep.GetTrack()->GetDefinition()->GetParticleName(); // particle name  
   //if(p_name == "mu+"&&aStep.GetTrack()->GetVolume()->GetLogicalVolume()->GetName()=="log_CFoil") 
   std::string logVolName = aStep.GetTrack()->GetVolume()->GetLogicalVolume()->GetName();
-  if(p_name == "mu+" && ((logVolName=="log_coulombCFoil")||(logVolName=="log_CFoil")))
+  if((p_name == "mu+" || p_name == "mu-") && ((logVolName=="log_coulombCFoil")||(logVolName=="log_CFoil")))
     {
       condition=true;
     }
@@ -92,8 +92,8 @@ void musrMuFormation::GetDatas(const G4Step* aStep)
      Gonin.GetYields(E,105.658369*1000,yvector); // Energy [keV], muon mass [keV/c2], yield table
      G4String p_new = "Mu";
       
-     // Positive muon
-     if(p_name=="mu+")
+     // Positive and negative muon
+     if(p_name=="mu+" || p_name == "mu-")
        {
 	 if(rnd<yvector[0]) 
 	   {
@@ -122,7 +122,7 @@ void musrMuFormation::GetDatas(const G4Step* aStep)
 
 void musrMuFormation::PrepareSecondary(const G4Track& track)
 {
-  if(p_name=="mu+")
+  if(p_name=="mu+" || p_name == "mu-")
     {
       aSecondary = new G4Track(DP,track.GetGlobalTime(),track.GetPosition());
     }
