@@ -82,7 +82,7 @@ int main(int argc,char** argv) {
     // Only if the name not specified in argv[2]
     std::ifstream fin(steeringFileName.c_str());
     std::string line;
-    while (!argc>2 && std::getline(fin, line)){
+    while (!(argc>2) && std::getline(fin, line)){
         std::istringstream ss(line);
         std::string cmd1, cmd2, cmd3;
         if (ss >> cmd1 >> cmd2 >> cmd3){
