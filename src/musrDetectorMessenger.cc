@@ -136,8 +136,8 @@ void musrDetectorMessenger::SetNewValue(G4UIcommand* command,G4String newValue) 
 	G4cout << "******************************************" << G4endl;
 	long seeds[2];
 	time_t systime = time(NULL);
-	seeds[0] = (long) (systime + random_seed_offset);
-	seeds[1] = (long) (systime*G4UniformRand()+random_seed_offset);
+	seeds[0] = (long) (systime + random_seed_offset*100);
+	seeds[1] = (long) (systime*G4UniformRand()+random_seed_offset*100);
 	G4cout << "seed1: " << seeds[0] << "; seed2: " << seeds[1] << G4endl;
 	CLHEP::HepRandom::setTheSeeds(seeds);
 	CLHEP::HepRandom::showEngineStatus();

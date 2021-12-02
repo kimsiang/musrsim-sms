@@ -49,7 +49,7 @@ class musrSteppingAction : public G4UserSteppingAction
     G4bool  GetInfoAboutOldTrack(G4int trackID, G4int& parentTrackID, G4int& particleID, G4double& vertexKine,
 				 G4ThreeVector& vertexPosition, G4String& vertexLogVol, G4String& vertexProcess);
     G4bool  AreTracksCommingFromSameParent(G4int trackID1, G4int trackID2, G4String volumeName);
-    static const G4int maxNumberOfOldTracks=200;
+    static const G4int maxNumberOfOldTracks=1000;
     G4bool IsVvvInfoRequested() {return boolIsVvvInfoRequested;}
     void   SetVvvInfoRequested(G4bool boolvar) {boolIsVvvInfoRequested = boolvar;}
     void   SetCalculationOfFieldIntegralRequested(G4bool decision) {boolCalculateFieldIntegral = decision;}
