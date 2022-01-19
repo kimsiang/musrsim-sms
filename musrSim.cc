@@ -76,7 +76,10 @@ int main(int argc,char** argv) {
     std::string name = "";
     int random_seed_offset = 0;
 
-    if(argc > 2) name = std::string(argv[2]);
+    if(argc > 2) {
+        name = std::string(argv[2]);
+        std::cout << "\nmusrSim.cc: Set output ROOT file: " << "data/musrSim_" << atoi(argv[1]) << "_" << name << ".root\n" << std::endl;
+    }
     if(argc > 3) random_seed_offset = atoi(argv[3]);
     // Read from macro to customize output ROOT file name
     // Only if the name not specified in argv[2]
@@ -92,7 +95,7 @@ int main(int argc,char** argv) {
                 }
                 else {
                     name = cmd3;
-                    std::cout << "\nmusrSim.cc: Set output ROOT file: " << "data/musrSim_" << atoi(argv[1]) << cmd3 << ".root\n" << std::endl;
+                    std::cout << "\nmusrSim.cc: Set output ROOT file: " << "data/musrSim_" << atoi(argv[1]) << "_" << cmd3 << ".root\n" << std::endl;
                 }
             }
         }
