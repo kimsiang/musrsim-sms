@@ -65,7 +65,7 @@ Example:
 # set output file name
 /musr/command SetOutputFileName myRootFile
 ```
-And the output root file will be: `musr_1003_myRootFile.root`(if the steering file is `1003.mac`)
+And the output root file will be: `musrSim_myRootFile.root`
 
 Moreover, you can specify the name as DEFAULT:
 ```
