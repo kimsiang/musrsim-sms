@@ -88,11 +88,11 @@ int main(int argc,char** argv) {
         if (ss >> cmd1 >> cmd2 >> cmd3){
             if (!cmd1.compare("/musr/command") && !cmd2.compare("SetOutputFileName")){
                 if (!cmd3.compare("DEFAULT")) {
-                    std::cout << "\nmusrSim.cc: Set default output ROOT file: " <<"data/musr_" << atoi(argv[1]) << ".root\n" << std::endl;
+                    std::cout << "\nmusrSim.cc: Set default output ROOT file: " <<"data/musrSim_" << atoi(argv[1]) << ".root\n" << std::endl;
                 }
                 else {
                     name = cmd3;
-                    std::cout << "\nmusrSim.cc: Set output ROOT file: " << "data/musr_" << atoi(argv[1]) << cmd3 << ".root\n" << std::endl;
+                    std::cout << "\nmusrSim.cc: Set output ROOT file: " << "data/musrSim_" << atoi(argv[1]) << cmd3 << ".root\n" << std::endl;
                 }
             }
         }
