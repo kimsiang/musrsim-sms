@@ -139,6 +139,7 @@ G4bool musrRootOutput::store_det_edep_el = true;
 G4bool musrRootOutput::store_det_edep_pos = true;
 G4bool musrRootOutput::store_det_edep_gam = true;
 G4bool musrRootOutput::store_det_edep_mup = true;
+G4bool musrRootOutput::store_det_edep_mun = true;
 G4bool musrRootOutput::store_det_nsteps = true;
 G4bool musrRootOutput::store_det_length = true;
 G4bool musrRootOutput::store_det_start = true;
@@ -280,6 +281,7 @@ void musrRootOutput::BeginOfRunAction() {
     if (store_det_edep_pos) {rootTree->Branch("det_edep_pos",&det_edep_pos,"det_edep_pos[det_n]/D");}
     if (store_det_edep_gam) {rootTree->Branch("det_edep_gam",&det_edep_gam,"det_edep_gam[det_n]/D");}
     if (store_det_edep_mup) {rootTree->Branch("det_edep_mup",&det_edep_mup,"det_edep_mup[det_n]/D");}
+    if (store_det_edep_mun) {rootTree->Branch("det_edep_mun",&det_edep_mun,"det_edep_mun[det_n]/D");}
     if (store_det_nsteps)   {rootTree->Branch("det_nsteps",&det_nsteps,"det_nsteps[det_n]/I");}
     if (store_det_length)   {rootTree->Branch("det_length",&det_length,"det_length[det_n]/D");}
     if (store_det_start)    {rootTree->Branch("det_time_start",&det_time_start,"det_time_start[det_n]/D");}
@@ -636,7 +638,7 @@ void musrRootOutput::SetFieldNomVal(G4int i, G4double value) {
 
 void musrRootOutput::SetDetectorInfo (G4int nDetectors, G4int ID, G4int particleID, G4double edep,
                                       G4double edep_el, G4double edep_pos,
-                                      G4double edep_gam, G4double edep_mup,G4int nsteps, G4double length, G4double t1,
+                                      G4double edep_gam, G4double edep_mup, G4double edep_mun,G4int nsteps, G4double length, G4double t1,
                                       G4double t2, G4double x, G4double y, G4double z,
                                       G4double ek, G4double ekVertex, G4double xVertex, G4double yVertex, G4double zVertex,
                                       G4int idVolVertex, G4int idProcVertex, G4int idTrackVertex)
@@ -655,6 +657,7 @@ void musrRootOutput::SetDetectorInfo (G4int nDetectors, G4int ID, G4int particle
         det_edep_pos[nDetectors]=edep_pos/CLHEP::MeV;
         det_edep_gam[nDetectors]=edep_gam/CLHEP::MeV;
         det_edep_mup[nDetectors]=edep_mup/CLHEP::MeV;
+        det_edep_mun[nDetectors]=edep_mun/CLHEP::MeV;
         det_nsteps[nDetectors]=nsteps;
         det_length[nDetectors]=length/CLHEP::mm;
         det_time_start[nDetectors]=t1/CLHEP::microsecond;

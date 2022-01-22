@@ -364,6 +364,7 @@ void musrScintSD::EndOfEvent(G4HCofThisEvent*) {
         G4double det_edep_pos[det_IDmax];
         G4double det_edep_gam[det_IDmax];
         G4double det_edep_mup[det_IDmax];
+        G4double det_edep_mun[det_IDmax];
         G4double det_time_start[det_IDmax];
         G4double det_time_end[det_IDmax];
         G4double det_x[det_IDmax];
@@ -423,8 +424,10 @@ void musrScintSD::EndOfEvent(G4HCofThisEvent*) {
                         det_edep_pos[j]           += aHit->GetEdep();
                     }  else if (aParticleName=="gamma") {
                         det_edep_gam[j]           += aHit->GetEdep();
-                    }  else if ((aParticleName=="mu+")||(aParticleName=="mu-")) {
+                    }  else if (aParticleName=="mu+") {
                         det_edep_mup[j]           += aHit->GetEdep();
+                    }  else if (aParticleName=="mu-") {
+                        det_edep_mun[j]           += aHit->GetEdep();
                     }  else {
                         char message[200];
                         sprintf(message,"musrScintSD.cc::EndOfEvent(): untreated particle \"%s\" deposited energy.",aParticleName.c_str());
@@ -461,6 +464,7 @@ void musrScintSD::EndOfEvent(G4HCofThisEvent*) {
                     det_edep_pos[nSignals]              = 0;
                     det_edep_gam[nSignals]              = 0;
                     det_edep_mup[nSignals]              = 0;
+                    det_edep_mun[nSignals]              = 0;
                     G4String aParticleName              = aHit->GetParticleName();
                     if (aParticleName=="e-") {
                         det_edep_el[nSignals]            += aHit->GetEdep();
@@ -468,8 +472,10 @@ void musrScintSD::EndOfEvent(G4HCofThisEvent*) {
                         det_edep_pos[nSignals]           += aHit->GetEdep();
                     }  else if (aParticleName=="gamma") {
                         det_edep_gam[nSignals]           += aHit->GetEdep();
-                    }  else if ((aParticleName=="mu+")||(aParticleName=="mu-")) {
+                    }  else if (aParticleName=="mu+") {
                         det_edep_mup[nSignals]           += aHit->GetEdep();
+                    }  else if (aParticleName=="mu-") {
+                        det_edep_mun[nSignals]           += aHit->GetEdep();
                     }  else {
                         char message[200];
                         sprintf(message,"musrScintSD.cc::EndOfEvent(): UNTREATED PARTICLE \"%s\" deposited energy.",aParticleName.c_str());
@@ -511,7 +517,7 @@ void musrScintSD::EndOfEvent(G4HCofThisEvent*) {
             G4int ii = itt->second;
             myRootOutput->SetDetectorInfo(jj,det_ID[ii],det_VrtxParticleID[ii],det_edep[ii],
                                           det_edep_el[ii],det_edep_pos[ii],
-                                          det_edep_gam[ii],det_edep_mup[ii],det_nsteps[ii],det_length[ii],
+                                          det_edep_gam[ii],det_edep_mup[ii], det_edep_mun[ii],det_nsteps[ii],det_length[ii],
                                           det_time_start[ii],det_time_end[ii],det_x[ii],det_y[ii],det_z[ii],
                                           det_kine[ii],det_VrtxKine[ii],det_VrtxX[ii],det_VrtxY[ii],det_VrtxZ[ii],
                                           det_VrtxVolID[ii],det_VrtxProcID[ii],det_VrtxTrackID[ii] );

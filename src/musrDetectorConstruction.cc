@@ -1481,6 +1481,7 @@ G4VPhysicalVolume* musrDetectorConstruction::Construct()  {
 	  if (strcmp(tmpString2,"det_edep_pos")==0) {musrRootOutput::store_det_edep_pos = false;}
 	  if (strcmp(tmpString2,"det_edep_gam")==0) {musrRootOutput::store_det_edep_gam = false;}
 	  if (strcmp(tmpString2,"det_edep_mup")==0) {musrRootOutput::store_det_edep_mup = false;}
+      if (strcmp(tmpString2,"det_edep_mun")==0) {musrRootOutput::store_det_edep_mun = false;}
 	  if (strcmp(tmpString2,"det_nsteps")==0)   {musrRootOutput::store_det_nsteps = false;}
 	  if (strcmp(tmpString2,"det_length")==0)   {musrRootOutput::store_det_length = false;}
 	  if (strcmp(tmpString2,"det_start")==0)    {musrRootOutput::store_det_start = false;}

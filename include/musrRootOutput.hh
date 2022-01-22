@@ -79,7 +79,7 @@ public:
     void SetEventWeight  (G4double w) {weight *= w;}
     void SetDetectorInfo (G4int nDetectors, G4int ID, G4int particleID, G4double edep,
                           G4double edep_el, G4double edep_pos,
-                          G4double edep_gam, G4double edep_mup,G4int nsteps, G4double length, G4double t1,
+                          G4double edep_gam, G4double edep_mup, G4double edep_mun,G4int nsteps, G4double length, G4double t1,
                           G4double t2, G4double x, G4double y, G4double z,
                           G4double ek, G4double ekVertex, G4double xVertex, G4double yVertex, G4double zVertex,
                           G4int idVolVertex, G4int idProcVertex, G4int idTrackVertex) ;
@@ -199,6 +199,7 @@ public:
     static G4bool store_det_edep_pos;
     static G4bool store_det_edep_gam;
     static G4bool store_det_edep_mup;
+    static G4bool store_det_edep_mun;
     static G4bool store_det_nsteps;
     static G4bool store_det_length;
     static G4bool store_det_start;
@@ -317,6 +318,7 @@ private:
     G4double  det_edep_pos[det_nMax];
     G4double  det_edep_gam[det_nMax];
     G4double  det_edep_mup[det_nMax];
+    G4double  det_edep_mun[det_nMax];
     G4double  det_time_start[det_nMax];
     G4double  det_time_end[det_nMax];
     G4double  det_x[det_nMax];
