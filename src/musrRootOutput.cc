@@ -139,7 +139,9 @@ G4bool musrRootOutput::store_det_edep_el = true;
 G4bool musrRootOutput::store_det_edep_pos = true;
 G4bool musrRootOutput::store_det_edep_gam = true;
 G4bool musrRootOutput::store_det_edep_mup = true;
+G4bool musrRootOutput::store_det_kine_mup = true;
 G4bool musrRootOutput::store_det_edep_mun = true;
+G4bool musrRootOutput::store_det_kine_mun = true;
 G4bool musrRootOutput::store_det_nsteps = true;
 G4bool musrRootOutput::store_det_length = true;
 G4bool musrRootOutput::store_det_start = true;
@@ -147,6 +149,12 @@ G4bool musrRootOutput::store_det_end = true;
 G4bool musrRootOutput::store_det_x = true;
 G4bool musrRootOutput::store_det_y = true;
 G4bool musrRootOutput::store_det_z = true;
+G4bool musrRootOutput::store_det_x_mup = true;
+G4bool musrRootOutput::store_det_y_mup = true;
+G4bool musrRootOutput::store_det_z_mup = true;
+G4bool musrRootOutput::store_det_x_mun = true;
+G4bool musrRootOutput::store_det_y_mun = true;
+G4bool musrRootOutput::store_det_z_mun = true;
 G4bool musrRootOutput::store_det_kine = true;
 G4bool musrRootOutput::store_det_VrtxKine = true;
 G4bool musrRootOutput::store_det_VrtxX = true;
@@ -281,7 +289,9 @@ void musrRootOutput::BeginOfRunAction() {
     if (store_det_edep_pos) {rootTree->Branch("det_edep_pos",&det_edep_pos,"det_edep_pos[det_n]/D");}
     if (store_det_edep_gam) {rootTree->Branch("det_edep_gam",&det_edep_gam,"det_edep_gam[det_n]/D");}
     if (store_det_edep_mup) {rootTree->Branch("det_edep_mup",&det_edep_mup,"det_edep_mup[det_n]/D");}
+    if (store_det_kine_mup) {rootTree->Branch("det_kine_mup",&det_kine_mup,"det_kine_mup[det_n]/D");}
     if (store_det_edep_mun) {rootTree->Branch("det_edep_mun",&det_edep_mun,"det_edep_mun[det_n]/D");}
+    if (store_det_kine_mun) {rootTree->Branch("det_kine_mun",&det_kine_mun,"det_kine_mun[det_n]/D");}
     if (store_det_nsteps)   {rootTree->Branch("det_nsteps",&det_nsteps,"det_nsteps[det_n]/I");}
     if (store_det_length)   {rootTree->Branch("det_length",&det_length,"det_length[det_n]/D");}
     if (store_det_start)    {rootTree->Branch("det_time_start",&det_time_start,"det_time_start[det_n]/D");}
@@ -289,6 +299,12 @@ void musrRootOutput::BeginOfRunAction() {
     if (store_det_x)        {rootTree->Branch("det_x",&det_x,"det_x[det_n]/D");}
     if (store_det_y)        {rootTree->Branch("det_y",&det_y,"det_y[det_n]/D");}
     if (store_det_z)        {rootTree->Branch("det_z",&det_z,"det_z[det_n]/D");}
+    if (store_det_x_mup)        {rootTree->Branch("det_x_mup",&det_x_mup,"det_x_mup[det_n]/D");}
+    if (store_det_y_mup)        {rootTree->Branch("det_y_mup",&det_y_mup,"det_y_mup[det_n]/D");}
+    if (store_det_z_mup)        {rootTree->Branch("det_z_mup",&det_z_mup,"det_z_mup[det_n]/D");}
+    if (store_det_x_mun)        {rootTree->Branch("det_x_mun",&det_x_mun,"det_x_mun[det_n]/D");}
+    if (store_det_y_mun)        {rootTree->Branch("det_y_mun",&det_y_mun,"det_y_mun[det_n]/D");}
+    if (store_det_z_mun)        {rootTree->Branch("det_z_mun",&det_z_mun,"det_z_mun[det_n]/D");}
     if (store_det_kine)     {rootTree->Branch("det_kine",&det_kine,"det_kine[det_n]/D");}
     if (store_det_VrtxKine) {rootTree->Branch("det_VrtxKine",&det_VrtxKine,"det_VrtxKine[det_n]/D");}
     if (store_det_VrtxX)    {rootTree->Branch("det_VrtxX",&det_VrtxX,"det_VrtxX[det_n]/D");}
@@ -638,8 +654,9 @@ void musrRootOutput::SetFieldNomVal(G4int i, G4double value) {
 
 void musrRootOutput::SetDetectorInfo (G4int nDetectors, G4int ID, G4int particleID, G4double edep,
                                       G4double edep_el, G4double edep_pos,
-                                      G4double edep_gam, G4double edep_mup, G4double edep_mun,G4int nsteps, G4double length, G4double t1,
+                                      G4double edep_gam, G4double edep_mup, G4double kine_mup, G4double edep_mun, G4double kine_mun, G4int nsteps, G4double length, G4double t1,
                                       G4double t2, G4double x, G4double y, G4double z,
+                                      G4double x_mup, G4double y_mup, G4double z_mup, G4double x_mun, G4double y_mun, G4double z_mun,
                                       G4double ek, G4double ekVertex, G4double xVertex, G4double yVertex, G4double zVertex,
                                       G4int idVolVertex, G4int idProcVertex, G4int idTrackVertex)
 {
@@ -657,7 +674,9 @@ void musrRootOutput::SetDetectorInfo (G4int nDetectors, G4int ID, G4int particle
         det_edep_pos[nDetectors]=edep_pos/CLHEP::MeV;
         det_edep_gam[nDetectors]=edep_gam/CLHEP::MeV;
         det_edep_mup[nDetectors]=edep_mup/CLHEP::MeV;
+        det_kine_mup[nDetectors]=kine_mup/CLHEP::MeV;
         det_edep_mun[nDetectors]=edep_mun/CLHEP::MeV;
+        det_kine_mun[nDetectors]=kine_mun/CLHEP::MeV;
         det_nsteps[nDetectors]=nsteps;
         det_length[nDetectors]=length/CLHEP::mm;
         det_time_start[nDetectors]=t1/CLHEP::microsecond;
@@ -665,6 +684,12 @@ void musrRootOutput::SetDetectorInfo (G4int nDetectors, G4int ID, G4int particle
         det_x[nDetectors]=x/CLHEP::mm;
         det_y[nDetectors]=y/CLHEP::mm;
         det_z[nDetectors]=z/CLHEP::mm;
+        det_x_mup[nDetectors]=x_mup/CLHEP::mm;
+        det_y_mup[nDetectors]=y_mup/CLHEP::mm;
+        det_z_mup[nDetectors]=z_mup/CLHEP::mm;
+        det_x_mun[nDetectors]=x_mun/CLHEP::mm;
+        det_y_mun[nDetectors]=y_mun/CLHEP::mm;
+        det_z_mun[nDetectors]=z_mun/CLHEP::mm;
         det_kine[nDetectors]=ek/CLHEP::MeV;
         det_VrtxKine[nDetectors]=ekVertex/CLHEP::MeV;
         det_VrtxX[nDetectors]=xVertex/CLHEP::mm;

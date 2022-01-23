@@ -1481,7 +1481,9 @@ G4VPhysicalVolume* musrDetectorConstruction::Construct()  {
 	  if (strcmp(tmpString2,"det_edep_pos")==0) {musrRootOutput::store_det_edep_pos = false;}
 	  if (strcmp(tmpString2,"det_edep_gam")==0) {musrRootOutput::store_det_edep_gam = false;}
 	  if (strcmp(tmpString2,"det_edep_mup")==0) {musrRootOutput::store_det_edep_mup = false;}
+      if (strcmp(tmpString2,"det_kine_mup")==0) {musrRootOutput::store_det_kine_mup = false;}
       if (strcmp(tmpString2,"det_edep_mun")==0) {musrRootOutput::store_det_edep_mun = false;}
+      if (strcmp(tmpString2,"det_kine_mun")==0) {musrRootOutput::store_det_kine_mun = false;}
 	  if (strcmp(tmpString2,"det_nsteps")==0)   {musrRootOutput::store_det_nsteps = false;}
 	  if (strcmp(tmpString2,"det_length")==0)   {musrRootOutput::store_det_length = false;}
 	  if (strcmp(tmpString2,"det_start")==0)    {musrRootOutput::store_det_start = false;}
@@ -1489,6 +1491,12 @@ G4VPhysicalVolume* musrDetectorConstruction::Construct()  {
 	  if (strcmp(tmpString2,"det_x")==0)        {musrRootOutput::store_det_x = false;}
 	  if (strcmp(tmpString2,"det_y")==0)        {musrRootOutput::store_det_y = false;}
 	  if (strcmp(tmpString2,"det_z")==0)        {musrRootOutput::store_det_z = false;}
+      if (strcmp(tmpString2,"det_x_mup")==0)        {musrRootOutput::store_det_x_mup = false;}
+      if (strcmp(tmpString2,"det_y_mup")==0)        {musrRootOutput::store_det_y_mup = false;}
+      if (strcmp(tmpString2,"det_z_mup")==0)        {musrRootOutput::store_det_z_mup = false;}
+      if (strcmp(tmpString2,"det_x_mun")==0)        {musrRootOutput::store_det_x_mun = false;}
+      if (strcmp(tmpString2,"det_y_mun")==0)        {musrRootOutput::store_det_y_mun = false;}
+      if (strcmp(tmpString2,"det_z_mun")==0)        {musrRootOutput::store_det_z_mun = false;}
 	  if (strcmp(tmpString2,"det_kine")==0)	    {musrRootOutput::store_det_kine = false;}
 	  if (strcmp(tmpString2,"det_VrtxKine")==0) {musrRootOutput::store_det_VrtxKine = false;}
 	  if (strcmp(tmpString2,"det_VrtxX")==0)    {musrRootOutput::store_det_VrtxX = false;}
