@@ -89,3 +89,18 @@ Now can specify a name when launch the job:
 ```
 The output file will be `musr_1003_name.root`.
 
+
+### 2022-1-24 (ML)
+Add branch:
+```
+det_edep_mun        # mu- energy deposition
+det_kine_mup        # mu+ kinetic energy
+det_kine_mun        # mu- kinetic energy
+det_x(/y/z)_mup     # position where mu+ hits the detector
+det_x(/y/z)_mun     # position where mu- hits the detector
+```
+You can turn off these branches by add following command in `.mac` file:
+```
+/musr/command rootOutput <branch_name> off
+```
+
