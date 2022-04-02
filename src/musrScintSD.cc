@@ -434,13 +434,13 @@ void musrScintSD::EndOfEvent(G4HCofThisEvent*) {
                         det_edep_gam[j]           += aHit->GetEdep();
                     }  else if (aParticleName=="mu+") {
                         det_edep_mup[j]           += aHit->GetEdep();
-                        det_kine_mup[j]           += aHit->GetKineticEnergy();
+                        det_kine_mup[j]            = aHit->GetKineticEnergy();
                         det_x_mup[j]               = aHit->GetPrePos().x();
                         det_y_mup[j]               = aHit->GetPrePos().y();
                         det_z_mup[j]               = aHit->GetPrePos().z();
                     }  else if (aParticleName=="mu-") {
                         det_edep_mun[j]           += aHit->GetEdep();
-                        det_kine_mun[j]           += aHit->GetKineticEnergy();
+                        det_kine_mun[j]            = aHit->GetKineticEnergy();
                         det_x_mun[j]               = aHit->GetPrePos().x();
                         det_y_mun[j]               = aHit->GetPrePos().y();
                         det_z_mun[j]               = aHit->GetPrePos().z();
@@ -499,13 +499,13 @@ void musrScintSD::EndOfEvent(G4HCofThisEvent*) {
                         det_edep_gam[nSignals]           += aHit->GetEdep();
                     }  else if (aParticleName=="mu+") {
                         det_edep_mup[nSignals]           += aHit->GetEdep();
-                        det_kine_mup[nSignals]           += aHit->GetKineticEnergy();
+                        det_kine_mup[nSignals]            = aHit->GetKineticEnergy();
                         det_x_mup[nSignals]               = aHit->GetPrePos().x();
                         det_y_mup[nSignals]               = aHit->GetPrePos().y();
                         det_z_mup[nSignals]               = aHit->GetPrePos().z();
                     }  else if (aParticleName=="mu-") {
                         det_edep_mun[nSignals]           += aHit->GetEdep();
-                        det_kine_mun[nSignals]           += aHit->GetKineticEnergy();
+                        det_kine_mun[nSignals]            = aHit->GetKineticEnergy();
                         det_x_mun[nSignals]               = aHit->GetPrePos().x();
                         det_y_mun[nSignals]               = aHit->GetPrePos().y();
                         det_z_mun[nSignals]               = aHit->GetPrePos().z();

@@ -163,6 +163,7 @@ G4EmExtraPhysics::G4EmExtraPhysics(G4int ver,G4String steeringFileName):
             exit(1);
         }
         char  line[501];
+        // Customize factors of processes and set process state(on/off)
         while (!feof(fSteeringFile)) {
             fgets(line,500,fSteeringFile);
             if ((line[0]!='#')&&(line[0]!='\n')&&(line[0]!='\r')) {
@@ -171,7 +172,7 @@ G4EmExtraPhysics::G4EmExtraPhysics(G4int ver,G4String steeringFileName):
                 if ( strcmp(tmpString0,"/musr/command")!=0 ) continue;
 
 
-                char tmpString1[100]="Unset",tmpString2[100]="Unset",factorName[100]="Unset";
+                char tmpString1[100]="Unset",tmpString2[100]="Unset",factorName[100]="Unset", processName[100]="Unset" ,processState[100]="Unset";
                 double factor=1.;
                 sscanf(&line[0],"%*s %s %s",tmpString1,tmpString2);
                 if (strcmp(tmpString1,"G4EmExtraPhysics")==0 && strcmp(tmpString2,"SetCrossSecFactor")==0){
@@ -185,6 +186,38 @@ G4EmExtraPhysics::G4EmExtraPhysics(G4int ver,G4String steeringFileName):
                     }
                     else if(strcmp(factorName,"phadFactor")==0){
                         phadFactor = factor;
+                    }
+                }
+                if (strcmp(tmpString1,"G4EmExtraPhysics")==0 && strcmp(tmpString2,"SetProcessState")==0) {
+                    sscanf(&line[0], "%*s %*s %*s %s %s", processName, processState);
+                    if (strcmp(processName, "GammaNuclear") == 0){
+                        if (strcmp(processState, "on") == 1) {
+                            gnActivated = true;
+                            G4cout << "G4EmExtraPhysics.cc: Set Process: " << processName << " " << processState << G4endl;
+                        }
+                        else if (strcmp(processState, "off") == 0) {
+                            gnActivated = false;
+                            G4cout << "G4EmExtraPhysics.cc: Set Process: " << processName << " " << processState << G4endl;
+                        }
+                        else{
+                            G4cout << "WARNING: G4EmExtraPhysics.cc: Unknown command in setting " << processName << ": " << processState << G4endl;
+                        }
+                    }
+                    else if (strcmp(processName, "ElectroNuclear") == 0){
+                        if (strcmp(processState, "on") == 1) {
+                            gnActivated = true;
+                            G4cout << "G4EmExtraPhysics.cc: Set Process: " << processName << " " << processState << G4endl;
+                        }
+                        else if (strcmp(processState, "off") == 0) {
+                            gnActivated = false;
+                            G4cout << "G4EmExtraPhysics.cc: Set Process: " << processName << " " << processState << G4endl;
+                        }
+                        else{
+                            G4cout << "WARNING: G4EmExtraPhysics.cc: Unknown command in setting " << processName << ": " << processState << G4endl;
+                        }
+                    }
+                    else {
+                        G4cout << "WARNING: G4EmExtraPhysics.cc: Unknown process: " << processName << G4endl;
                     }
                 }
             }
