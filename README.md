@@ -110,6 +110,7 @@ Add customization of 2 physic processes. Use command below in `.mac` file to con
 ```
 /musr/command G4EmExtraPhysics SetProcessState GammaNclear on(off)
 /musr/command G4EmExtraPhysics SetProcessState ElectroNclear on(off)
+/musr/command G4EmExtraPhysics SetProcessState GammaToMuPair on(off)
 ```
 
 Fix bugs about abnormal larger kinetic energy

@@ -216,6 +216,19 @@ G4EmExtraPhysics::G4EmExtraPhysics(G4int ver,G4String steeringFileName):
                             G4cout << "WARNING: G4EmExtraPhysics.cc: Unknown command in setting " << processName << ": " << processState << G4endl;
                         }
                     }
+                    else if (strcmp(processName, "GammaToMuPair") == 0){
+                        if (strcmp(processState, "on") == 1) {
+                            gmumuActivated = true;
+                            G4cout << "G4EmExtraPhysics.cc: Set Process: " << processName << " " << processState << G4endl;
+                        }
+                        else if (strcmp(processState, "off") == 0) {
+                            gmumuActivated = false;
+                            G4cout << "G4EmExtraPhysics.cc: Set Process: " << processName << " " << processState << G4endl;
+                        }
+                        else{
+                            G4cout << "WARNING: G4EmExtraPhysics.cc: Unknown command in setting " << processName << ": " << processState << G4endl;
+                        }
+                    }
                     else {
                         G4cout << "WARNING: G4EmExtraPhysics.cc: Unknown process: " << processName << G4endl;
                     }
