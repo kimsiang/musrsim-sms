@@ -106,7 +106,7 @@ You can turn off these branches by add following command in `.mac` file:
 
 
 ### 2022-4-2 (ML)
-Add customization of 2 physic processes. Use command below in `.mac` file to control:
+Add customization of 3 specific physic processes. Use command below in `.mac` file to control:
 ```
 /musr/command G4EmExtraPhysics SetProcessState GammaNclear on(off)
 /musr/command G4EmExtraPhysics SetProcessState ElectroNclear on(off)
