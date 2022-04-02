@@ -205,11 +205,11 @@ G4EmExtraPhysics::G4EmExtraPhysics(G4int ver,G4String steeringFileName):
                     }
                     else if (strcmp(processName, "ElectroNuclear") == 0){
                         if (strcmp(processState, "on") == 1) {
-                            gnActivated = true;
+                            eActivated = true;
                             G4cout << "G4EmExtraPhysics.cc: Set Process: " << processName << " " << processState << G4endl;
                         }
                         else if (strcmp(processState, "off") == 0) {
-                            gnActivated = false;
+                            eActivated = false;
                             G4cout << "G4EmExtraPhysics.cc: Set Process: " << processName << " " << processState << G4endl;
                         }
                         else{
