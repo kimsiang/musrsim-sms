@@ -114,3 +114,12 @@ Add customization of 3 specific physic processes. Use command below in `.mac` fi
 ```
 
 Fix bugs about abnormal larger kinetic energy
+
+
+### 2022-4-30 (ML)
+Add branch recording the ID of Parent Track: `det_VrtxPrtTrackID`
+
+You can turn it off by adding following command in `.mac` file:
+```
+/musr/command rootOutput det_VrtxPrtTrackID off
+```
