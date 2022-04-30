@@ -244,6 +244,8 @@ G4bool musrScintSD::ProcessHits(G4Step* aStep,G4TouchableHistory*)
     newHit->SetCreatorProcessName(processName);
     G4int trackID = aTrack->GetTrackID();
     newHit->SetTrackID  (trackID);
+    G4int parentTrackID = aTrack->GetParentID();
+    newHit->SetParentTrackID(parentTrackID);
     newHit->SetStepLength   (aStep->GetStepLength());
 
     scintCollection->insert( newHit );
@@ -385,6 +387,7 @@ void musrScintSD::EndOfEvent(G4HCofThisEvent*) {
         G4double det_VrtxZ[det_IDmax];
         G4int    det_VrtxVolID[det_IDmax];
         G4int    det_VrtxProcID[det_IDmax];
+        G4int    det_VrtxPrtTrackID[det_IDmax];
         G4int    det_VrtxTrackID[det_IDmax];
         G4int    det_VrtxParticleID[det_IDmax];
         G4int det_VvvTrackSign[det_IDmax];
@@ -528,6 +531,7 @@ void musrScintSD::EndOfEvent(G4HCofThisEvent*) {
                     det_VrtxVolID[nSignals]        = myRootOutput->ConvertVolumeToID(logicalVolumeAtVertex);
                     G4String creatorProcessName    = aHit->GetCreatorProcessName();
                     det_VrtxProcID[nSignals]       = myRootOutput->ConvertProcessToID(creatorProcessName);
+                    det_VrtxPrtTrackID[nSignals]   = aHit->GetParentTrackID();
                     det_VrtxTrackID[nSignals]      = aHit->GetTrackID();
                     det_VrtxParticleID[nSignals]   = aHit->GetParticleID();
                     det_VvvTrackSign[nSignals]     = 1;
@@ -554,7 +558,7 @@ void musrScintSD::EndOfEvent(G4HCofThisEvent*) {
                                           det_time_start[ii],det_time_end[ii],det_x[ii],det_y[ii],det_z[ii],
                                           det_x_mup[ii], det_y_mup[ii], det_z_mup[ii], det_x_mun[ii], det_y_mun[ii], det_z_mun[ii],
                                           det_kine[ii],det_VrtxKine[ii],det_VrtxX[ii],det_VrtxY[ii],det_VrtxZ[ii],
-                                          det_VrtxVolID[ii],det_VrtxProcID[ii],det_VrtxTrackID[ii] );
+                                          det_VrtxVolID[ii],det_VrtxProcID[ii],det_VrtxTrackID[ii],det_VrtxPrtTrackID[ii]);
 
             if (boolIsVvvInfoRequested) {
                 G4int oldTrackID = abs(det_VrtxTrackID[ii]);

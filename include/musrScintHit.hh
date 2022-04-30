@@ -58,6 +58,7 @@ class musrScintHit : public G4VHit
 
       void SetParticleName (G4String name) {particleName = name; }
       void SetParticleID (G4int id) {particleID = id; }
+      void SetParentTrackID (G4int prtTrack)    {parentTrackID = prtTrack;}
       void SetTrackID  (G4int track)      { trackID = track; }
       void SetEdep     (G4double de)      { edep = de; }
       void SetPrePos      (G4ThreeVector xyz){ pre_pos = xyz; }
@@ -79,6 +80,7 @@ class musrScintHit : public G4VHit
 
       G4String GetParticleName() {return particleName; }
       G4int GetParticleID() {return particleID; }
+      G4int GetParentTrackID()  {return parentTrackID;}
       G4int GetTrackID()    { return trackID; }
       G4double GetEdep()    { return edep; }    
       G4ThreeVector GetPrePos(){ return pre_pos; }
@@ -105,6 +107,7 @@ class musrScintHit : public G4VHit
 
       G4String      particleName;
       G4int         particleID;
+      G4int         parentTrackID;
       G4int         trackID;
       G4double      edep;
       G4ThreeVector pre_pos;

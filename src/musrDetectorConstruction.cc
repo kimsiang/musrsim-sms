@@ -1505,6 +1505,7 @@ G4VPhysicalVolume* musrDetectorConstruction::Construct()  {
 	  if (strcmp(tmpString2,"det_VrtxVolID")==0){musrRootOutput::store_det_VrtxVolID = false;}
 	  if (strcmp(tmpString2,"det_VrtxProcID")==0){musrRootOutput::store_det_VrtxProcID = false;}
 	  if (strcmp(tmpString2,"det_VrtxTrackID")==0){musrRootOutput::store_det_VrtxTrackID = false;}
+      if (strcmp(tmpString2,"det_VrtxParentTrackID")==0){musrRootOutput::store_det_VrtxParentTrackID = false;}
 	  if (strcmp(tmpString2,"det_VrtxParticleID")==0){musrRootOutput::store_det_VrtxParticleID = false;}
 	  if (strcmp(tmpString2,"det_VvvKine")==0)  {musrRootOutput::store_det_VvvKine = false;}
 	  if (strcmp(tmpString2,"det_VvvX")==0)     {musrRootOutput::store_det_VvvX = false;}

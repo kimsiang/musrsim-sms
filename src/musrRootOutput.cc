@@ -163,6 +163,7 @@ G4bool musrRootOutput::store_det_VrtxZ = true;
 G4bool musrRootOutput::store_det_VrtxVolID = true;
 G4bool musrRootOutput::store_det_VrtxProcID = true;
 G4bool musrRootOutput::store_det_VrtxTrackID = true;
+G4bool musrRootOutput::store_det_VrtxParentTrackID = true;
 G4bool musrRootOutput::store_det_VrtxParticleID = true;
 G4bool musrRootOutput::store_det_VvvKine = true;
 G4bool musrRootOutput::store_det_VvvX = true;
@@ -313,6 +314,7 @@ void musrRootOutput::BeginOfRunAction() {
     if (store_det_VrtxVolID){rootTree->Branch("det_VrtxVolID",&det_VrtxVolID,"det_VrtxVolID[det_n]/I");}
     if (store_det_VrtxProcID){rootTree->Branch("det_VrtxProcID",&det_VrtxProcID,"det_VrtxProcID[det_n]/I");}
     if (store_det_VrtxTrackID){rootTree->Branch("det_VrtxTrackID",&det_VrtxTrackID,"det_VrtxTrackID[det_n]/I");}
+    if (store_det_VrtxParentTrackID){rootTree->Branch("det_VrtxPrtTrackID",&det_VrtxPrtTrackID,"det_VrtxPrtTrackID[det_n]/I");}
     if (store_det_VrtxParticleID){rootTree->Branch("det_VrtxParticleID",&det_VrtxParticleID,"det_VrtxParticleID[det_n]/I");}
     if (store_det_VvvKine) {rootTree->Branch("det_VvvKine",&det_VvvKine,"det_VvvKine[det_n]/D");}
     if (store_det_VvvX)    {rootTree->Branch("det_VvvX",&det_VvvX,"det_VvvX[det_n]/D");}
@@ -658,7 +660,7 @@ void musrRootOutput::SetDetectorInfo (G4int nDetectors, G4int ID, G4int particle
                                       G4double t2, G4double x, G4double y, G4double z,
                                       G4double x_mup, G4double y_mup, G4double z_mup, G4double x_mun, G4double y_mun, G4double z_mun,
                                       G4double ek, G4double ekVertex, G4double xVertex, G4double yVertex, G4double zVertex,
-                                      G4int idVolVertex, G4int idProcVertex, G4int idTrackVertex)
+                                      G4int idVolVertex, G4int idProcVertex, G4int idTrackVertex, G4int idPrtTrackVertex)
 {
     if ((nDetectors<0)||(nDetectors>=(det_nMax-1))) {
         char message[200];
@@ -697,6 +699,7 @@ void musrRootOutput::SetDetectorInfo (G4int nDetectors, G4int ID, G4int particle
         det_VrtxZ[nDetectors]=zVertex/CLHEP::mm;
         det_VrtxVolID[nDetectors]=idVolVertex;
         det_VrtxProcID[nDetectors]=idProcVertex;
+        det_VrtxPrtTrackID[nDetectors]=idPrtTrackVertex;
         det_VrtxTrackID[nDetectors]=idTrackVertex;
         det_VrtxParticleID[nDetectors]=particleID;
     }

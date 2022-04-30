@@ -83,7 +83,7 @@ public:
                           G4double t2, G4double x, G4double y, G4double z,
                           G4double x_mup, G4double y_mup, G4double z_mup, G4double x_mun, G4double y_mun, G4double z_mun,
                           G4double ek, G4double ekVertex, G4double xVertex, G4double yVertex, G4double zVertex,
-                          G4int idVolVertex, G4int idProcVertex, G4int idTrackVertex) ;
+                          G4int idVolVertex, G4int idProcVertex, G4int idTrackVertex, G4int idPrtTrackVertex) ;
 
     void SetDetectorInfoVvv (G4int nDetectors,
                              G4double ekVertex, G4double xVertex, G4double yVertex, G4double zVertex,
@@ -224,6 +224,7 @@ public:
     static G4bool store_det_VrtxVolID;
     static G4bool store_det_VrtxProcID;
     static G4bool store_det_VrtxTrackID;
+    static G4bool store_det_VrtxParentTrackID;
     static G4bool store_det_VrtxParticleID;
     static G4bool store_det_VvvKine;
     static G4bool store_det_VvvX;
@@ -348,6 +349,7 @@ private:
     G4double  det_VrtxZ[det_nMax];
     G4int     det_VrtxVolID[det_nMax];
     G4int     det_VrtxProcID[det_nMax];
+    G4int     det_VrtxPrtTrackID[det_nMax];
     G4int     det_VrtxTrackID[det_nMax];
     G4int     det_VrtxParticleID[det_nMax];
     G4double  det_VvvKine[det_nMax];
