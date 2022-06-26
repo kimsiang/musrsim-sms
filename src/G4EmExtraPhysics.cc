@@ -178,7 +178,7 @@ G4EmExtraPhysics::G4EmExtraPhysics(G4int ver,G4String steeringFileName):
                 sscanf(&line[0],"%*s %s %s",tmpString1,tmpString2);
                 if (strcmp(tmpString1,"G4EmExtraPhysics")==0 && strcmp(tmpString2,"SetCrossSecFactor")==0){
                     sscanf(&line[0],"%*s %*s %*s %s %lf",factorName,&factor);
-                    G4cout << "G4EmExtraPhysics    customized "<< factorName << " to "<< factor << G4endl;
+                    G4cout << "G4EmExtraPhysics.cc: Set "<< factorName << " to "<< factor << G4endl;
                     if(strcmp(factorName,"gmumuFactor")==0) {
                         gmumuFactor = factor;
                     }
