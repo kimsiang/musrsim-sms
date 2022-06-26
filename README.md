@@ -56,7 +56,11 @@ With `randomOption=1`, Geant4 will take the current system time as the random se
 
 Example:
 ```
+# Set the offset as input parameter
 ../musrSim 1003.mac name 10
+
+# Set the offest in macro file
+/musr/command SetRndSeedOffset 10
 ```
 In this case, this random seed of this job will be offset by 10.
 In practice, we submit me jobs with `condor`, each job will be offset by their job process number.
