@@ -109,6 +109,7 @@ private:
   G4double gmumuFactor;
   G4double pmumuFactor;
   G4double phadFactor;
+  G4double enFactor;
   G4double fNuEleCcBias;
   G4double fNuEleNcBias;
   G4double fNuNucleusBias;

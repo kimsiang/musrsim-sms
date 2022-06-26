@@ -137,6 +137,7 @@ G4EmExtraPhysics::G4EmExtraPhysics(G4int ver,G4String steeringFileName):
         gmumuFactor (1.0), // default = 1.0
         pmumuFactor (1.0),
         phadFactor  (1.0),
+        enFactor    (1.0),
         fNuEleCcBias(1.0),
         fNuEleNcBias(1.0),
         fNuNucleusBias(1.0),
@@ -186,6 +187,12 @@ G4EmExtraPhysics::G4EmExtraPhysics(G4int ver,G4String steeringFileName):
                     }
                     else if(strcmp(factorName,"phadFactor")==0){
                         phadFactor = factor;
+                    }
+                    else if(strcmp(factorName,"enFactor")==0){
+                        enFactor = factor;
+                    }
+                    else {
+                        G4cout << "WARNING: G4EmExtraPhysics.cc: Unknown command in setting " << factorName << " to " << factor << G4endl;
                     }
                 }
                 if (strcmp(tmpString1,"G4EmExtraPhysics")==0 && strcmp(tmpString2,"SetProcessState")==0) {
@@ -536,7 +543,7 @@ void G4EmExtraPhysics::ConstructGammaElectroNuclear()
     if(fUseGammaNuclearXS) {
         gnuc->AddDataSet(new G4GammaNuclearXS());
     }
-    gnuc->BiasCrossSectionByFactor(1.0); // added by KSK, default = 1.0
+    gnuc->BiasCrossSectionByFactor(enFactor); // added by KSK, default = 1.0
 
     G4QGSModel< G4GammaParticipants >* theStringModel =
             new G4QGSModel< G4GammaParticipants >;

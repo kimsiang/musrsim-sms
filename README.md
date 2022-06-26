@@ -123,3 +123,12 @@ You can turn it off by adding following command in `.mac` file:
 ```
 /musr/command rootOutput det_VrtxPrtTrackID off
 ```
+
+### 2020-6-26 (ML)
+Add customization of ElectroNuclear cross section factor in `.mac` file.\
+Default value is 1.0\
+For example:
+```
+# set electronuclear cross section factor to 1000
+/musr/command G4EmExtraPhysics SetCrossSecFactor enFactor 1000.0
+```
