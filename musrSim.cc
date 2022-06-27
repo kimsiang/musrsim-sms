@@ -101,7 +101,7 @@ int main(int argc,char** argv) {
             // Set random seed in macro file
             if (!(argc >3) && !cmd1.compare("/musr/command") && !cmd2.compare("SetRndSeedOffset")){
                 random_seed_offset = atoi(cmd3.c_str());
-                std::cout << "musrSim.cc: Set random seed offset as" << random_seed_offset << std::endl;
+                std::cout << "musrSim.cc: Set random seed offset: " << random_seed_offset << std::endl;
             }
         }
     }
