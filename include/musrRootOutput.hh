@@ -487,7 +487,7 @@ private:
     G4double odet_timeC40[odet_nMax];
 
 public:
-    static const Int_t save_nMax=5000;
+    static const Int_t save_nMax=1000;
 
 private:
     G4int    save_n;
