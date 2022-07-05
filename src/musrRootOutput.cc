@@ -165,6 +165,7 @@ G4bool musrRootOutput::store_det_VrtxProcID = true;
 G4bool musrRootOutput::store_det_VrtxTrackID = true;
 G4bool musrRootOutput::store_det_VrtxParentTrackID = true;
 G4bool musrRootOutput::store_det_VrtxParticleID = true;
+G4bool musrRootOutput::store_det_VrtxPrtParticleID = true;
 G4bool musrRootOutput::store_det_VvvKine = true;
 G4bool musrRootOutput::store_det_VvvX = true;
 G4bool musrRootOutput::store_det_VvvY = true;
@@ -316,6 +317,7 @@ void musrRootOutput::BeginOfRunAction() {
     if (store_det_VrtxTrackID){rootTree->Branch("det_VrtxTrackID",&det_VrtxTrackID,"det_VrtxTrackID[det_n]/I");}
     if (store_det_VrtxParentTrackID){rootTree->Branch("det_VrtxPrtTrackID",&det_VrtxPrtTrackID,"det_VrtxPrtTrackID[det_n]/I");}
     if (store_det_VrtxParticleID){rootTree->Branch("det_VrtxParticleID",&det_VrtxParticleID,"det_VrtxParticleID[det_n]/I");}
+    if (store_det_VrtxPrtParticleID){rootTree->Branch("det_VrtxPrtParticleID",&det_VrtxPrtParticleID,"det_VrtxPrtParticleID[det_n]/I");}
     if (store_det_VvvKine) {rootTree->Branch("det_VvvKine",&det_VvvKine,"det_VvvKine[det_n]/D");}
     if (store_det_VvvX)    {rootTree->Branch("det_VvvX",&det_VvvX,"det_VvvX[det_n]/D");}
     if (store_det_VvvY)    {rootTree->Branch("det_VvvY",&det_VvvY,"det_VvvY[det_n]/D");}
@@ -656,7 +658,7 @@ void musrRootOutput::SetFieldNomVal(G4int i, G4double value) {
 }
 
 
-void musrRootOutput::SetDetectorInfo (G4int nDetectors, G4int ID, G4int particleID, G4double edep,
+void musrRootOutput::SetDetectorInfo (G4int nDetectors, G4int ID, G4int particleID, G4int prtParticleID, G4double edep,
                                       G4double edep_el, G4double edep_pos,
                                       G4double edep_gam, G4double edep_mup, G4double kine_mup, G4double edep_mun, G4double kine_mun, G4int nsteps, G4double length, G4double t1,
                                       G4double t2, G4double x, G4double y, G4double z,
@@ -704,6 +706,7 @@ void musrRootOutput::SetDetectorInfo (G4int nDetectors, G4int ID, G4int particle
         det_VrtxPrtTrackID[nDetectors]=idPrtTrackVertex;
         det_VrtxTrackID[nDetectors]=idTrackVertex;
         det_VrtxParticleID[nDetectors]=particleID;
+        det_VrtxPrtParticleID[nDetectors]=prtParticleID;
     }
 }
 

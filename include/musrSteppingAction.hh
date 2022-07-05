@@ -51,6 +51,7 @@ class musrSteppingAction : public G4UserSteppingAction
     G4bool  AreTracksCommingFromSameParent(G4int trackID1, G4int trackID2, G4String volumeName);
     static const G4int maxNumberOfOldTracks=1000;
     G4bool IsVvvInfoRequested() {return boolIsVvvInfoRequested;}
+    G4int GetParticleIDfromTrack(G4int TrackID);
     void   SetVvvInfoRequested(G4bool boolvar) {boolIsVvvInfoRequested = boolvar;}
     void   SetCalculationOfFieldIntegralRequested(G4bool decision) {boolCalculateFieldIntegral = decision;}
 
@@ -75,6 +76,7 @@ class musrSteppingAction : public G4UserSteppingAction
 
     G4int         indexOfOldTrack;
     std::map<G4int,G4int> myOldTracksMap;
+    std::map<G4int, G4int> myTrack2PIDMap;
     G4int         particleID_oldTrack[maxNumberOfOldTracks];
     G4int         parentTrackID_oldTrack[maxNumberOfOldTracks];
     G4double      vertexKine_oldTrack[maxNumberOfOldTracks];

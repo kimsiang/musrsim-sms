@@ -156,7 +156,16 @@ void musrSteppingAction::UserSteppingAction(const G4Step* aStep)  {
     G4LogicalVolume* actualLogicalVolume = aTrack->GetVolume()->GetLogicalVolume();
     G4String actualVolume = actualLogicalVolume->GetName();
 
-    // Delete track if the particle is in the "kill" volume.
+    G4int p_track = aTrack->GetTrackID();
+    G4int p_ID = aTrack->GetDefinition()->GetPDGEncoding();
+
+    std::map<G4int,G4int>::iterator trkitr;
+    trkitr = myTrack2PIDMap.find(p_track);
+    if (trkitr == myTrack2PIDMap.end()) myTrack2PIDMap.insert(std::pair<G4int, G4int>(p_track, p_ID));
+
+
+
+      // Delete track if the particle is in the "kill" volume.
     // There is an example how to delete the track in example/novice/N04.
     // It is done in a different way here, because the example/novice/N04 was not doing
     // exactly what I wanted.
@@ -494,6 +503,12 @@ G4bool  musrSteppingAction::AreTracksCommingFromSameParent(G4int trackID1, G4int
     //G4cout<<"track1="<<track1<<"\ttrack2="<<track2<<G4endl; return true;}
   //  G4cout<<"\t\t\t\ttrack1="<<track1<<"\ttrack2="<<track2<<G4endl;
   return false;
+}
+
+G4int musrSteppingAction::GetParticleIDfromTrack(G4int TrackID) {
+     std::map<G4int, G4int>::iterator itr = myTrack2PIDMap.find(TrackID);
+    if (itr == myTrack2PIDMap.end()) return -999;
+    return itr->second;
 }
 
 //  //Double_t musrSteppingAction::poissonf(Double_t* x, Double_t* par)                                         

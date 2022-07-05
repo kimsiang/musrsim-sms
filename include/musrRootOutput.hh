@@ -77,7 +77,7 @@ public:
     void SetDecayPosition (G4ThreeVector pos) {muDecayPosX=pos.x()/CLHEP::mm; muDecayPosY=pos.y()/CLHEP::mm;
         muDecayPosZ=pos.z()/CLHEP::mm;};
     void SetEventWeight  (G4double w) {weight *= w;}
-    void SetDetectorInfo (G4int nDetectors, G4int ID, G4int particleID, G4double edep,
+    void SetDetectorInfo (G4int nDetectors, G4int ID, G4int particleID, G4int prtParticleID, G4double edep,
                           G4double edep_el, G4double edep_pos,
                           G4double edep_gam, G4double edep_mup, G4double kine_mup, G4double edep_mun, G4double kine_mun,G4int nsteps, G4double length, G4double t1,
                           G4double t2, G4double x, G4double y, G4double z,
@@ -226,6 +226,7 @@ public:
     static G4bool store_det_VrtxTrackID;
     static G4bool store_det_VrtxParentTrackID;
     static G4bool store_det_VrtxParticleID;
+    static G4bool store_det_VrtxPrtParticleID;
     static G4bool store_det_VvvKine;
     static G4bool store_det_VvvX;
     static G4bool store_det_VvvY;
@@ -352,6 +353,7 @@ private:
     G4int     det_VrtxPrtTrackID[det_nMax];
     G4int     det_VrtxTrackID[det_nMax];
     G4int     det_VrtxParticleID[det_nMax];
+    G4int     det_VrtxPrtParticleID[det_nMax];
     G4double  det_VvvKine[det_nMax];
     G4double  det_VvvX[det_nMax];
     G4double  det_VvvY[det_nMax];

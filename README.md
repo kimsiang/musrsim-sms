@@ -133,7 +133,7 @@ You can turn it off by adding following command in `.mac` file:
 /musr/command rootOutput det_VrtxPrtTrackID off
 ```
 
-### 2020-6-26 (ML)
+### 2022-6-26 (ML)
 Add customization of ElectroNuclear cross section factor in `.mac` file.\
 Default value is 1.0\
 For example:
