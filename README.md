@@ -2,11 +2,6 @@
 # musrsim-sms
 Geant4 package for musrSim (shanghai muon source dedicated)
 
-# Notice
-This branch is especially created for surface muon research.
-The "save_" branches will not save photon information
-
-
 # Tutorial
 
 ### Setup environment

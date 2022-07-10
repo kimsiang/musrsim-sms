@@ -623,22 +623,20 @@ void musrRootOutput::SetSaveDetectorInfo (G4int ID, G4int particleID, G4double k
         musrErrorMessage::GetInstance()->musrError(SERIOUS,message,true);
     }
     else {
-        if (particleID != 22) {
-            save_detID[save_n] = ID;
-            save_particleID[save_n] = particleID;
-            save_ke[save_n] = ke / CLHEP::MeV;
-            save_x[save_n] = x / CLHEP::mm;
-            save_y[save_n] = y / CLHEP::mm;
-            save_z[save_n] = z / CLHEP::mm;
-            save_time[save_n] = time / CLHEP::microsecond;
-            save_px[save_n] = px / CLHEP::MeV;
-            save_py[save_n] = py / CLHEP::MeV;
-            save_pz[save_n] = pz / CLHEP::MeV;
-            save_polx[save_n] = polx;
-            save_poly[save_n] = poly;
-            save_polz[save_n] = polz;
-            save_n++;
-        }
+        save_detID[save_n] = ID;
+        save_particleID[save_n] = particleID;
+        save_ke[save_n] = ke / CLHEP::MeV;
+        save_x[save_n] = x / CLHEP::mm;
+        save_y[save_n] = y / CLHEP::mm;
+        save_z[save_n] = z / CLHEP::mm;
+        save_time[save_n] = time / CLHEP::microsecond;
+        save_px[save_n] = px / CLHEP::MeV;
+        save_py[save_n] = py / CLHEP::MeV;
+        save_pz[save_n] = pz / CLHEP::MeV;
+        save_polx[save_n] = polx;
+        save_poly[save_n] = poly;
+        save_polz[save_n] = polz;
+        save_n++;
     }
 }
 
