@@ -79,6 +79,7 @@ void musrSteppingAction::DoAtTheBeginningOfEvent() {
   muAlreadyWasInM1InThisEvent=false;
   muAlreadyWasInM2InThisEvent=false;
   myOldTracksMap.clear();
+  myTrack2PIDMap.clear();
   indexOfOldTrack = -1;
   realTimeWhenThisEventStarted=time(0);
   BxIntegral=0;  ByIntegral=0;  BzIntegral=0; BzIntegral1=0;  BzIntegral2=0;  BzIntegral3=0;
@@ -162,7 +163,6 @@ void musrSteppingAction::UserSteppingAction(const G4Step* aStep)  {
     std::map<G4int,G4int>::iterator trkitr;
     trkitr = myTrack2PIDMap.find(p_track);
     if (trkitr == myTrack2PIDMap.end()) myTrack2PIDMap.insert(std::pair<G4int, G4int>(p_track, p_ID));
-
 
 
       // Delete track if the particle is in the "kill" volume.

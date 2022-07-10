@@ -3,6 +3,8 @@
 cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
 project(musrSim)
 
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #----------------------------------------------------------------------------
 # KAMIL CHANGES:
 #include_directories ("/home/download/Root_5.24_source/root/include")
