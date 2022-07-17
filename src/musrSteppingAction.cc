@@ -80,6 +80,7 @@ void musrSteppingAction::DoAtTheBeginningOfEvent() {
   muAlreadyWasInM2InThisEvent=false;
   myOldTracksMap.clear();
   myTrack2PIDMap.clear();
+  myMupInfoMap.clear();
   indexOfOldTrack = -1;
   realTimeWhenThisEventStarted=time(0);
   BxIntegral=0;  ByIntegral=0;  BzIntegral=0; BzIntegral1=0;  BzIntegral2=0;  BzIntegral3=0;
@@ -162,7 +163,13 @@ void musrSteppingAction::UserSteppingAction(const G4Step* aStep)  {
 
     std::map<G4int,G4int>::iterator trkitr;
     trkitr = myTrack2PIDMap.find(p_track);
-    if (trkitr == myTrack2PIDMap.end()) myTrack2PIDMap.insert(std::pair<G4int, G4int>(p_track, p_ID));
+    if (trkitr == myTrack2PIDMap.end()) {
+        myTrack2PIDMap.insert(std::pair<G4int, G4int>(p_track, p_ID));
+        if (p_ID == -13) {  // mu+
+            std::tuple<G4double, G4double, G4double>gen_pos(preStepPosition.x(), preStepPosition.y(), preStepPosition.z());
+            myMupInfoMap.insert(std::make_pair(p_track, gen_pos));
+        }
+    }
 
 
       // Delete track if the particle is in the "kill" volume.
@@ -509,6 +516,14 @@ G4int musrSteppingAction::GetParticleIDfromTrack(G4int TrackID) {
      std::map<G4int, G4int>::iterator itr = myTrack2PIDMap.find(TrackID);
     if (itr == myTrack2PIDMap.end()) return -999;
     return itr->second;
+}
+
+void musrSteppingAction::GetMupInfoMap(std::map<G4int, std::tuple<G4double, G4double, G4double>>& mymap) {
+    mymap = myMupInfoMap;
+}
+
+void musrSteppingAction::DoAtTheEndOfEvent() {
+    myRootOutput->SetMupInfo(myMupInfoMap);
 }
 
 //  //Double_t musrSteppingAction::poissonf(Double_t* x, Double_t* par)                                         

@@ -1450,6 +1450,7 @@ G4VPhysicalVolume* musrDetectorConstruction::Construct()  {
 	  if (strcmp(tmpString2,"muDecayPolX")==0)  {musrRootOutput::store_muDecayPolX = false;}
 	  if (strcmp(tmpString2,"muDecayPolY")==0)  {musrRootOutput::store_muDecayPolY = false;}
 	  if (strcmp(tmpString2,"muDecayPolZ")==0)  {musrRootOutput::store_muDecayPolZ = false;}
+        if (strcmp(tmpString2,"mupInfo")==0)  {musrRootOutput::store_mupInfo = false;}
 	  if (strcmp(tmpString2,"muTargetTime")==0) {musrRootOutput::store_muTargetTime = false;}
 	  if (strcmp(tmpString2,"muTargetPolX")==0) {musrRootOutput::store_muTargetPolX = false;}
 	  if (strcmp(tmpString2,"muTargetPolY")==0) {musrRootOutput::store_muTargetPolY = false;}

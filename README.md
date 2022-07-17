@@ -146,3 +146,17 @@ You can turn off this branch by adding following command in `.mac` file:
 ```
 /musr/command rootOutput det_VrtxPrtParticleID off
 ```
+
+### 2022-7-13 (ML)
+Add branch:
+```
+mup_n           # number of mu+ generated 
+mup_TrackID[mup_n]  # TrackID of each mu+
+mup_GenposX[mup_n]  # x position where mu+ generated
+mup_GenposY[mup_n]  # y position where mu+ generated
+mup_GenposZ[mup_n]  # z position where mu+ generated
+```
+You can turn off all these branches by adding following command in `.mac` file:
+```
+/musr/command rootOutput mupInfo off
+```
