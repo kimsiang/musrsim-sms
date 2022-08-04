@@ -129,10 +129,11 @@ You can turn it off by adding following command in `.mac` file:
 ```
 
 ### 2020-6-26 (ML)
-Add customization of ElectroNuclear cross section factor in `.mac` file.\
+Add customization of ElectroNuclear and PhotoNuclear cross section factor in `.mac` file.\
 Default value is 1.0\
 For example:
 ```
 # set electronuclear cross section factor to 1000
 /musr/command G4EmExtraPhysics SetCrossSecFactor enFactor 1000.0
+/musr/command G4EmExtraPhysics SetCrossSecFactor pnFactor 1000.0
 ```
