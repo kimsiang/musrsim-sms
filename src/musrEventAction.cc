@@ -79,7 +79,7 @@ void musrEventAction::EndOfEventAction(const G4Event* evt)  {
   //  cout << ":." << flush;
   long thisEventNr = (long) evt->GetEventID();
 
-  //  musrSteppingAction::GetInstance()->DoAtTheEndOfEvent();
+    musrSteppingAction::GetInstance()->DoAtTheEndOfEvent();
   
   // write out the root tree:
   musrRootOutput* myRootOutput = musrRootOutput::GetRootInstance();

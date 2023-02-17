@@ -1450,6 +1450,7 @@ G4VPhysicalVolume* musrDetectorConstruction::Construct()  {
 	  if (strcmp(tmpString2,"muDecayPolX")==0)  {musrRootOutput::store_muDecayPolX = false;}
 	  if (strcmp(tmpString2,"muDecayPolY")==0)  {musrRootOutput::store_muDecayPolY = false;}
 	  if (strcmp(tmpString2,"muDecayPolZ")==0)  {musrRootOutput::store_muDecayPolZ = false;}
+        if (strcmp(tmpString2,"mupInfo")==0)  {musrRootOutput::store_mupInfo = false;}
 	  if (strcmp(tmpString2,"muTargetTime")==0) {musrRootOutput::store_muTargetTime = false;}
 	  if (strcmp(tmpString2,"muTargetPolX")==0) {musrRootOutput::store_muTargetPolX = false;}
 	  if (strcmp(tmpString2,"muTargetPolY")==0) {musrRootOutput::store_muTargetPolY = false;}
@@ -1507,6 +1508,7 @@ G4VPhysicalVolume* musrDetectorConstruction::Construct()  {
 	  if (strcmp(tmpString2,"det_VrtxTrackID")==0){musrRootOutput::store_det_VrtxTrackID = false;}
       if (strcmp(tmpString2,"det_VrtxPrtTrackID")==0){musrRootOutput::store_det_VrtxParentTrackID = false;}
 	  if (strcmp(tmpString2,"det_VrtxParticleID")==0){musrRootOutput::store_det_VrtxParticleID = false;}
+      if (strcmp(tmpString2,"det_VrtxPrtParticleID")==0){musrRootOutput::store_det_VrtxPrtParticleID = false;}
 	  if (strcmp(tmpString2,"det_VvvKine")==0)  {musrRootOutput::store_det_VvvKine = false;}
 	  if (strcmp(tmpString2,"det_VvvX")==0)     {musrRootOutput::store_det_VvvX = false;}
 	  if (strcmp(tmpString2,"det_VvvY")==0)     {musrRootOutput::store_det_VvvY = false;}

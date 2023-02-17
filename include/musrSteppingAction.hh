@@ -44,6 +44,7 @@ class musrSteppingAction : public G4UserSteppingAction
 
     void UserSteppingAction(const G4Step *theStep);
     void DoAtTheBeginningOfEvent();
+    void DoAtTheEndOfEvent();
     void SetLogicalVolumeAsSpecialSaveVolume(G4String logicName, G4int volumeID);
     void SetVolumeForMuonEventReweighting(G4String logicName, G4int weight);
     G4bool  GetInfoAboutOldTrack(G4int trackID, G4int& parentTrackID, G4int& particleID, G4double& vertexKine,
@@ -51,6 +52,8 @@ class musrSteppingAction : public G4UserSteppingAction
     G4bool  AreTracksCommingFromSameParent(G4int trackID1, G4int trackID2, G4String volumeName);
     static const G4int maxNumberOfOldTracks=1000;
     G4bool IsVvvInfoRequested() {return boolIsVvvInfoRequested;}
+    G4int GetParticleIDfromTrack(G4int TrackID);
+    void GetMupInfoMap(std::map<G4int, std::tuple<G4double, G4double, G4double>>& mymap);
     void   SetVvvInfoRequested(G4bool boolvar) {boolIsVvvInfoRequested = boolvar;}
     void   SetCalculationOfFieldIntegralRequested(G4bool decision) {boolCalculateFieldIntegral = decision;}
 
@@ -75,6 +78,8 @@ class musrSteppingAction : public G4UserSteppingAction
 
     G4int         indexOfOldTrack;
     std::map<G4int,G4int> myOldTracksMap;
+    std::map<G4int, G4int> myTrack2PIDMap;
+    std::map<G4int, std::tuple<G4double, G4double, G4double>> myMupInfoMap;    // the position where it generates
     G4int         particleID_oldTrack[maxNumberOfOldTracks];
     G4int         parentTrackID_oldTrack[maxNumberOfOldTracks];
     G4double      vertexKine_oldTrack[maxNumberOfOldTracks];

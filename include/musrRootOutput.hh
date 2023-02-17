@@ -35,6 +35,7 @@
 #include "TVectorD.h"
 //
 #include <map>
+#include <tuple>
 
 #include "G4ios.hh"
 #include <fstream>
@@ -77,13 +78,15 @@ public:
     void SetDecayPosition (G4ThreeVector pos) {muDecayPosX=pos.x()/CLHEP::mm; muDecayPosY=pos.y()/CLHEP::mm;
         muDecayPosZ=pos.z()/CLHEP::mm;};
     void SetEventWeight  (G4double w) {weight *= w;}
-    void SetDetectorInfo (G4int nDetectors, G4int ID, G4int particleID, G4double edep,
+    void SetDetectorInfo (G4int nDetectors, G4int ID, G4int particleID, G4int prtParticleID, G4double edep,
                           G4double edep_el, G4double edep_pos,
                           G4double edep_gam, G4double edep_mup, G4double kine_mup, G4double edep_mun, G4double kine_mun,G4int nsteps, G4double length, G4double t1,
                           G4double t2, G4double x, G4double y, G4double z,
                           G4double x_mup, G4double y_mup, G4double z_mup, G4double x_mun, G4double y_mun, G4double z_mun,
                           G4double ek, G4double ekVertex, G4double xVertex, G4double yVertex, G4double zVertex,
                           G4int idVolVertex, G4int idProcVertex, G4int idTrackVertex, G4int idPrtTrackVertex) ;
+
+    void SetMupInfo(std::map<G4int, std::tuple<G4double, G4double, G4double>> MupInfoMap);
 
     void SetDetectorInfoVvv (G4int nDetectors,
                              G4double ekVertex, G4double xVertex, G4double yVertex, G4double zVertex,
@@ -169,6 +172,7 @@ public:
     static G4bool store_muDecayPolX;
     static G4bool store_muDecayPolY;
     static G4bool store_muDecayPolZ;
+    static G4bool store_mupInfo;
     static G4bool store_muTargetTime;
     static G4bool store_muTargetPolX;
     static G4bool store_muTargetPolY;
@@ -226,6 +230,7 @@ public:
     static G4bool store_det_VrtxTrackID;
     static G4bool store_det_VrtxParentTrackID;
     static G4bool store_det_VrtxParticleID;
+    static G4bool store_det_VrtxPrtParticleID;
     static G4bool store_det_VvvKine;
     static G4bool store_det_VvvX;
     static G4bool store_det_VvvY;
@@ -318,6 +323,7 @@ public:
     static const Int_t det_nMax=100;    // must be by 1 higher than the real number of detector "hits", because
     // else the detector nr. 0 is counted (0 is used if no
     // SensDetectorMapping correspond to a given logical volume).
+    static const Int_t mup_nMax=10;    // must be by 1 higher than the real generate number of mu+
 private:
     G4int     det_n;
     G4int     det_ID[det_nMax];
@@ -352,6 +358,7 @@ private:
     G4int     det_VrtxPrtTrackID[det_nMax];
     G4int     det_VrtxTrackID[det_nMax];
     G4int     det_VrtxParticleID[det_nMax];
+    G4int     det_VrtxPrtParticleID[det_nMax];
     G4double  det_VvvKine[det_nMax];
     G4double  det_VvvX[det_nMax];
     G4double  det_VvvY[det_nMax];
@@ -360,6 +367,14 @@ private:
     G4int     det_VvvProcID[det_nMax];
     G4int     det_VvvTrackID[det_nMax];
     G4int     det_VvvParticleID[det_nMax];
+
+    // mu_p information
+    G4int mup_n;
+    G4int mup_TrackID[mup_nMax];
+    G4double mup_GenposX[mup_nMax];
+    G4double mup_GenposY[mup_nMax];
+    G4double mup_GenposZ[mup_nMax];
+
 
 public:
     static const Int_t odet_nMax=det_nMax;

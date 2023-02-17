@@ -390,7 +390,9 @@ void musrScintSD::EndOfEvent(G4HCofThisEvent*) {
         G4int    det_VrtxPrtTrackID[det_IDmax];
         G4int    det_VrtxTrackID[det_IDmax];
         G4int    det_VrtxParticleID[det_IDmax];
+        G4int    det_VrtxPrtPID[det_IDmax];
         G4int det_VvvTrackSign[det_IDmax];
+        musrSteppingAction* myMusrSteppingAction = musrSteppingAction::GetInstance();
 
         //  Sort hits according to the time.  Using std::map is convenient, because it sorts
         //  its entries according to the key (the first variable of the pair).
@@ -534,6 +536,7 @@ void musrScintSD::EndOfEvent(G4HCofThisEvent*) {
                     det_VrtxPrtTrackID[nSignals]   = aHit->GetParentTrackID();
                     det_VrtxTrackID[nSignals]      = aHit->GetTrackID();
                     det_VrtxParticleID[nSignals]   = aHit->GetParticleID();
+                    det_VrtxPrtPID[nSignals]       = myMusrSteppingAction->GetParticleIDfromTrack(det_VrtxPrtTrackID[nSignals]);
                     det_VvvTrackSign[nSignals]     = 1;
                     nSignals++;
                 }
@@ -552,7 +555,7 @@ void musrScintSD::EndOfEvent(G4HCofThisEvent*) {
         for (itt=mySignalMapping.begin(); itt!=mySignalMapping.end(); itt++) {
             jj++;
             G4int ii = itt->second;
-            myRootOutput->SetDetectorInfo(jj,det_ID[ii],det_VrtxParticleID[ii],det_edep[ii],
+            myRootOutput->SetDetectorInfo(jj,det_ID[ii],det_VrtxParticleID[ii],det_VrtxPrtPID[ii],det_edep[ii],
                                           det_edep_el[ii],det_edep_pos[ii],
                                           det_edep_gam[ii],det_edep_mup[ii], det_kine_mup[ii], det_edep_mun[ii], det_kine_mun[ii],det_nsteps[ii],det_length[ii],
                                           det_time_start[ii],det_time_end[ii],det_x[ii],det_y[ii],det_z[ii],
@@ -562,7 +565,6 @@ void musrScintSD::EndOfEvent(G4HCofThisEvent*) {
 
             if (boolIsVvvInfoRequested) {
                 G4int oldTrackID = abs(det_VrtxTrackID[ii]);
-                musrSteppingAction* myMusrSteppingAction = musrSteppingAction::GetInstance();
                 G4int vvvParentTrackID= -1; G4int vvvPparticleID; G4double vvvKine; G4ThreeVector vvvPosition; G4String vvvLogVol; G4String vvvProcess;
                 G4int vvvLogVolID=-999;
                 G4bool oldTrackRetrievedOK;

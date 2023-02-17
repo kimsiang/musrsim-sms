@@ -108,6 +108,7 @@ G4bool musrRootOutput::store_muDecayTime = true;
 G4bool musrRootOutput::store_muDecayPolX = true;
 G4bool musrRootOutput::store_muDecayPolY = true;
 G4bool musrRootOutput::store_muDecayPolZ = true;
+G4bool musrRootOutput::store_mupInfo = true;
 G4bool musrRootOutput::store_muTargetTime = false;
 G4bool musrRootOutput::store_muTargetPolX = false;
 G4bool musrRootOutput::store_muTargetPolY = false;
@@ -165,6 +166,7 @@ G4bool musrRootOutput::store_det_VrtxProcID = true;
 G4bool musrRootOutput::store_det_VrtxTrackID = true;
 G4bool musrRootOutput::store_det_VrtxParentTrackID = true;
 G4bool musrRootOutput::store_det_VrtxParticleID = true;
+G4bool musrRootOutput::store_det_VrtxPrtParticleID = true;
 G4bool musrRootOutput::store_det_VvvKine = true;
 G4bool musrRootOutput::store_det_VvvX = true;
 G4bool musrRootOutput::store_det_VvvY = true;
@@ -265,6 +267,14 @@ void musrRootOutput::BeginOfRunAction() {
     if (store_posIniMomX)   {rootTree->Branch("posIniMomX",&posIniMomx,"posIniMomX/D");}
     if (store_posIniMomY)   {rootTree->Branch("posIniMomY",&posIniMomy,"posIniMomY/D");}
     if (store_posIniMomZ)   {rootTree->Branch("posIniMomZ",&posIniMomz,"posIniMomZ/D");}
+    if (store_mupInfo)   {
+        rootTree->Branch("mup_n",&mup_n,"mup_n/I");
+        rootTree->Branch("mup_TrackID",&mup_TrackID,"mup_TrackID[mup_n]/I");
+        rootTree->Branch("mup_GenposX",&mup_GenposX,"mup_GenposX[mup_n]/D");
+        rootTree->Branch("mup_GenposY",&mup_GenposY,"mup_GenposY[mup_n]/D");
+        rootTree->Branch("mup_GenposZ",&mup_GenposZ,"mup_GenposZ[mup_n]/D");
+
+    }
     if (musrParameters::boolG4OpticalPhotons) {
         if (store_nOptPhot)     {rootTree->Branch("nOptPhot",&nOptPhot,"nOptPhot/I");}
         if (store_nOptPhotDet)  {rootTree->Branch("nOptPhotDet",&nOptPhotDet,"nOptPhotDet/I");}
@@ -316,6 +326,7 @@ void musrRootOutput::BeginOfRunAction() {
     if (store_det_VrtxTrackID){rootTree->Branch("det_VrtxTrackID",&det_VrtxTrackID,"det_VrtxTrackID[det_n]/I");}
     if (store_det_VrtxParentTrackID){rootTree->Branch("det_VrtxPrtTrackID",&det_VrtxPrtTrackID,"det_VrtxPrtTrackID[det_n]/I");}
     if (store_det_VrtxParticleID){rootTree->Branch("det_VrtxParticleID",&det_VrtxParticleID,"det_VrtxParticleID[det_n]/I");}
+    if (store_det_VrtxPrtParticleID){rootTree->Branch("det_VrtxPrtParticleID",&det_VrtxPrtParticleID,"det_VrtxPrtParticleID[det_n]/I");}
     if (store_det_VvvKine) {rootTree->Branch("det_VvvKine",&det_VvvKine,"det_VvvKine[det_n]/D");}
     if (store_det_VvvX)    {rootTree->Branch("det_VvvX",&det_VvvX,"det_VvvX[det_n]/D");}
     if (store_det_VvvY)    {rootTree->Branch("det_VvvY",&det_VvvY,"det_VvvY[det_n]/D");}
@@ -654,7 +665,7 @@ void musrRootOutput::SetFieldNomVal(G4int i, G4double value) {
 }
 
 
-void musrRootOutput::SetDetectorInfo (G4int nDetectors, G4int ID, G4int particleID, G4double edep,
+void musrRootOutput::SetDetectorInfo (G4int nDetectors, G4int ID, G4int particleID, G4int prtParticleID, G4double edep,
                                       G4double edep_el, G4double edep_pos,
                                       G4double edep_gam, G4double edep_mup, G4double kine_mup, G4double edep_mun, G4double kine_mun, G4int nsteps, G4double length, G4double t1,
                                       G4double t2, G4double x, G4double y, G4double z,
@@ -702,6 +713,7 @@ void musrRootOutput::SetDetectorInfo (G4int nDetectors, G4int ID, G4int particle
         det_VrtxPrtTrackID[nDetectors]=idPrtTrackVertex;
         det_VrtxTrackID[nDetectors]=idTrackVertex;
         det_VrtxParticleID[nDetectors]=particleID;
+        det_VrtxPrtParticleID[nDetectors]=prtParticleID;
     }
 }
 
@@ -891,5 +903,22 @@ void musrRootOutput::SetPhotDetTime(G4double time) {
         char message[200];
         sprintf(message,"musrRootOutput.cc::SetPhotDetTime: number of individual photons larger than maxNOptPhotDet (=%d)",maxNOptPhotDet);
         musrErrorMessage::GetInstance()->musrError(WARNING,message,true); // had silent=false and printed all messages (JSL)
+    }
+}
+
+void musrRootOutput::SetMupInfo(std::map<G4int, std::tuple<G4double, G4double, G4double>> MupInfoMap) {
+    mup_n = MupInfoMap.size();
+    if (mup_n > mup_nMax){
+        char message[200];
+        sprintf(message,"musrRootOutput.cc::SetMupInfo(): number of mu+(%d) exceeds maximal allowed value(%d).", mup_n, mup_nMax);
+        musrErrorMessage::GetInstance()->musrError(SERIOUS,message,true);
+    }
+    int i=0;
+    for (auto itr = MupInfoMap.begin(); itr != MupInfoMap.end() && i < mup_nMax; itr++){
+        mup_TrackID[i] = itr->first;
+        mup_GenposX[i] = std::get<0>(itr->second);
+        mup_GenposY[i] = std::get<1>(itr->second);
+        mup_GenposZ[i] = std::get<2>(itr->second);
+        i++;
     }
 }

@@ -103,7 +103,7 @@ det_kine_mun        # mu- kinetic energy
 det_x(/y/z)_mup     # position where mu+ hits the detector
 det_x(/y/z)_mun     # position where mu- hits the detector
 ```
-You can turn off these branches by add following command in `.mac` file:
+You can turn off these branches by adding following command in `.mac` file:
 ```
 /musr/command rootOutput <branch_name> off
 ```
@@ -128,7 +128,7 @@ You can turn it off by adding following command in `.mac` file:
 /musr/command rootOutput det_VrtxPrtTrackID off
 ```
 
-### 2020-6-26 (ML)
+### 2022-6-26 (ML)
 Add customization of ElectroNuclear and PhotoNuclear cross section factor in `.mac` file.\
 Default value is 1.0\
 For example:
@@ -136,4 +136,28 @@ For example:
 # set electronuclear cross section factor to 1000
 /musr/command G4EmExtraPhysics SetCrossSecFactor enFactor 1000.0
 /musr/command G4EmExtraPhysics SetCrossSecFactor pnFactor 1000.0
+```
+
+### 2022-7-10 (ML)
+Add branch:
+```
+det_VrtxPrtParticleID   # The particle ID of parent track
+```
+You can turn off this branch by adding following command in `.mac` file:
+```
+/musr/command rootOutput det_VrtxPrtParticleID off
+```
+
+### 2022-7-13 (ML)
+Add branch:
+```
+mup_n           # number of mu+ generated 
+mup_TrackID[mup_n]  # TrackID of each mu+
+mup_GenposX[mup_n]  # x position where mu+ generated
+mup_GenposY[mup_n]  # y position where mu+ generated
+mup_GenposZ[mup_n]  # z position where mu+ generated
+```
+You can turn off all these branches by adding following command in `.mac` file:
+```
+/musr/command rootOutput mupInfo off
 ```
