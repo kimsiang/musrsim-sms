@@ -202,7 +202,7 @@ G4EmExtraPhysics::G4EmExtraPhysics(G4int ver,G4String steeringFileName):
                 if (strcmp(tmpString1,"G4EmExtraPhysics")==0 && strcmp(tmpString2,"SetProcessState")==0) {
                     sscanf(&line[0], "%*s %*s %*s %s %s", processName, processState);
                     if (strcmp(processName, "GammaNuclear") == 0){
-                        if (strcmp(processState, "on") == 1) {
+                        if (strcmp(processState, "on") == 0) {
                             gnActivated = true;
                             G4cout << "G4EmExtraPhysics.cc: Set Process: " << processName << " " << processState << G4endl;
                         }
@@ -215,7 +215,7 @@ G4EmExtraPhysics::G4EmExtraPhysics(G4int ver,G4String steeringFileName):
                         }
                     }
                     else if (strcmp(processName, "ElectroNuclear") == 0){
-                        if (strcmp(processState, "on") == 1) {
+                        if (strcmp(processState, "on") == 0) {
                             eActivated = true;
                             G4cout << "G4EmExtraPhysics.cc: Set Process: " << processName << " " << processState << G4endl;
                         }
@@ -228,7 +228,7 @@ G4EmExtraPhysics::G4EmExtraPhysics(G4int ver,G4String steeringFileName):
                         }
                     }
                     else if (strcmp(processName, "GammaToMuPair") == 0){
-                        if (strcmp(processState, "on") == 1) {
+                        if (strcmp(processState, "on") == 0) {
                             gmumuActivated = true;
                             G4cout << "G4EmExtraPhysics.cc: Set Process: " << processName << " " << processState << G4endl;
                         }
